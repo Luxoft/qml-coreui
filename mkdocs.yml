@@ -1,0 +1,62 @@
+site_name: QML Core UI
+site_description: guide to the core ui architecture for QML driven projects
+site_author: Juergen Ryannel
+copyright: 2019 Luxoft GmbH
+google_analytics:
+theme:
+  name: "material"
+  palette:
+    primary: "blue"
+    accent: "teal"
+  font:
+    text: "Ubuntu"
+    code: "Ubuntu Mono"
+  logo:
+    icon: "bookmark"
+  language: "en"
+  extra:
+    search:
+      language: "en"
+  feature:
+    tabs: true
+
+nav:
+  - "Overview": index.md
+  - "Guide":
+      - "Install": "guide/install.md"
+      - "What is Clean UI": "guide/whatis.md"
+      - "Getting Started": "guide/index.md"
+      - "Examples": "guide/examples.md"
+      - "CookBook": "guide/cookbook.md"
+  - Topics:
+      - "Preface": "topics/preface.md"
+      - "Introduction": "topics/intro.md"
+      - "Foundations": "topics/foundations.md"
+      - "Building Blocks": "topics/blocks.md"
+      - "Controls": "topics/controls.md"
+      - "Filesystem layout": "topics/fslayout.md"
+      - "Extensions": "topics/extensions.md"
+      - "Layouts": "topics/layouts.md"
+      - "Protoyping": "topics/prototyping.md"
+      - "Services": "topics/services.md"
+      - "Testing": "topics/testing.md"
+      - "UI Layer": "topics/uilayer.md"
+      - "Refactoring": "topics/refactor.md"
+      - "Styles": "topics/styles.md"
+  - "Download":
+      - "Getting Started": "download/index.md"
+  - "API Reference":
+      - "Getting Started": "api/index.md"
+  - "Team":
+      - "Getting Started": "team/index.md"
+  - "Resources":
+      - "Getting Started": "resources/index.md"
+  - "Support This":
+      - "Getting Started": "support/index.md"
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.magiclink
+
+repo_url: https://github.com/Luxoft/qml-coreui-guide
