@@ -1,5 +1,10 @@
 # Install
 
+!!!info
+
+    This material is work in progress and will change!
+
+
 CoreUI is not really something to be installed. It is more a methodic approach to writing user inerfaces using Qt5.
 Still ther is a helper library and tools to help you getting started.
 

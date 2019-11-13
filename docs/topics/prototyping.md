@@ -1,5 +1,9 @@
 # Prototyping
 
+!!!info
+
+    This material is work in progress and will change!
+
 User interface prototyping shall allow an early project to advance in the exploration of the user interface using a lean work flow. It is desirable but not always realistic that the resulting code shall follow the same architecture patterns and guides created for standard projects. Ideally, also the technology and used and the environment the technology is applied to shall be near a production. Making efforts to re-create a potential production environment ensures the outcome is somewhat comparable to a real scenario.
 
 For embedded devices it important also get as close as possible to the target setup by using a similar or even less powerful board and a similar display and input methods. Also the housing can be prototyped to allow a user to experience the UI in a near real setup scenario.

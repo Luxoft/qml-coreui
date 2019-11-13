@@ -1,5 +1,11 @@
 # UI Styling
 
+!!!info
+
+    This material is work in progress and will change!
+
+
+
 A style changes the visual appearance of styled controls. These can be common controls as part of the component library but also application controls or even containers. To be able to style a UI successfully, all controls need to adhere to a common style programming guide which shows the developer how to ensure that newly created components are styleable.
 
 In case the application does not use custom controls and all styling is already done by the common controls library and no work is needed here. This chapter is more for people who need to create custom controls or have specific UI requirements deviating from a common set.

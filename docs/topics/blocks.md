@@ -1,5 +1,10 @@
 # Building Blocks
 
+!!!info
+
+    This material is work in progress and will change!
+
+
 !!! abstract
     Building blocks are loosely coupled concepts which when arranged in the right order they form the foundation of the CoreUI. Through the loose coupling, you can also create a different architecture. This follows the principle that CoreUI is an opinionated stack and as such reflects our best efforts. Don't expect ready-made code solutions, these are concepts.
 

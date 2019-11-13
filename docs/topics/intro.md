@@ -1,5 +1,10 @@
 # Introduction
 
+!!!info
+
+    This material is work in progress and will change!
+
+
 !!! note ""
 
     CoreUI was created out of the need for a more structured way of creating User Interfaces (UIs) not only for applications but also for large systems. The current process works fine if only a few people work on a small UI. But, as the user interface starts to get bigger and the number of people working on the UI layer increases, then the existing process is no longer well defined. It just doesn't scale. Ideally, CoreUI provides a pattern to scale UI development linearly without scrutinizing the implementation of UI features.

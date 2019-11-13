@@ -1,3 +1,10 @@
+# Foundations
+
+!!!info
+
+    This material is work in progress and will change!
+
+
 !!! abstract
 
     CoreUI is founded on some core-principles collected over the years, which all contribute to the overall design decisions. These principles are based on the opinions of many but may not be applicable to everyone.

@@ -1,5 +1,10 @@
 # Physical Layout
 
+!!!info
+
+    This material is work in progress and will change!
+
+
 !!! abstract
 
     The structure is the physical file and folder structure which defines the UI layer. It is composed of a sysui, applications, a controls library and styles. The UI is launched using a runtime and can be extended by native and qml extensions.
@@ -51,7 +56,7 @@ sysui/
     helpers/
 ```
 
-For a complex SysUI the structure might be divided by the different UI aspects and each aspect will be formed as an independent application structure. It is important that an aspect does not directly depend on other aspects. They might depend on incoming properties, and services. 
+For a complex SysUI the structure might be divided by the different UI aspects and each aspect will be formed as an independent application structure. It is important that an aspect does not directly depend on other aspects. They might depend on incoming properties, and services.
 
 ```
 sysui/
@@ -95,7 +100,7 @@ Each of these portions of the system UI shall be structured like an independent 
 
 An application is a collection of UI blocks glued together using a container. The service communication is created using a store mechanism. The store is a hierarchical object tree where each object represents a portion of the overall user interface.
 
-!!! todo 
+!!! todo
 
     Add diagram for store and UI relationship
 

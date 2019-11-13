@@ -1,6 +1,11 @@
 
 # Common Controls
 
+!!!info
+
+    This material is work in progress and will change!
+
+
 Common Controls are shared controls between the applications. They form semantic user interfaces. Often they are built out of UI primitives such as rectangles, mouse areas, images, etc. and expose a defined high-level API. These controls are designed after the user interface specification and especially they follow the UI style guide as a central guide which defines the visual appearance.
 
 Controls are tightly bound to styles as the style defines the visual appearance of a control. It is often desirable to separate the logic of a control from the visual appearance and ideally make the appearance pluggable. This can be reached by thinking about a control as a template for a real control. This template contains only the common logic of a control and can even be coded in C++ for optimization. The visual appearance would then be added when a concrete control is defined. To know which concrete control needs to be used, the framework contains a logic to use a different control based on the style setting. This acts very much like a factory class where the object creation is separated from the object creation request. The framework takes care about ensuring the correct concrete control is created.

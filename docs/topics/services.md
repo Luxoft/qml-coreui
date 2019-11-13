@@ -1,5 +1,10 @@
 # Services
 
+!!!info
+
+    This material is work in progress and will change!
+
+
 Services exposes features either from the system or a networked resource to the application layer. Services can be categorized based on their process-association, inter-service dependencies and the handling of state. In general a service is an instance of vertical communication. This vertical communication can be done via an IPC out-of-process or via a library in-process. The API can be designed state-less or state-full. You should prefer state-full if the API shall reflect the system state (e.g. volume, temperature) which shall be shown on several displays and state-less if the API is used to primary query backends and no shared state is required. In general in embedded system a state-full service is preferred as the system shall reflect the machine state.
 
 > A service is a vertical communication layer

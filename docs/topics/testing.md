@@ -1,5 +1,10 @@
 # Testing
 
+!!!info
+
+    This material is work in progress and will change!
+
+
 
 There are different test strategies from white-box over black-box testing and system, integration and unit testing.
 
@@ -262,7 +267,7 @@ TestCase {
         client.increment();
         tryCompare(sniffer.received, "increment")
     }
-    
+
     function test_002_decrement() {
         sniffer.reset();
         client.decrement();

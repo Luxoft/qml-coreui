@@ -1,1 +1,6 @@
-# What is Qt5 Core UI
+# What is QML Core UI
+
+!!!info
+
+    This material is work in progress and will change!
+

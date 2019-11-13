@@ -1,5 +1,9 @@
 # Refactoring
 
+!!!info
+
+    This material is work in progress and will change!
+
 Refactoring shall provide the reader with insights how to re-factor slowly an existing user interface architecture toward the CoreUI architecture by applying a series of micro-re-factorings.
 
 A micro-refactoring is a small rewrite of source code which fits mentally inside the developers head. This is important to ensure the developer is aware about any side-effects and can fix these before committing.
