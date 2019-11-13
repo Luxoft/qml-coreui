@@ -230,7 +230,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../start/" class="md-tabs__link md-tabs__link--active">
+        <a href="../intro/" class="md-tabs__link md-tabs__link--active">
           Admin
         </a>
       
@@ -256,8 +256,8 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../api/" class="md-tabs__link">
-          API Reference
+        <a href="../../extensions/overview/" class="md-tabs__link">
+          Extensions
         </a>
       
     </li>
@@ -648,6 +648,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../start/" title="Quick Start" class="md-nav__link">
       Quick Start
     </a>
@@ -786,11 +798,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      API Reference
+      Extensions
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        API Reference
+        Extensions
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -801,8 +813,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../api/" title="Getting Started" class="md-nav__link">
-      Getting Started
+    <a href="../../extensions/overview/" title="Overview" class="md-nav__link">
+      Overview
     </a>
   </li>
 
@@ -916,13 +928,13 @@
                 
                 <h1 id="developing-and-contributing">Developing and Contributing</h1>
 <p>To develop on a listed repository from your config document you need to clone the repository in an independent development folder and build it locally. This separation helps to have always a reference build available based on the upstream source code and a developer build based on your current modified stand.</p>
-<p><code>coreui-admin</code> helps you here using the <code>dev</code> command. The <code>dev</code> command allows you to clone and configure a repository inside a <code>dev</code> folder. If you project has support for Qt code-review <code>coreui-admin</code> will install the code-review commit templates and add gerrit as a remote repository. To mark a repository for code-review add a code-review property in the repository section of your config document with the name of the review path.</p>
+<p><code>coreui-admin</code> helps you here using the <code>dev</code> command. The <code>dev</code> command allows you to clone and configure a repository inside a <code>dev</code> folder. If your project has support for Qt code-review <code>coreui-admin</code> will install the code-review commit templates and add Gerrit as a remote repository. To mark a repository for code-review add a code-review property in the repository section of your config document with the name of the review path.</p>
 <div class="codehilite"><pre><span></span><span class="nt">neptune3-ui</span><span class="p">:</span>
-    <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git://code.qt.io/qt-apps/neptune3-ui.git</span>
-    <span class="nt">branch</span><span class="p">:</span> <span class="s">&#39;5.13&#39;</span>
-    <span class="nt">build</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">qmake</span>
-    <span class="nt">os</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">linux</span><span class="p p-Indicator">,</span> <span class="nv">macos</span><span class="p p-Indicator">]</span>
-    <span class="nt">codereview</span><span class="p">:</span> <span class="s">&quot;qt-apps/neptune3-ui&quot;</span>
+  <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git://code.qt.io/qt-apps/neptune3-ui.git</span>
+  <span class="nt">branch</span><span class="p">:</span> <span class="s">&#39;5.13&#39;</span>
+  <span class="nt">build</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">qmake</span>
+  <span class="nt">os</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">linux</span><span class="p p-Indicator">,</span> <span class="nv">macos</span><span class="p p-Indicator">]</span>
+  <span class="nt">codereview</span><span class="p">:</span> <span class="s">&quot;qt-apps/neptune3-ui&quot;</span>
 </pre></div>
 
 
@@ -931,11 +943,11 @@
 </pre></div>
 
 
-<p>This will create a <code>dev/source/neptune3-ui</code> and <code>dev/build/neptune3-ui</code> and after a successful build a <code>dev/install/neptune3-ui</code>. These folders are independent from your upstream tracking folders.</p>
-<p>In this workflow you would edit the code in the <code>dev/source/neptune3-ui</code> folder to contribute on the Neptune3 UI. You can build and if finished upstream your changes. To check the upstream you would simple update the repo using <code>coreui-admin update</code> and build your upstream version of the repo.</p>
+<p>This will create a <code>dev/source/neptune3-ui</code> and <code>dev/build/neptune3-ui</code> and after a successful build a <code>dev/install/neptune3-ui</code>. These folders are independent of your upstream tracking folders.</p>
+<p>In this workflow, you would edit the code in the <code>dev/source/neptune3-ui</code> folder to contribute to the Neptune3 UI. You can build and if finished upstream your changes. To check the upstream you would simply update the repo using <code>coreui-admin update</code> and build your upstream version of the repo.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you like to see what a command is doing, you can simple use the <code>--dry-run</code> option. The command will output a small message how to configure Qt Creator to build and run your project.</p>
+<p>If you like to see what a command is doing, you can simply use the <code>--dry-run</code> option. The command will output a small message on how to configure Qt Creator to build and run your project.</p>
 </div>
                 
                   

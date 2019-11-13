@@ -230,7 +230,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../start/" class="md-tabs__link md-tabs__link--active">
+        <a href="../intro/" class="md-tabs__link md-tabs__link--active">
           Admin
         </a>
       
@@ -256,8 +256,8 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../api/" class="md-tabs__link">
-          API Reference
+        <a href="../../extensions/overview/" class="md-tabs__link">
+          Extensions
         </a>
       
     </li>
@@ -648,6 +648,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../start/" title="Quick Start" class="md-nav__link">
       Quick Start
     </a>
@@ -822,11 +834,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      API Reference
+      Extensions
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        API Reference
+        Extensions
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -837,8 +849,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../api/" title="Getting Started" class="md-nav__link">
-      Getting Started
+    <a href="../../extensions/overview/" title="Overview" class="md-nav__link">
+      Overview
     </a>
   </li>
 
@@ -974,7 +986,7 @@
                 
                 
                 <h1 id="qt-automotive-setup">Qt Automotive Setup</h1>
-<p>To create your first project you first need to have QtAuto installed. The easiest way is to use an existing Qt installation and install the remaining QtAuto modules. A more advanced option is to compile your own Qt5 and then install the QtAuto modules. A own Qt build is required if you are using linux and want to use the multi-process mode, as it requires a qt build with wayland support.</p>
+<p>To create the first project you first need to have QtAuto installed. The easiest way is to use an existing Qt installation and install the remaining QtAuto modules. A more advanced option is to compile Qt5 and then install the QtAuto modules. An own Qt build is required if you are using Linux and want to use the multi-process mode, as it requires a qt build with Wayland support.</p>
 <p>The <code>coreui-admin</code> tool will support you in both scenarios.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -995,27 +1007,27 @@ coreui-admin init
 </pre></div>
 
 
-<p>This will start your default editor and open the qauto document.</p>
-<p>Now we will tell qauto where the existing qt installation is by passing the path to the <code>qmake</code> executable.</p>
+<p>This will start your default editor and open the coreui document.</p>
+<p>Now we will tell coreui where the existing qt installation is, by setting the path to the <code>qmake</code> executable.</p>
 <p>For example on MACOS this should look like this:</p>
 <div class="codehilite"><pre><span></span>coreui-admin config qmake ~/Qt/5.11.0/clang_64/bin/qmake
 </pre></div>
 
 
-<p>From now on coreui-admin will use the existing Qt installation as base.</p>
+<p>From now on coreui-admin will use the existing Qt installation as the base.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In case you need to build your own Qt leave the qmake configuration empty and use the <code>coreui-admin qt</code> command to build your custom Qt5 from source. See the section <em>Setup using custom Qt</em>.</p>
+<p>In case you need to build your own Qt leave the qmake configuration empty and use the <code>coreui-admin qt</code> command to build your custom Qt5 from the source. See the section <em>Setup using custom Qt</em>.</p>
 </div>
 <p>Now we clone the QtAuto modules and build them.</p>
-<p>First we can check the <code>auto</code> target using::</p>
+<p>First, we can check the <code>auto</code> target using::</p>
 <div class="codehilite"><pre><span></span>coreui-admin targets auto
 </pre></div>
 
 
-<p>This will print the currently listed repositories vailable under the auto target. A target is an ordered list or repositories. The ordering defines the build order. This information is stored in the <code>coreui.yml</code> targets section.</p>
-<div class="codehilite"><pre><span></span>    ______name______|______________________repos______________________
-    auto            | appman, qtivi, neptune3-ui
+<p>This will print the currently listed repositories available under the auto-target. A target is an ordered list or repositories. The ordering defines the build order. This information is stored in the <code>coreui.yml</code> targets section.</p>
+<div class="codehilite"><pre><span></span> ______name______|______________________repos______________________
+ auto | appman, qtivi, neptune3-ui
 </pre></div>
 
 
@@ -1031,11 +1043,8 @@ coreui-admin build auto
 
 <p>The clones repositories are available in the <code>source/&lt;repo-name&gt;</code> and <code>build/&lt;repo-name&gt;</code> locations. After building the repositories will be automatically installed into <code>install/&lt;repo-name&gt;</code>.</p>
 <p>!! note</p>
-<div class="codehilite"><pre><span></span><span class="n">Be</span> <span class="n">aware</span> <span class="k">some</span> <span class="n">repositories</span> <span class="n">will</span> <span class="n">automatically</span> <span class="n">install</span> <span class="k">as</span> <span class="n">qt</span> <span class="n">modules</span> <span class="k">into</span> <span class="n">the</span> <span class="n">Qt</span> <span class="n">directory</span> <span class="k">and</span> <span class="n">can</span> <span class="k">not</span> <span class="n">be</span> <span class="k">found</span> <span class="k">in</span> <span class="n">the</span> <span class="n">install</span> <span class="k">location</span><span class="p">.</span>
-</pre></div>
-
-
-<p>If you later want to update your installation, you can simple run update.</p>
+<p>Be aware some repositories will automatically install as qt modules into the Qt directory and can not be found in the install location.</p>
+<p>If you later want to update your installation, you can simply run an update.</p>
 <div class="codehilite"><pre><span></span>coreui-admin update auto
 coreui-admin build auto
 </pre></div>
@@ -1048,12 +1057,12 @@ coreui-admin build auto
 
 <h2 id="custom-qt">Custom Qt</h2>
 <p>If you want to use the multi-process setup on Linux or just want to use a custom Qt the script will support you in building Qt for your platform.</p>
-<p>The first step is to check if your OS can build Qt and the QAuto components. For this run the OS command.</p>
+<p>The first step is to check if your OS can build Qt and the QtAuto components. For this run the OS command.</p>
 <div class="codehilite"><pre><span></span>coreui-admin os --check
 </pre></div>
 
 
-<p>Note: The OS command is currently only supported on Ubuntu currently.</p>
+<p>Note: The OS command is currently only supported on Ubuntu.</p>
 <p>The check command will either be positive or negative. In the case the result is negative please run the os init command.</p>
 <div class="codehilite"><pre><span></span>coreui-admin os --init
 </pre></div>
@@ -1068,22 +1077,22 @@ coreui-admin qt --build
 
 
 <p>The last step can take up to an hour, depending on your machine configuration.</p>
-<p>To set the number of used make jobs (how many CPU cores make can use), you can edit the jobs config value. For example for a great performance on a Core i7 Quad Core Intel CPU you can set the jobs count to 6. You would still have two processors left to continue working.</p>
+<p>To set the number of make jobs (how many CPU cores make can use), you can edit the jobs config value. For example, for a great performance on a Core i7 Quad-Core Intel CPU, you can set the jobs to 6. You would still have two processors left to continue working.</p>
 <div class="codehilite"><pre><span></span>coreui-admin config <span class="nb">jobs</span> <span class="m">6</span>
 </pre></div>
 
 
-<p>To check your configuration you can list the configurtion values.</p>
+<p>To check your configuration you can list the configuration values.</p>
 <div class="codehilite"><pre><span></span>coreui-admin config
 </pre></div>
 
 
 <p>Will output something like this</p>
-<div class="codehilite"><pre><span></span>build            | build
-install          | install
-jobs             | 6
-qmake            | ~/Qt/5.10.0/clang_64/bin/qmake
-source           | source
+<div class="codehilite"><pre><span></span>build | build
+install | install
+jobs | 6
+qmake | ~/Qt/5.10.0/clang_64/bin/qmake
+source | source
 </pre></div>
 
 

@@ -230,7 +230,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="./" class="md-tabs__link md-tabs__link--active">
+        <a href="../intro/" class="md-tabs__link md-tabs__link--active">
           Admin
         </a>
       
@@ -256,8 +256,8 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../api/" class="md-tabs__link">
-          API Reference
+        <a href="../../extensions/overview/" class="md-tabs__link">
+          Extensions
         </a>
       
     </li>
@@ -646,6 +646,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -829,11 +841,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      API Reference
+      Extensions
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        API Reference
+        Extensions
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -844,8 +856,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../api/" title="Getting Started" class="md-nav__link">
-      Getting Started
+    <a href="../../extensions/overview/" title="Overview" class="md-nav__link">
+      Overview
     </a>
   </li>
 
@@ -996,7 +1008,7 @@ pip install -e .
 </pre></div>
 
 
-<p>The simplest start is to use an existing Qt SDK (e.g. 5.11 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start into the creation of a new user interface for systems.</p>
+<p>The simplest start is to use an existing Qt SDK (e.g. 5.11 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start to the creation of a new user interface for systems.</p>
 <h2 id="setting-up-qtauto-stack">Setting up QtAuto Stack</h2>
 <p>Create a project directory</p>
 <div class="codehilite"><pre><span></span>mkdir coreui <span class="o">&amp;&amp;</span> <span class="nb">cd</span> coreui
@@ -1024,7 +1036,7 @@ pip install -e .
 
 
 <p>Note: Please make sure that all coreui components are successfully configured.</p>
-<p>Now we can start the QtAuto reference user interrface called Neptune3 UI.</p>
+<p>Now we can start the QtAuto reference user interface called Neptune3 UI.</p>
 <div class="codehilite"><pre><span></span>coreui-admin start
 </pre></div>
 
@@ -1037,7 +1049,7 @@ pip install -e .
 </pre></div>
 
 
-<p>We first let the admin know where the existing Qt SDK is located. For this we point it to the <code>qmake</code> executable for the SDK.</p>
+<p>We first let the admin know where the existing Qt SDK is located. For this, we point it to the <code>qmake</code> executable for the SDK.</p>
 <div class="codehilite"><pre><span></span>coreui-admin config qmake &lt;path/to/qmake&gt;
 </pre></div>
 
@@ -1068,7 +1080,7 @@ pip install -e .
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../topics/styles/" title="Styles" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1077,7 +1089,7 @@ pip install -e .
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Styles
+                Introduction
               </span>
             </div>
           </a>

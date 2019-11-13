@@ -230,7 +230,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../start/" class="md-tabs__link md-tabs__link--active">
+        <a href="../intro/" class="md-tabs__link md-tabs__link--active">
           Admin
         </a>
       
@@ -256,8 +256,8 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../api/" class="md-tabs__link">
-          API Reference
+        <a href="../../extensions/overview/" class="md-tabs__link">
+          Extensions
         </a>
       
     </li>
@@ -648,6 +648,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../start/" title="Quick Start" class="md-nav__link">
       Quick Start
     </a>
@@ -665,6 +677,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Concepts
@@ -678,16 +692,11 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
-    Concepts
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#configuration-file" class="md-nav__link">
@@ -860,11 +869,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      API Reference
+      Extensions
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        API Reference
+        Extensions
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -875,8 +884,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../api/" title="Getting Started" class="md-nav__link">
-      Getting Started
+    <a href="../../extensions/overview/" title="Overview" class="md-nav__link">
+      Overview
     </a>
   </li>
 
@@ -972,16 +981,11 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
-    Concepts
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#configuration-file" class="md-nav__link">
@@ -1051,24 +1055,22 @@
                   <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/admin/concepts.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Concepts</h1>
-                
-                <h2 id="concepts">Concepts</h2>
-<p>As a project solution the coreui-admin guides you through the initial setup of QtAuto and the creation of an initial user interface based on QAuto. For this it tries to be flexible and uses several generic concepts.</p>
+                <h1 id="concepts">Concepts</h1>
+<p>As a project solution, the coreui-admin guides you through the initial setup of QtAuto and the creation of an initial user interface based on QtAuto. For this, it tries to be flexible and uses several generic concepts.</p>
 <h2 id="configuration-file">Configuration File</h2>
-<p>The admin relies on a per project auto configuration file. It stores information about the build process and involved repositores. Additional you can place environment variables and small scripts into the configuration document.</p>
+<p>The admin relies on a per-project configuration file. It stores information about the build process and involved repositories. Additional you can place environment variables and small scripts into the configuration document.</p>
 <h2 id="environment-variables">Environment Variables</h2>
-<p>Environment variables passed on to the build or run commands will be read form the shell environment but also can be placed into the qauto config file in the env section. For user contributed env variables it is also possible to add environment variables into an <code>.env</code> file.</p>
+<p>Environment variables passed on to the build or run commands will be read from the shell environment but also can be placed into the coreui config file in the env section. For user-contributed env variables it is also possible to add environment variables into a  <code>.env</code> file.</p>
 <h2 id="repositories-and-targets">Repositories and Targets</h2>
-<p>QAuto supports the registration of repositories by name with the git url, branch, build-system information. A repository listed can be made available in the target section. A target allows the bundling of one or more repositories as build unit.</p>
+<p>QtAuto supports the registration of repositories by name with the git URL, branch, build-system information. A repository listed can be made available in the target section. A target allows the bundling of one or more repositories as a build unit.</p>
 <h2 id="standardized-builds">Standardized Builds</h2>
-<p>Registered repositories can have different build systems named when registered with qauto. For this it knows currently three build systems (configure, qmake, cmake). Configure is used for the building of Qt itself and other projects may use qmake or cmake based projects.</p>
+<p>Registered repositories can have different build systems named when registered with coreui. For this, it knows currently three build systems (configure, qmake, CMake). Configure is used for the building of Qt itself and other projects may use qmake or CMake based projects.</p>
 <h2 id="scripts">Scripts</h2>
-<p>A script is a command line registered with the auto configuration file. The environment variables are passed on to the scripts.</p>
+<p>A script is a command-line registered with the coreui configuration file. The environment variables are passed on to the scripts.</p>
 <h2 id="project-generators">Project Generators</h2>
-<p>QAuto allows you to generate a full project scaffold. The scaffolds are based on smart templates and follow a defined architecture.</p>
+<p>QtAuto allows you to generate a full project scaffold. The scaffolds are based on smart templates and follow a defined architecture.</p>
 <h2 id="aspect-generators">Aspect Generators</h2>
-<p>Besides generating full project the qauto script allows also to extend the generated project using distinct components. This allows the extension of the generated project.</p>
+<p>Besides generating full project the coreui script allows also to extend the generated project using distinct components. This allows the extension of the generated project.</p>
                 
                   
                 

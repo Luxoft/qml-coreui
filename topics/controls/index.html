@@ -230,7 +230,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../admin/start/" class="md-tabs__link">
+        <a href="../../admin/intro/" class="md-tabs__link">
           Admin
         </a>
       
@@ -256,8 +256,8 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../api/" class="md-tabs__link">
-          API Reference
+        <a href="../../extensions/overview/" class="md-tabs__link">
+          Extensions
         </a>
       
     </li>
@@ -789,6 +789,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../admin/intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../admin/start/" title="Quick Start" class="md-nav__link">
       Quick Start
     </a>
@@ -918,11 +930,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      API Reference
+      Extensions
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        API Reference
+        Extensions
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -933,8 +945,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../api/" title="Getting Started" class="md-nav__link">
-      Getting Started
+    <a href="../../extensions/overview/" title="Overview" class="md-nav__link">
+      Overview
     </a>
   </li>
 
@@ -1170,14 +1182,14 @@
 <p class="admonition-title">Info</p>
 <p>This material is work in progress and will change!</p>
 </div>
-<p>Common Controls are shared controls between the applications. They form semantic user interfaces. Often they are built out of UI primitives such as rectangles, mouse areas, images, etc. and expose a defined high-level API. These controls are designed after the user interface specification and especially they follow the UI style guide as a central guide which defines the visual appearance.</p>
+<p>Common Controls are shared controls between the applications. They form semantic user interfaces. Often they are built out of UI primitives such as rectangles, mouse areas, images, etc. and expose a defined high-level API. These controls are designed after the user interface specification and especially they follow the UI style guide as a central guide that defines the visual appearance.</p>
 <p>Controls are tightly bound to styles as the style defines the visual appearance of a control. It is often desirable to separate the logic of a control from the visual appearance and ideally make the appearance pluggable. This can be reached by thinking about a control as a template for a real control. This template contains only the common logic of a control and can even be coded in C++ for optimization. The visual appearance would then be added when a concrete control is defined. To know which concrete control needs to be used, the framework contains a logic to use a different control based on the style setting. This acts very much like a factory class where the object creation is separated from the object creation request. The framework takes care about ensuring the correct concrete control is created.</p>
 <p>This is the pattern used in the QtQuick.Controls V2 (<a href="https://doc.qt.io/qt-5.10/qtquickcontrols2-index.html">https://doc.qt.io/qt-5.10/qtquickcontrols2-index.html</a>) controls library. It forms a common set of controls which is used typically in modern touch-based user interfaces without coupling them to the style. The library comes with a common set of styles to get started and allows a team to define fully its own style. On a high level, this is done by having the template classes implement the control logic and a style adding the geometry and appearance of background and content to the control (<a href="https://doc.qt.io/qt-5.10/qtquickcontrols2-customize.html">https://doc.qt.io/qt-5.10/qtquickcontrols2-customize.html</a>).</p>
 <p>It is also possible to create completely new controls but often this is not required and a new control can often be formed by either styling or aggregating two or more controls to a new control.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As long as a control behaves like an existing control template (e.g. a button is clicked) the visual appearance can be adjusted.</p>
 </div>
+<p>As long as a control behaves like an existing control template (e.g. a button is clicked) the visual appearance can be adjusted.</p>
 <h2 id="typical-controls">Typical Controls</h2>
 <p>These are the controls currently supported by QtQuick Controls 2. This should be used as a short overview of the available controls and to form a vocabulary with the design team.</p>
 <ul>
@@ -1213,7 +1225,7 @@
 <li><strong>ItemDelegate</strong> - Presents a checkable control that can be pressed and clicked by the user.</li>
 <li><strong>CheckDelegate</strong> - Item delegate with a check indicator that can be toggled on or off</li>
 <li><strong>RadioDelegate</strong> - Exclusive item delegate with a radio indicator that can be toggled on or off</li>
-<li><strong>SwipeDelegate</strong> - Swipable item delegate</li>
+<li><strong>SwipeDelegate</strong> - Swipeable item delegate</li>
 <li><strong>SwitchDelegate</strong> - Item delegate with a switch indicator that can be toggled on or off</li>
 </ul>
 <h3 id="indicator-controls"><a href="https://doc.qt.io/qt-5/qtquickcontrols2-indicators.html">Indicator Controls</a></h3>
@@ -1283,7 +1295,7 @@
 </ul>
 <p>The behavior of the items inside a layout can be influenced using the [Layout<qml-qtquick-layouts-layout.html>` attached property.</p>
 <h2 id="common-vs-application-controls">Common vs. Application Controls</h2>
-<p>Common controls are shared between all applications and are designed to work in these different contexts. An application control is private to an application. Often an application control is derived from the need of the UI specification for a very special visual appearance. This could be for example a slider to change the radio frequency. This control would be very specific to a radio application and normally not required by other application. As such it would be defined inside the application and not in a common control library. Besides this difference of physical location, the creation process is the same.</p>
+<p>Common controls are shared between all applications and are designed to work in these different contexts. An application control is private to an application. Often an application control is derived from the need of the UI specification for a very special visual appearance. This could be for example a slider to change the radio frequency. This control would be very specific to a radio application and normally not required by other applications. As such it would be defined inside the application and not in a common control library. Besides this difference in physical location, the creation process is the same.</p>
                 
                   
                 
