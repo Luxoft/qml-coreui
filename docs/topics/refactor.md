@@ -36,11 +36,14 @@ This measures the relation between the identified and converted kind of componen
 
 This counts the number of harmful imports per kind of component. Ideally the controls and panels will reduce the number of harmful components and most harmful imports will be isolated inside the stores.
 
-## Refactoring Cookbook
+## Mico Refactoring Cookbook
 
-See also: https://martinfowler.com/tags/refactoring.html
+Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.
 
-### Recipe: Stop leaking objects from singletons
+> Its heart is a series of small behavior preserving transformations. Each transformation (called a "refactoring") does little, but a sequence of these transformations can produce a significant restructuring. Since each refactoring is small, it's less likely to go wrong. The system is kept fully working after each refactoring, reducing the chances that a system can get seriously broken during the restructuring.
+> Martin Fowler (https://refactoring.com)
+
+### Recipe: Stop leaking object internals from singletons
 
 A singleton which exposes an object opens the opportunity for everyone to navigate the object internals. By this open up all kind of cross-dependencies.
 
@@ -65,7 +68,7 @@ Panel {
 }
 ```
 
-But could also be used like this. The point is the user of the singleton could now navigate een to the parents of the widow, just to fulfill is use case.
+But could also be used like this. The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.
 
 > whatever can happen will happen
 
@@ -81,39 +84,42 @@ Panel {
 
 To close down this leakage we need to investigate how the object is used. Often we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.
 
-```qml
+```diff
 // HelperSingleton.qml - improved
 QtObject {
-    property Item __appWindow
+-   property Item appWindow
++   property Item __appWindow
 
-    function hideWindow() {
-        __appWindow.visible = false
-    }
++   function hideWindow() {
++       __appWindow.visible = false
++   }
 
-    function setWindowTitle(title) {
-        __appWindow.setTitle(title)
-    }
++   function setWindowTitle(title) {
++       __appWindow.setTitle(title)
++   }
 }
 ```
 
 And better panel
 
-```qml
+```diff
 // AppPanel.qml - improved
 Panel {
     Button {
         text: "Hide window"
-        onClicked: HelperSingleton.hideWindow()
+-       onClicked: HelperSingleton.appWindow.visible = false
++       onClicked: HelperSingleton.hideWindow()
     }
 }
 ```
 
-```qml
+```diff
 // EvilPanel.qml - improved
 Panel {
     Button {
         text: "Set Title of Window"
-        onClicked: HelperSingleton.setWindowTitle("A new title")
+-       onClicked: HelperSingleton.appWindow.children[0].text = "A new title"
++       onClicked: HelperSingleton.setWindowTitle("A new title")
     }
 }
 ```
@@ -126,7 +132,7 @@ Over time we will be able to eliminate the object from the public interface and 
 
 When investigating the usage of certain singletons often they are used in a related code area. It seems developers where to lazy to pass in these dependencies and rather shortcut the relations.
 
-Assume we have a panel which show a title and some content. The title shall present the current time and the content shall presetn the time but also be able to reset the current time.
+Assume we have a panel which show a title and some content. The title shall present the current time and the content shall present the time but also be able to reset the current time.
 
 The parent application panel, which holds both children panels.
 
@@ -206,7 +212,7 @@ In the next step we can then move the singleton onto the other side and pass it 
 
 ```diff
 // AppPanel.qml
-import service.time 1.0
++ import service.time 1.0
 
 Panel {
     TitlePanel {
@@ -214,12 +220,12 @@ Panel {
     }
     ContentPanel {
 +       currentTime: Clock.currentTime
-+       onResetTime: Clock.resetTime
++       onResetTime: Clock.resetTime()
     }
 }
 ```
 
-Now we can elimate the usage of the singletons in the children.
+Now we can eliminate the usage of the singletons in the children.
 
 ```diff
 // TitlePanel.qml
@@ -261,6 +267,56 @@ By this we effectively push the singleton usage on level up. Normally it is expe
 
 A singleton normally shares global state, functionality and events. To eliminate this we need to find the common ancestor node from where we can inject the dependencies. For a share event, we often can just connect the signal with a state change on that level, for shared properties we could do similar. For common functionality we can connect a signal which bubbles up to a function being executed. Ideally the function is extracted into a store if its application business relevant.
 
+So after we pushed the singleton up, we could now convert it to an instance, which acts like a small store.
+
+```diff
+// AppPanel.qml
++ import service.time 1.0
+
+Panel {
++   Clock {
++       id: clock
++   }
+    TitlePanel {
+-       currentTime: Clock.currentTime
++       currentTime: clock.currentTime
+    }
+    ContentPanel {
+-       currentTime: Clock.currentTime
++       currentTime: clock.currentTime
+
+-       onResetTime: Clock.resetTime()
++       onResetTime: clock.resetTime()
+    }
+}
+```
+
+Now that we have an instance, we can in our tests create and destroy this instance. Also when this UI portion is destroyed, the service instance will also be destroyed and does not use any resources.
+
+To go a step forward we can even inject the service as a dependency.
+
+```diff
+// AppPanel.qml
++ import service.time 1.0
+
+Panel {
+-   Clock {
+-       id: clock
+-   }
++   property Clock clock : Clock { }
+    TitlePanel {
+        currentTime: clock.currentTime
+    }
+    ContentPanel {
+        currentTime: clock.currentTime
+
+        onResetTime: clock.resetTime()
+    }
+}
+```
+
+This allows use to configure the dependency of the AppPanel and with this make it better testable.
+
 ### Recipe: Extract harmful dependency conditions
 
 A harmful dependency is a dependency which breaks decomposition and testability by introducing (often indirect) not testable dependencies (e.g. network, hardware, global state).
@@ -279,7 +335,291 @@ In a later step we can now start with that component. Be sure to only move compo
 
 ### Recipe: Extract a Store
 
-After pushing conditions up tot he root level of the current component sometimes it is a good practice to collect them into an object. So the object gets injected into this component. This component is the first version of a potential store.
+After pushing conditions up to the root level of the current component sometimes it is a good practice to collect them into an object. So the object gets injected into this component. This component is the first version of a potential store.
+
 This object then collects these dependencies and will carry the harmful dependencies. The component itself will only depend on this particular object (aka store).
 
 This makes it also easier to push dependencies up the UI tree as we only have to push the object up not individual properties.
+
+```qml
+// AppPanel.qml
+import service.time 1.0
+
+Panel {
+    id: root
+    property Clock clock : Clock { }
+    property string stationName
+    TitlePanel {
+        title: root.stationName
+        currentTime: clock.currentTime
+    }
+    ContentPanel {
+        currentTime: clock.currentTime
+        onResetTime: clock.resetTime()
+    }
+}
+```
+
+__Step: name space your dependency__
+
+
+```
+// AppStore.qml
+import service.time 1.0
+
+Store {
+    property Clock clock: Clock {}
+}
+```
+
+
+
+```diff
+// AppPanel.qml
+- import service.time 1.0
+
+Panel {
+    id: root
+-   property Clock clock : Clock { }
++   property AppStore store: AppStore {}
+    property string stationName
+    TitlePanel {
+        title: root.stationName
+-       currentTime: clock.currentTime
++       currentTime: store.clock.currentTime
+    }
+    ContentPanel {
++       currentTime: clock.currentTime
++       currentTime: store.clock.currentTime
+-       onResetTime: clock.resetTime()
++       onResetTime: store.clock.resetTime()
+    }
+}
+```
+
+__Step: Prevent object leaking__
+
+We still have a problem in the store, we leak an object and the internals of the object can be discovered. We could prevent it by hiding the object behind the store interface.
+
+```diff
+// AppStore.qml
+import service.time 1.0
+
+Store {
+-   property Clock clock: Clock {}
++   property Clock __clock: Clock {}
+
++   property string currentTime: __clock.currentTime
++   function resetTime() {
++       __clock.resetTime()
++   }
+}
+```
+
+This will change our panel to
+
+```diff
+// AppPanel.qml
+
+Panel {
+    id: root
+    property AppStore store: AppStore {}
+    property string stationName
+    TitlePanel {
+        title: root.stationName
+-       currentTime: store.clock.currentTime
++       currentTime: store.currentTime
+    }
+    ContentPanel {
+-       currentTime: store.clock.currentTime
++       currentTime: store.clock.currentTime
+-       onResetTime: store.clock.resetTime()
++       onResetTime: store.clock.resetTime()
+    }
+}
+```
+
+__Step: extract data interface into a data object__
+
+Now we can also add the remaining station name, which might come from another service. We do not know here into the store.
+
+
+```
+// AppStore.qml
+import service.time 1.0
+
+Store {
+    property Clock clock: Clock {}
++   property string stationName
+}
+```
+
+
+```diff
+// AppPanel.qml
+
+Panel {
+    id: root
+-   property AppStore store: AppStore {}
++   property AppStore store: AppStore {
++       stationName: root.stationName
++   }
+    property string stationName
+    TitlePanel {
+-       title: root.stationName
++       title: store.stationName
+        currentTime: store.clock.currentTime
+    }
+    ContentPanel {
+        currentTime: store.clock.currentTime
+        onResetTime: store.clock.resetTime()
+    }
+}
+```
+
+On the first sight this seems to make thing more complicated. But think about, we want to inject dependency. So we want to make it the duty of the instance which instantiates us to think about where the data comes from.
+
+__Step: inject store__
+
+So this allows us now to inject the store as dependency and make our dependency much more clearer.
+
+
+```diff
+// AppPanel.qml
+// import service.time 1.0
+
+Panel {
+    id: root
+-   property AppStore store: AppStore {
+-       stationName: root.stationName
+-   }
+-   property string stationName
++   property AppStore store
+    TitlePanel {
+        title: store.stationName
+        currentTime: store.clock.currentTime
+    }
+    ContentPanel {
+        currentTime: store.clock.currentTime
+        onResetTime: store.clock.resetTime()
+    }
+}
+```
+
+We would call this component now a View, as it depends on a store. A panels just depend on data properties, a view on a store.
+
+```diff
+- // AppPanel.qml
++ // AppView.qml
+
+- Panel {
++ View {
+    id: root
+    property AppStore store
+    ...
+}
+```
+
+Maybe our AppPanel is called by a Main item, this would be the change there.
+
+```diff
+// Main.qml
+Item {
+    width: 800
+    height: 600
+    AppPanel {
+-       stationName: 'Last Station'
++       store: AppStore {
++           stationName: 'Last Station'
++       }
+    }
+}
+```
+
+
+## Conclusion
+
+Injecting dependencies, means roughly: make it the problem of someone else. When looking back we have now a set of nice to test components and clear idea where the data comes from.
+
+```qml
+// Main.qml
+Item {
+    width: 800
+    height: 600
+    AppPanel {
+        store: AppStore {
+            stationName: 'Last Station'
+        }
+    }
+}
+```
+
+```qml
+// AppStore.qml
+import service.time 1.0
+
+Store {
+    property Clock __clock: Clock {}
+    property string stationName
+    property string currentTime: __clock.currentTime
+    function resetTime() {
+        return __clock.resetTime()
+    }
+}
+```
+
+```qml
+// AppPanel.qml
+Panel {
+    id: root
+    property AppStore store
+    TitlePanel {
+        title: store.stationName
+        currentTime: store.currentTime
+    }
+    ContentPanel {
+        currentTime: store.currentTime
+        onResetTime: store.resetTime()
+    }
+}
+```
+
+```qml
+// ContentPanel.qml
+Panel {
+    id: root
+    property string currentTime
+    signal resetTime()
+
+    Button {
+        text: root.currentTime
+        onClicked: root.resetTime()
+    }
+}
+```
+
+
+```qml
+// TitlePanel.qml
+Panel {
+    id: root
+    property string currentTime
+    Label {
+        text: root.currentTime
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
