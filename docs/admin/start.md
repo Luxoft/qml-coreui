@@ -1,8 +1,6 @@
 # Quick Start
 
-
 ## Installation
-
 
 To use the admin we first need to install it as part of our environment.
 
@@ -12,8 +10,7 @@ cd coreui-admin
 pip install -e .
 ```
 
-The simplest start is to use an existing Qt SDK (e.g. 5.11 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start into the creation of a new user interface for systems.
-
+The simplest start is to use an existing Qt SDK (e.g. 5.11 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start to the creation of a new user interface for systems.
 
 ## Setting up QtAuto Stack
 
@@ -49,7 +46,7 @@ coreui-admin build auto
 
 Note: Please make sure that all coreui components are successfully configured.
 
-Now we can start the QtAuto reference user interrface called Neptune3 UI.
+Now we can start the QtAuto reference user interface called Neptune3 UI.
 
 ```sh
 coreui-admin start
@@ -68,7 +65,7 @@ cd myproject
 ```
 
 
-We first let the admin know where the existing Qt SDK is located. For this we point it to the `qmake` executable for the SDK.
+We first let the admin know where the existing Qt SDK is located. For this, we point it to the `qmake` executable for the SDK.
 
 ```sh
 coreui-admin config qmake <path/to/qmake>
@@ -81,6 +78,3 @@ coreui-admin start
 ```
 
 To develop with the newly created UI you can open QtCreator and open the `myproject/myproject.qmlproject` project.
-
-
-

@@ -1,6 +1,6 @@
 # Installation
 
-The `coreui-admin` tool is a script which can be easily installed using standard python tooling.
+The `coreui-admin` tool is a script that can be easily installed using standard python tooling.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ The script requires a python (2.x or 3.x ) installation with the PIP package man
 ## Installation from Git
 
 
-You can also direcly install from git using the python package manager
+You can also directly install from git using the python package manager
 
 ```sh
 pip install git+https://github.com/Luxoft/coreui-admin.git@develop --upgrade
@@ -22,7 +22,7 @@ pip install git+https://github.com/Luxoft/coreui-admin.git@develop --upgrade
 
 ### Editable Installation
 
-An editable installation only installs links to the orignal source. In effect updating the git checkout also installs the script.
+An editable installation only installs links to the original source. In effect updating, the git checkout also installs the script.
 
 ```sh
 git clone https://github.com/Luxoft/coreui-admin.git
@@ -58,16 +58,12 @@ virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
-Now install coreui-admin and to exit this python virtual environment call `deactivate`.
+Now install coreui-admin and to exit this python virtual environment run `deactivate`.
 
 ## First Usage
 
-After the installation the `coreui-admin` command is at your disposal.
+After the installation, the `coreui-admin` command is at your disposal.
 
 ```sh
 coreui-admin --help
 ```
-
-
-
-
