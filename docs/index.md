@@ -36,6 +36,7 @@ This guide was initially designed and worked out by Jürgen Bocklage-Ryannel. Be
 
 ## License
 
-Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (FDL) version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
 
-The code samples in this document are provided under BSD 3-Clause "New" or "Revised" License as published by the SPDX Workgroup a Linux Foundation Project
+> Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free > Documentation License (FDL) version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+>
+> The code samples in this document are provided under BSD 3-Clause "New" or "Revised" License as published by the SPDX Workgroup a Linux Foundation Project
