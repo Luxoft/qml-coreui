@@ -989,55 +989,54 @@
                 
                 <h1 id="reference">Reference</h1>
 <h2 id="command-line-usage">Command Line Usage</h2>
-<p>::</p>
-<div class="codehilite"><pre><span></span><span class="nv">Usage</span>: <span class="nv">coreui</span><span class="o">-</span><span class="nv">admin</span> [<span class="nv">OPTIONS</span>] <span class="nv">COMMAND</span> [<span class="nv">ARGS</span>]...
+<div class="codehilite"><pre><span></span>Usage: coreui-admin [OPTIONS] COMMAND [ARGS]...
 
-<span class="nv">coreui</span> <span class="nv">adminstration</span> <span class="nv">tool</span>
+coreui adminstration tool
 
-<span class="nv">Options</span>:
-  <span class="o">-</span><span class="nv">v</span>, <span class="o">--</span><span class="nv">verbose</span>                   <span class="nv">Enables</span> <span class="nv">verbose</span> <span class="nv">mode</span>.
-  <span class="o">--</span><span class="nv">dry</span><span class="o">-</span><span class="nv">run</span> <span class="o">/</span> <span class="o">--</span><span class="nv">no</span><span class="o">-</span><span class="nv">dry</span><span class="o">-</span><span class="nv">run</span>        <span class="nv">operations</span> <span class="nv">are</span> <span class="nv">not</span> <span class="nv">executed</span>, <span class="nv">only</span> <span class="nv">printed</span>
-  <span class="o">--</span><span class="nv">log</span><span class="o">-</span><span class="nv">level</span> [<span class="nv">info</span><span class="o">|</span><span class="nv">debug</span><span class="o">|</span><span class="nv">warning</span><span class="o">|</span><span class="nv">error</span>]
-                                  <span class="nv">sets</span> <span class="nv">the</span> <span class="nv">log</span> <span class="nv">level</span>
-  <span class="o">--</span><span class="nv">help</span>                          <span class="k">Show</span> <span class="nv">this</span> <span class="nv">message</span> <span class="nv">and</span> <span class="k">exit</span>.
+Options:
+  -v, --verbose                   Enables verbose mode.
+  --dry-run / --no-dry-run        operations are not executed, only printed
+  --log-level [info|debug|warning|error]
+                                  sets the log level
+  --help                          Show this message and exit.
 
-<span class="nv">Commands</span>:
-  <span class="nv">app</span>       <span class="nv">creates</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">application</span>
-  <span class="nv">build</span>     <span class="nv">Builds</span> <span class="nv">one</span> <span class="nv">or</span> <span class="nv">more</span> <span class="nv">repos</span>
-  <span class="nv">clean</span>     <span class="nv">cleans</span> <span class="nv">the</span> <span class="nv">build</span>, <span class="nv">install</span> <span class="nv">and</span> <span class="nv">optional</span> <span class="nv">the</span> <span class="nv">source</span> <span class="nv">folder</span>
-  <span class="nv">clone</span>     <span class="nv">clones</span> <span class="nv">the</span> <span class="nv">coreui</span> <span class="nv">repositories</span> <span class="nv">into</span> <span class="nv">this</span> <span class="nv">workspace</span>
-  <span class="nv">config</span>    <span class="nv">configures</span> <span class="nv">coreui</span>
-  <span class="nv">env</span>       <span class="nv">display</span>.<span class="nv">env</span> <span class="nv">variables</span>
-  <span class="nv">generate</span>  <span class="nv">Creates</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">aspect</span>
-  <span class="nv">init</span>      <span class="nv">creates</span> <span class="nv">an</span> <span class="nv">empty</span> <span class="nv">coreui</span> <span class="nv">workspace</span>
-  <span class="nv">new</span>       <span class="nv">creates</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">coreui</span> <span class="nv">project</span>
-  <span class="nv">os</span>        <span class="nv">prepares</span> <span class="nv">the</span> <span class="nv">OS</span> <span class="nv">to</span> <span class="nv">build</span> <span class="nv">coreui</span>
-  <span class="nv">pull</span>      <span class="nv">updates</span> <span class="nv">the</span> <span class="nv">coreui</span> <span class="nv">repositories</span>
-  <span class="nv">qt</span>        <span class="nv">support</span> <span class="k">for</span> <span class="nv">building</span> <span class="nv">qt</span>
-  <span class="nv">repos</span>     <span class="nv">manages</span> <span class="nv">the</span> <span class="nv">listed</span> <span class="nv">repos</span>
-  <span class="nv">run</span>       <span class="nv">runs</span> <span class="nv">a</span> <span class="nv">script</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">config</span> <span class="nv">script</span> <span class="nv">section</span> <span class="nv">by</span> <span class="nv">name</span>
-  <span class="nv">start</span>     <span class="nv">starts</span> <span class="nv">a</span> <span class="nv">project</span>
-  <span class="nv">targets</span>   <span class="nv">manages</span> <span class="nv">the</span> <span class="nv">buildable</span> <span class="nv">targets</span>
+Commands:
+  app       creates a new application
+  build     Builds one or more repos
+  clean     cleans the build, install and optional the source folder
+  clone     clones the coreui repositories into this workspace
+  config    configures coreui
+  env       display.env variables
+  generate  Creates a new aspect
+  init      creates an empty coreui workspace
+  new       creates a new coreui project
+  os        prepares the OS to build coreui
+  pull      updates the coreui repositories
+  qt        support for building qt
+  repos     manages the listed repos
+  run       runs a script from the config script section by name
+  start     starts a project
+  targets   manages the buildable targets
 </pre></div>
 
 
 <h2 id="initialisation">Initialisation</h2>
-<div class="codehilite"><pre><span></span><span class="nv">Usage</span>: <span class="nv">coreui</span><span class="o">-</span><span class="nv">admin</span> <span class="nv">init</span> [<span class="nv">OPTIONS</span>]
+<div class="codehilite"><pre><span></span>Usage: coreui-admin init [OPTIONS]
 
-  <span class="nv">Initialized</span> <span class="nv">the</span> <span class="nv">workspace</span> <span class="nv">by</span> <span class="nv">writing</span> <span class="nv">the</span> `<span class="nv">coreui</span>.<span class="nv">yml</span>` <span class="nv">setup</span> <span class="nv">document</span>
+  Initialized the workspace by writing the `coreui.yml` setup document
 
-<span class="nv">Options</span>:
-  <span class="o">--</span><span class="nv">help</span>  <span class="k">Show</span> <span class="nv">this</span> <span class="nv">message</span> <span class="nv">and</span> <span class="k">exit</span>.
+Options:
+  --help  Show this message and exit.
 </pre></div>
 
 
 <h2 id="configuration">Configuration</h2>
-<div class="codehilite"><pre><span></span><span class="nv">Usage</span>: <span class="nv">coreui</span><span class="o">-</span><span class="nv">admin</span> <span class="nv">config</span> [<span class="nv">OPTIONS</span>] [<span class="nv">NAME</span>] [<span class="nv">VALUE</span>]
+<div class="codehilite"><pre><span></span>Usage: coreui-admin config [OPTIONS] [NAME] [VALUE]
 
-<span class="nv">Options</span>:
-  <span class="o">--</span><span class="nv">unset</span> <span class="nv">TEXT</span>
-  <span class="o">--</span><span class="nv">edit</span> <span class="o">/</span> <span class="o">--</span><span class="nv">no</span><span class="o">-</span><span class="nv">edit</span>
-  <span class="o">--</span><span class="nv">help</span>              <span class="k">Show</span> <span class="nv">this</span> <span class="nv">message</span> <span class="nv">and</span> <span class="k">exit</span>.
+Options:
+  --unset TEXT
+  --edit / --no-edit
+  --help              Show this message and exit.
 </pre></div>
 
 
@@ -1048,49 +1047,49 @@
 <li><code>qmake</code>: qmake path (defaults to empty)</li>
 </ul>
 <p>You can set the option using the <code>config</code> command. For example to set the jobs option to 6 use</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="n">jobs</span> <span class="mi">6</span>
+<div class="codehilite"><pre><span></span>coreui-admin config <span class="nb">jobs</span> <span class="m">6</span>
 </pre></div>
 
 
 <p>In case you want to edit the whole <code>coreui.yml</code> document you can just type</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="c1">--edit</span>
+<div class="codehilite"><pre><span></span>coreui-admin config --edit
 </pre></div>
 
 
 <p>This will open your default editor and display the configuration document.</p>
 <h1 id="targets">Targets</h1>
 <p>The configuration document has a section of <code>targets</code>, which is a list of repositories. The repositories order is important for the order of build.</p>
-<div class="codehilite"><pre><span></span><span class="n">targets</span><span class="o">:</span>
-  <span class="n">auto</span><span class="o">:</span>
-  <span class="o">-</span> <span class="n">appman</span>
-  <span class="o">-</span> <span class="n">dlt</span><span class="o">-</span><span class="n">daemon</span>
+<div class="codehilite"><pre><span></span><span class="nt">targets</span><span class="p">:</span>
+  <span class="nt">auto</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">appman</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dlt-daemon</span>
 </pre></div>
 
 
 <h1 id="repositories">Repositories</h1>
 <p>The <code>coreui.yml</code> document has an own section for repos listed. The repos are listed with a name, url, branch and the build-type. The name is the name the project will be checkout and being identified using other commands. The url should be a standard git url. The branch is the branch being checkout out. The build-type can be <code>qmake</code> or <code>cmake</code> - othe build types are currently not supported.</p>
 <p>In the <code>coreui.yml</code> document a <code>repos</code> section looks like this</p>
-<div class="codehilite"><pre><span></span><span class="nl">config</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nl">jobs</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">  </span><span class="nl">qmake</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">jryannel</span><span class="o">/</span><span class="n">Qt</span><span class="o">/</span><span class="mf">5.10.0</span><span class="o">/</span><span class="n">clang_64</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">qmake</span><span class="w"></span>
-<span class="nl">env</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nl">QT_SCALE_FACTOR</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.75&#39;</span><span class="w"></span>
-<span class="nl">repos</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nl">appman</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nl">branch</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;5.10&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="nl">build</span><span class="p">:</span><span class="w"> </span><span class="n">qmake</span><span class="w"></span>
-<span class="w">    </span><span class="nl">os</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="n">linux, macos</span><span class="o">]</span><span class="w"></span>
-<span class="w">    </span><span class="nl">url</span><span class="p">:</span><span class="w"> </span><span class="nl">git</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="p">.</span><span class="n">qt</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">qt</span><span class="o">/</span><span class="n">qtapplicationmanager</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
-<span class="w">  </span><span class="n">dlt</span><span class="o">-</span><span class="nl">daemon</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nl">branch</span><span class="p">:</span><span class="w"> </span><span class="n">master</span><span class="w"></span>
-<span class="w">    </span><span class="nl">build</span><span class="p">:</span><span class="w"> </span><span class="n">cmake</span><span class="w"></span>
-<span class="w">    </span><span class="nl">os</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="n">linux</span><span class="o">]</span><span class="w"></span>
-<span class="w">    </span><span class="nl">url</span><span class="p">:</span><span class="w"> </span><span class="nl">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">GENIVI</span><span class="o">/</span><span class="n">dlt</span><span class="o">-</span><span class="n">daemon</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
-<span class="nl">scripts</span><span class="p">:</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
-<span class="nl">targets</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nl">auto</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">appman</span><span class="w"></span>
-<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">dlt</span><span class="o">-</span><span class="n">daemon</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+  <span class="nt">jobs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+  <span class="nt">qmake</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/Users/jryannel/Qt/5.10.0/clang_64/bin/qmake</span>
+<span class="nt">env</span><span class="p">:</span>
+    <span class="nt">QT_SCALE_FACTOR</span><span class="p">:</span> <span class="s">&#39;0.75&#39;</span>
+<span class="nt">repos</span><span class="p">:</span>
+  <span class="nt">appman</span><span class="p">:</span>
+    <span class="nt">branch</span><span class="p">:</span> <span class="s">&#39;5.10&#39;</span>
+    <span class="nt">build</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">qmake</span>
+    <span class="nt">os</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">linux</span><span class="p p-Indicator">,</span> <span class="nv">macos</span><span class="p p-Indicator">]</span>
+    <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git://code.qt.io/qt/qtapplicationmanager.git</span>
+  <span class="nt">dlt-daemon</span><span class="p">:</span>
+    <span class="nt">branch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+    <span class="nt">build</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cmake</span>
+    <span class="nt">os</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">linux</span><span class="p p-Indicator">]</span>
+    <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git://github.com/GENIVI/dlt-daemon.git</span>
+<span class="nt">scripts</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">targets</span><span class="p">:</span>
+  <span class="nt">auto</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">appman</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dlt-daemon</span>
 </pre></div>
 
 
@@ -1099,8 +1098,8 @@
 <h1 id="environment-variables">Environment Variables</h1>
 <p>All commands wil inherit the system environment variables. There are several ways to add additional environment variables. Either project wide enviroment variables can be set in the <code>coreui.yml</code> document in the <code>env</code> section or using a local <code>.env</code> file next to the <code>coreui.yml</code>.</p>
 <p>In the <code>coreui.yml</code> document you need to fill in the <code>env</code> section using a key value pair format.</p>
-<div class="codehilite"><pre><span></span><span class="n">env</span><span class="o">:</span>
-    <span class="n">QT_SCALE_FACTOR</span><span class="o">:</span> <span class="s2">&quot;0.75&quot;</span>
+<div class="codehilite"><pre><span></span><span class="nt">env</span><span class="p">:</span>
+    <span class="nt">QT_SCALE_FACTOR</span><span class="p">:</span> <span class="s">&quot;0.75&quot;</span>
 </pre></div>
 
 

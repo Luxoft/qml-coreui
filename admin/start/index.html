@@ -990,60 +990,60 @@
                 <h1 id="quick-start">Quick Start</h1>
 <h2 id="installation">Installation</h2>
 <p>To use the admin we first need to install it as part of our environment.</p>
-<div class="codehilite"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">git</span><span class="nv">@http</span><span class="err">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">Luxoft</span><span class="o">/</span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span><span class="p">.</span><span class="n">git</span><span class="w"></span>
-<span class="n">cd</span><span class="w"> </span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span><span class="w"></span>
-<span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+<div class="codehilite"><pre><span></span>git clone git@http://github.com/Luxoft/coreui-admin.git
+<span class="nb">cd</span> coreui-admin
+pip install -e .
 </pre></div>
 
 
 <p>The simplest start is to use an existing Qt SDK (e.g. 5.11 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start into the creation of a new user interface for systems.</p>
 <h2 id="setting-up-qtauto-stack">Setting up QtAuto Stack</h2>
 <p>Create a project directory</p>
-<div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="n">coreui</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">coreui</span>
+<div class="codehilite"><pre><span></span>mkdir coreui <span class="o">&amp;&amp;</span> <span class="nb">cd</span> coreui
 </pre></div>
 
 
 <p>Write the config file <code>coreui.yml</code></p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">init</span>
+<div class="codehilite"><pre><span></span>coreui-admin init
 </pre></div>
 
 
 <p>Configure <code>qmake</code> to use existing Qt5 SDK</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="n">qmake</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">qmake</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>coreui-admin config qmake &lt;path/to/qmake&gt;
 </pre></div>
 
 
 <p>Clone QtAuto source repositories</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">clone</span> <span class="n">auto</span>
+<div class="codehilite"><pre><span></span>coreui-admin clone auto
 </pre></div>
 
 
 <p>Build all QtAuto repositories</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">build</span> <span class="n">auto</span>
+<div class="codehilite"><pre><span></span>coreui-admin build auto
 </pre></div>
 
 
 <p>Note: Please make sure that all coreui components are successfully configured.</p>
 <p>Now we can start the QtAuto reference user interrface called Neptune3 UI.</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="k">start</span>
+<div class="codehilite"><pre><span></span>coreui-admin start
 </pre></div>
 
 
 <p>The script was automatically registered while building the QtAuto repositories.</p>
 <h2 id="setting-up-a-new-coreui-project">Setting up a new CoreUI project</h2>
 <p>Now we can create the single-process UI</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="k">new</span> <span class="n">myproject</span>
-<span class="n">cd</span> <span class="n">myproject</span>
+<div class="codehilite"><pre><span></span>coreui-admin new myproject
+<span class="nb">cd</span> myproject
 </pre></div>
 
 
 <p>We first let the admin know where the existing Qt SDK is located. For this we point it to the <code>qmake</code> executable for the SDK.</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="n">qmake</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">qmake</span><span class="o">&gt;</span>
+<div class="codehilite"><pre><span></span>coreui-admin config qmake &lt;path/to/qmake&gt;
 </pre></div>
 
 
 <p>We can launch the UI using the start script, which was registered by the project generator.</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="k">start</span>
+<div class="codehilite"><pre><span></span>coreui-admin start
 </pre></div>
 
 
