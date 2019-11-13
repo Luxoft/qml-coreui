@@ -1,0 +1,1036 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="guide to the core ui architecture for QML driven projects">
+      
+      
+      
+        <meta name="author" content="Juergen Ryannel">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>Services - QML Core UI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#services" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="QML Core UI" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">bookmark</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              QML Core UI
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Services
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Overview
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../guide/install/" class="md-tabs__link">
+          Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Topics
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../download/" class="md-tabs__link">
+          Download
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../api/" class="md-tabs__link">
+          API Reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../team/" class="md-tabs__link">
+          Team
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../support/" class="md-tabs__link">
+          Support This
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="QML Core UI" class="md-nav__button md-logo">
+      
+        <i class="md-icon">bookmark</i>
+      
+    </a>
+    QML Core UI
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/install/" title="Install" class="md-nav__link">
+      Install
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/whatis/" title="What is Clean UI" class="md-nav__link">
+      What is Clean UI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/cookbook/" title="CookBook" class="md-nav__link">
+      CookBook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../foundations/" title="Foundations" class="md-nav__link">
+      Foundations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blocks/" title="Building Blocks" class="md-nav__link">
+      Building Blocks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controls/" title="Controls" class="md-nav__link">
+      Controls
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fslayout/" title="Filesystem layout" class="md-nav__link">
+      Filesystem layout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layouts/" title="Layouts" class="md-nav__link">
+      Layouts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prototyping/" title="Protoyping" class="md-nav__link">
+      Protoyping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Services" class="md-nav__link md-nav__link--active">
+      Services
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uilayer/" title="UI Layer" class="md-nav__link">
+      UI Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../refactor/" title="Refactoring" class="md-nav__link">
+      Refactoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../styles/" title="Styles" class="md-nav__link">
+      Styles
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Download
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Download
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../download/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      API Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Team
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Team
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../team/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Resources
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Support This
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Support This
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/topics/services.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="services">Services</h1>
+<p>Services exposes features either from the system or a networked resource to the application layer. Services can be categorized based on their process-association, inter-service dependencies and the handling of state. In general a service is an instance of vertical communication. This vertical communication can be done via an IPC out-of-process or via a library in-process. The API can be designed state-less or state-full. You should prefer state-full if the API shall reflect the system state (e.g. volume, temperature) which shall be shown on several displays and state-less if the API is used to primary query backends and no shared state is required. In general in embedded system a state-full service is preferred as the system shall reflect the machine state.</p>
+<blockquote>
+<p>A service is a vertical communication layer
+APIs in embedded devices are primary state-full</p>
+</blockquote>
+<p>Be aware that the service API will not directly consumed by the UI elements and rather be wrapped by a store API optimized for UI consumption.</p>
+<blockquote>
+<p>A service API will not be directly consumed by the UI</p>
+</blockquote>
+<p>Services are system features which expose an API surface published using primary a system specific IPC. A service is often defined as a client/server model, where the client (e.g. the UI or another service) and the server (a bundle of services in one process) communicate via an IPC (typically TCP/IP based or D-BUS based).</p>
+<p>During development a service needs to be simulated in case the endpoint is not available or depends on a hardware which is difficult to gain access to or work with. Often HW is also not available in an early project phase, still the UI development needs to start. When looking on a system there exists often many services, and ideally each service can be individually configured to use either a simulation or a real backend.</p>
+<p>Simulation and services will often be used across device boundaries. For example a host running the user interface tries to connect to an embedded device connected via an ethernet or serial connection. In these cases it is important that the selected IPC supports this use case. This is why the author things D-BUS is not a valid choice for this layer and TCP/IP based solutions are better suited.</p>
+<blockquote>
+<p>A service needs to support a simulation backend</p>
+<p>A simulation backend needs to be enabled per service</p>
+</blockquote>
+<p>For out-of-process services of the IPC is very specific to the individual project and the service needs to be able to adapt to this communication library. IN a rare case the project does not define an IPC solution and the developers can choose their best fiffting solution.</p>
+<p>There is a difference between the services consumed by the UI and the services the system is offering. Often system services are available using D-BUS as IPC and are meant to be consumed using some low-level API. These middle-ware services offer a higher-level API already defined with the UI in mind, still, the API is only loosely coupled towards the UI.</p>
+<p>It is assumed that this service API will change over the development time of the project and it will take several iterations to get a stable API. As such it is not wise that the UI directly consumes this API. The changes will lead to many small defects in the UI which will make it very hard to detect and fix them.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>It is preferred that the service client API either be consumed by a C++ native extension or in a QML/JS based UI store. The C++ compiler will detect many API changes and report them before they appear in the UI and when using a QML/JS based store there needs to be 100% test coverage to ensure that these changes will be detected.</p>
+</div>
+<p>It is important that the release cycle of the store API is fully controlled by the UI developer to avoid suprises and the release cycle of the service API is harmonized between the UI and platform developers.</p>
+<h1 id="api-shape">API Shape</h1>
+<p>The API should be shaped after easy to understand patterns and ideally be familiar to the developer but also easy to explain to non-technical API authors. The API should define a common vocabulary and provide a way to structure larger projects.</p>
+<p>The API shall be shaped around the idea of a module. Each module is identified by a reverse URI (e.g. like a Java package convention). Each module can contain a list of interfaces. An interface is a collection of properties, operations and signals. The collection of properties define the state of the interface. The operations provide a mean to modify the state or to retrieve data. Signals allow a service to notify a client about external changes. It is assumed for pure property changes the API will auto-provide signals.</p>
+<div class="codehilite"><pre><span></span>    <span class="o">-</span> <span class="nv">module</span>                  # <span class="nv">module</span> <span class="nv">is</span> <span class="nv">a</span> <span class="nv">namespace</span> <span class="k">for</span> <span class="nv">all</span> <span class="nv">child</span> <span class="nv">symbols</span> <span class="nv">exists</span>
+        <span class="o">-</span> <span class="nv">Interface</span>           # <span class="nv">named</span> <span class="nv">symbol</span> <span class="nv">which</span> <span class="nv">defines</span> <span class="nv">a</span> <span class="nv">set</span> <span class="nv">of</span> <span class="nv">properties</span>, <span class="nv">operations</span>, <span class="nv">and</span> <span class="nv">signals</span>
+            <span class="o">-</span> <span class="nv">Properties</span>      # <span class="nv">data</span> <span class="nv">entry</span> <span class="nv">with</span> <span class="nv">a</span> <span class="nv">name</span> <span class="nv">and</span> <span class="nv">type</span>
+            <span class="o">-</span> <span class="nv">Operations</span>      # <span class="nv">operation</span> <span class="nv">with</span> <span class="nv">parameters</span> <span class="nv">and</span> <span class="k">return</span> <span class="nv">value</span>
+            <span class="o">-</span> <span class="nv">Signals</span>         # <span class="nv">notification</span> <span class="nv">sent</span> <span class="nv">from</span> <span class="nv">the</span> <span class="nv">service</span> <span class="nv">back</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">consumer</span>
+        <span class="o">-</span> <span class="nv">Struct</span>              # <span class="nv">data</span> <span class="nv">structure</span> <span class="nv">to</span> <span class="nv">define</span> <span class="nv">a</span> <span class="nv">message</span>
+            <span class="o">-</span> <span class="nv">Fields</span>          # <span class="nv">entries</span> <span class="nv">of</span> <span class="nv">a</span> <span class="nv">struct</span> <span class="nv">with</span> <span class="nv">name</span> <span class="nv">and</span> <span class="nv">type</span>
+        <span class="o">-</span> <span class="nv">Enum</span><span class="o">/</span><span class="nv">Flag</span>           # <span class="nv">An</span> <span class="nv">enumeration</span> <span class="nv">which</span> <span class="nv">can</span> <span class="nv">be</span> <span class="nv">used</span> <span class="nv">e</span>.<span class="nv">g</span>. <span class="k">for</span> <span class="nv">properties</span> <span class="nv">and</span><span class="o">/</span><span class="nv">or</span> <span class="nv">operations</span>
+            <span class="o">-</span> <span class="nv">Values</span>          # <span class="nv">entries</span> <span class="nv">of</span> <span class="nv">an</span> <span class="nv">enumeration</span> <span class="nv">with</span> <span class="nv">name</span> <span class="nv">and</span> <span class="nv">value</span>
+</pre></div>
+
+
+<p>A module can have one or more interfaces, structs or enums/flags. As such a module is a higher level feature. To adhere to the micro-service architecture a service API should not depend directly on another service, instead, the API author should use identifiers (IDs), which are typically integers or strings to identify a resource from another module.</p>
+<p>Below is an example of a simple counter API. Please be aware this is a state-full example as the state of the interface is encoded in the count property.</p>
+<div class="codehilite"><pre><span></span>    <span class="n">module</span> <span class="n">counter</span> <span class="mf">1.0</span>
+
+    <span class="kd">interface</span> <span class="nc">Counter</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="n">count</span>
+      <span class="kt">void</span> <span class="nf">increment</span><span class="o">()</span>
+      <span class="kt">void</span> <span class="nf">decrement</span><span class="o">()</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>A state-less example would look like this</p>
+<div class="codehilite"><pre><span></span>    <span class="n">module</span> <span class="n">counter</span> <span class="mf">1.0</span>
+
+    <span class="kd">interface</span> <span class="nc">Counter</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="nf">count</span><span class="o">()</span>
+      <span class="kt">int</span> <span class="nf">increment</span><span class="o">()</span>
+      <span class="kt">int</span> <span class="nf">decrement</span><span class="o">()</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<h2 id="interface-definition">Interface Definition</h2>
+<p>The API exposed by all middle-ware services needs to be harmonized across all services. To ensure a well defined and harmonized API can be created the API shall be defined in an interface definition language (IDL) with an attached code generation.</p>
+<p>The IDL should be independent of the target technology to allow securing the investment into an API also if the UI technology or the backend technolgy changes in the future.</p>
+<p>The IDL should be designed so that it is simple to understand and expressive. It should be able to express the API exact enough for developers to get an idea which code will be generated out of the API, still, it should be high level enough that a non-technical person understands which features are covered in the API.</p>
+<p>The IDL needs to be able to generate a well-defined API documentation for externals to lookup the documentation as a reference how to use the API. Also, the IDL shall allow extensions to provide meta information to transport project specific information such as deployment information or specific directives for the code generator.</p>
+<h2 id="code-generation">Code Generation</h2>
+<p>The IDL should have a sophisticated code generator attached, ideally independent from the target technology, to allow customers to use a different technology or a different IPC.</p>
+<p>During the lifetime of a project, there are many needs to generate a different kind of source code or reports about an API. For example also if the client/server communication is done in C++ using a TCP/IP based IPC  there might be a requirement during development to potentially use a WebSocket JSON protocol to make debugging easier. Also, developers would like to generate documentation with a custom style to map the project colors or in a format which can be consumed by their tool-chain. In the past, there was also some need to report back some statistics about the API.</p>
+<p>All of these use cases call for a flexible yet powerful code generation framework where a development team can use existing code generator or provide their own if the requirements of the project change. Still, the investment into the API definition should not be lost and be reusable.</p>
+<h2 id="service-implementation">Service Implementation</h2>
+<p>A service generated from the code generator should ideally already be compilable and runnable by the user also if it does not provide any implementation. This allows the user to implement features piece by piece iteratively. This normally results in a conflict if the code generator writes files which need to be edited by the user. It is important that the code generator differentiate between files which can be overwritten and those which need to be preserved for the user.</p>
+<p>The service implementation is typically based on an abstract base class which provides the interface to be implemented. The developer then needs to edit the concrete classes and implement the interface.</p>
+<h2 id="client-usage">Client Usage</h2>
+<p>From the UI perspective the client should just be instantiated. The UI should be in charge to decide at which time a client is created and connected to the device. The client configuration should be read from some kind of data storage (e.g. settings file) and/or environment variable. By this configuration of the client is separated from the instantiation. The UI shall be in charge of the startup sequence. And as such must be able to delay certain clients only to be constructed on demand.</p>
+<p>A service API shall not be exposed to the UI, this is merely to allow better testing. For this a store wrappes the used service APIs in a common API for the UI. The store can be written either in QML/JS or C++.  QML/JS is great during prototyping but C++ offers more performance and better control of the API usage.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// store/RootStore.qml</span>
+
+<span class="kr">import</span> <span class="nx">services</span><span class="p">.</span><span class="nx">phone</span> <span class="mf">1.0</span>
+
+<span class="nx">Store</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+
+    <span class="nx">property</span> <span class="nx">alias</span> <span class="k">callActive:</span> <span class="nx">phone</span><span class="p">.</span><span class="nx">callActive</span>
+
+    <span class="nx">PhoneService</span> <span class="p">{</span>
+        <span class="kd">id: phone</span>
+        <span class="k">active:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">call</span><span class="p">(</span><span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">phone</span><span class="p">.</span><span class="nx">enabled</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">phone</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">number</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">warning</span><span class="p">(</span><span class="s1">&#39;ERROR: &#39;</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Calling service function is often more complex than just calling the operation. Certain conditions defeind by the requirements specification and or error cases needs to be handled. To avoid this code pollutes the UI these functions are coded inside a store. Often used functions can also be encoded into helpers to even more reduce code clutter.</p>
+<h2 id="service-simulation">Service Simulation</h2>
+<p>Service simulation allows a client to be used without a real-service attached and furthermore allows the testing of service conditions which are difficult to establish. It is used in the UI creation when user stories need to be tested to ensure certain system conditions are established to effectively validate the user story. This does not replace the need for system testing as these kinds of prototypes are more designed to demo a user story to a product owner before it will be validated in the actual hardware.</p>
+<p>Establishing flexible simulated services is the key factor to separate the UI software from the hardware. Simulation needs to be switched per service base so that the system can run in a mixed simulation mode. This requires a service not to depend on other services which leads to a micro-service architecture. In case a service depends on an object from another service it is better to exchange object ids and the other service would acquire the object using this object id.</p>
+<p>A simulated service should be more than just a static representation of the service state, it should also be able to simulate the execution of operations and their effects. Ideally the simulation is able to simulate how data changes over time, e.g. a time or event based scripting. This could be a script attached to the simulated service or as simple as a timed data read from a file.</p>
+<p>The configuration of the services is ideally located in one shared document and can be edited to switch between real-services and simulated services. Most of the times a service is bound through a TCP/IP protocol, the switch could then be as simple as changing the port or the IP address of a service.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../prototyping/" title="Protoyping" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Protoyping
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../testing/" title="Testing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Testing
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2019 Luxoft GmbH
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

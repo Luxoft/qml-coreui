@@ -1,0 +1,1342 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="guide to the core ui architecture for QML driven projects">
+      
+      
+      
+        <meta name="author" content="Juergen Ryannel">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>Testing - QML Core UI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#testing" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="QML Core UI" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">bookmark</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              QML Core UI
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Testing
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Overview
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../guide/install/" class="md-tabs__link">
+          Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Topics
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../download/" class="md-tabs__link">
+          Download
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../api/" class="md-tabs__link">
+          API Reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../team/" class="md-tabs__link">
+          Team
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../support/" class="md-tabs__link">
+          Support This
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="QML Core UI" class="md-nav__button md-logo">
+      
+        <i class="md-icon">bookmark</i>
+      
+    </a>
+    QML Core UI
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/install/" title="Install" class="md-nav__link">
+      Install
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/whatis/" title="What is Clean UI" class="md-nav__link">
+      What is Clean UI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/cookbook/" title="CookBook" class="md-nav__link">
+      CookBook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../foundations/" title="Foundations" class="md-nav__link">
+      Foundations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blocks/" title="Building Blocks" class="md-nav__link">
+      Building Blocks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controls/" title="Controls" class="md-nav__link">
+      Controls
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fslayout/" title="Filesystem layout" class="md-nav__link">
+      Filesystem layout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layouts/" title="Layouts" class="md-nav__link">
+      Layouts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prototyping/" title="Protoyping" class="md-nav__link">
+      Protoyping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Testing
+      </label>
+    
+    <a href="./" title="Testing" class="md-nav__link md-nav__link--active">
+      Testing
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#integration-testing" class="md-nav__link">
+    Integration Testing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui-layer-integration" class="md-nav__link">
+    UI Layer Integration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middle-ware-layer-integration" class="md-nav__link">
+    Middle-ware Layer Integration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-testing" class="md-nav__link">
+    Unit Testing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-testing" class="md-nav__link">
+    Control Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-testing" class="md-nav__link">
+    Panel Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-testing" class="md-nav__link">
+    View Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#store-testing" class="md-nav__link">
+    Store Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-testing" class="md-nav__link">
+    Service Testing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uilayer/" title="UI Layer" class="md-nav__link">
+      UI Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../refactor/" title="Refactoring" class="md-nav__link">
+      Refactoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../styles/" title="Styles" class="md-nav__link">
+      Styles
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Download
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Download
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../download/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      API Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Team
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Team
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../team/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Resources
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Support This
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Support This
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#integration-testing" class="md-nav__link">
+    Integration Testing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui-layer-integration" class="md-nav__link">
+    UI Layer Integration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middle-ware-layer-integration" class="md-nav__link">
+    Middle-ware Layer Integration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-testing" class="md-nav__link">
+    Unit Testing
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-testing" class="md-nav__link">
+    Control Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-testing" class="md-nav__link">
+    Panel Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-testing" class="md-nav__link">
+    View Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#store-testing" class="md-nav__link">
+    Store Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-testing" class="md-nav__link">
+    Service Testing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/topics/testing.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="testing">Testing</h1>
+<p>There are different test strategies from white-box over black-box testing and system, integration and unit testing.</p>
+<p>System testing requires a whole system to operate and it will be stimulated from outside and the reaction to the stimulation will be validated. This test effort is not in the scope of this document. This chapter will mostly focus on the integration testing and and unit testing of the user interface layer.</p>
+<p>From the concept description we know there are control, panel, view, store and service component types in our architecture. These component are distributed on the UI layer (control, panel, view, store) and the middle-ware layer (service).</p>
+<h2 id="integration-testing">Integration Testing</h2>
+<p>When it comes to integration testing the most important aspect is how to integrate the UI layer with the underlying service layer and sure also the Qt5 components with the platform layer. There needs to be some mechanism to make this effort possible.</p>
+<h3 id="ui-layer-integration">UI Layer Integration</h3>
+<h3 id="middle-ware-layer-integration">Middle-ware Layer Integration</h3>
+<h2 id="unit-testing">Unit Testing</h2>
+<p>A unit in our terms is a component. Also if this is not always exact it gives a good base to work on. To test a component you need to abstract away it dependencies.</p>
+<h3 id="control-testing">Control Testing</h3>
+<p>A control is a UI part which only depends on Qt standard data types, as such it can be easily tested as there is no need to abstract away external extra dependencies.</p>
+<div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">Button</span> <span class="nx">control</span>
+    <span class="nx">Component</span> <span class="p">{</span>
+        <span class="kd">id: component</span>
+        <span class="nx">Button</span> <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// this is run for every test function</span>
+        <span class="nx">control</span> <span class="o">=</span> <span class="nx">createTemporaryObject</span><span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="nx">root</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">SignalSpy</span> <span class="p">{</span>
+        <span class="kd">id: spy</span>
+        <span class="k">target:</span> <span class="nx">control</span>
+        <span class="k">signalName:</span> <span class="s2">&quot;clicked&quot;</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">test_click</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="nx">spy</span><span class="p">.</span><span class="nx">count</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="nx">control</span><span class="p">.</span><span class="nx">clicked</span><span class="p">();</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="nx">spy</span><span class="p">.</span><span class="nx">count</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="panel-testing">Panel Testing</h3>
+<p>A panel is a UI container which similar to the control only depends on standard Qt data types. So there is also no need to extract away external dependencies.</p>
+<h3 id="view-testing">View Testing</h3>
+<p>A view depends on the store and a store will depend on the services. So it is important to abstract away the store dependencies to allow a better testing if the views.</p>
+<p>Abstracting the store is the major issue in the testing strategy.</p>
+<p>A store abstraction is added called IRootStore which will contain the API of the root store. We need to use this IRootStore everywhere in the code to ensure we can switch it later with a root store mock. Here  is how such a IRootStore would look like.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// stores/IRootStore.qml</span>
+<span class="kr">import</span> <span class="nx">CoreUI</span> <span class="mf">1.0</span>
+
+<span class="nx">Store</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+
+    <span class="nx">readonly</span> <span class="nx">property</span> <span class="kr">int</span> <span class="nx">count</span>
+    <span class="nx">property</span> <span class="kd">var</span> <span class="k">increment:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;increment not implemented&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">property</span> <span class="kd">var</span> <span class="k">decrement:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;decrement not implemented&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The exposed API count, increment(), decrement() is implemented without a real implementation. The js functions are declared as var properties so that they can later be overwritten by an actual implementation.</p>
+<p>The actual store would have the real implementation using in this example a counter service.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// stores/RootStore.qml</span>
+
+<span class="nx">IRootStore</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+
+    <span class="k">count:</span> <span class="nx">service</span><span class="p">.</span><span class="nx">count</span>
+
+    <span class="nx">property</span> <span class="nx">CounterService</span> <span class="nx">_service</span><span class="o">:</span> <span class="nx">CounterService</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">increment:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">service</span><span class="p">.</span><span class="nx">increment</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">decrement:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">service</span><span class="p">.</span><span class="nx">decrement</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>To create a mock store we can create one directly in the tests folder, called RootStoreMock.</p>
+<p>It derives from the IRootStore and implements the API in a way which can be tested. This means the results are exposed. It is also possible to add new API to the mocked store. These properties and functions should be prefixed with an <code>_</code> to show the user this is not an official API of the root store.</p>
+<div class="codehilite"><pre><span></span>    <span class="c1">// stores/tests/RootStoreMock.qml</span>
+    <span class="kr">import</span> <span class="s2">&quot;..&quot;</span>
+
+    <span class="nx">IRootStore</span> <span class="p">{</span>
+        <span class="kd">id: root</span>
+        <span class="k">count:</span> <span class="mi">0</span>
+        <span class="nx">property</span> <span class="kr">int</span> <span class="nx">_previousCount</span><span class="o">:</span> <span class="nx">count</span>
+
+        <span class="k">increment:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">_previousCount</span> <span class="o">=</span> <span class="nx">count</span><span class="p">;</span>
+            <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">decrement:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">_previousCount</span> <span class="o">=</span> <span class="nx">count</span><span class="p">;</span>
+            <span class="o">--</span><span class="nx">count</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+
+
+<p>Now with the mocked root store we can run the tests.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// stores/tests/tst_welcomeview.qml</span>
+<span class="kr">import</span> <span class="nx">QtTest</span> <span class="mf">1.1</span>
+<span class="kr">import</span> <span class="s2">&quot;..&quot;</span>
+<span class="kr">import</span> <span class="s2">&quot;../mocked&quot;</span>
+
+<span class="nx">TestCase</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">WelcomeView</span> <span class="nx">view</span><span class="p">;</span>
+    <span class="nx">Component</span> <span class="p">{</span>
+        <span class="kd">id: component</span>
+        <span class="nx">WelcomeView</span> <span class="p">{</span>
+            <span class="k">store:</span> <span class="nx">RootStoreMock</span> <span class="p">{}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// this is run for every test function</span>
+        <span class="nx">view</span> <span class="o">=</span> <span class="nx">createTemporaryObject</span><span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="nx">root</span><span class="p">);</span>
+        <span class="c1">// assert initial state</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// testing increment action</span>
+    <span class="kd">function</span> <span class="nx">test_increment</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">_previousCount</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">findChield</span><span class="p">(</span><span class="nx">view</span><span class="p">,</span> <span class="s2">&quot;increment&quot;</span><span class="p">);</span>
+        <span class="nx">mouseClick</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">_previousCount</span><span class="p">);</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+        <span class="nx">mouseClick</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">_previousCount</span><span class="p">);</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// testing decrement action</span>
+    <span class="kd">function</span> <span class="nx">test_decrement</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">findChield</span><span class="p">(</span><span class="nx">view</span><span class="p">,</span> <span class="s2">&quot;decrement&quot;</span><span class="p">);</span>
+        <span class="nx">mouseClick</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">_previousCount</span><span class="p">);</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This should give the reader an idea how to test an view component which depends on a store with many external dependencies.</p>
+<h3 id="store-testing">Store Testing</h3>
+<p>A store depends on the services and as such it depends on the chosen service architecture and their limitations. Ideally a store could be tested using a service simulation back-end which will run inside the test process and which is fully controllable.</p>
+<p>A normal service implementation would use some kind of IPC and requires a second process to be started. As this way of testing is error prone (start two processes, await both are established, initiate connection, wait until connection ready, ...) it would be better we could create a custom service implementation inside our test and would not have to modify the service client.</p>
+<div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">CounterService</span> <span class="p">{</span>
+        <span class="kd">id: service</span>
+        <span class="k">register:</span> <span class="kc">true</span>
+        <span class="k">increment:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">decrement:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">count</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">property</span> <span class="nx">IRootStore</span> <span class="nx">store</span><span class="p">;</span>
+    <span class="nx">Component</span> <span class="p">{</span>
+        <span class="kd">id: component</span>
+        <span class="nx">RootStore</span> <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// this is run for every test function</span>
+        <span class="nx">store</span> <span class="o">=</span> <span class="nx">createTemporaryObject</span><span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="nx">root</span><span class="p">);</span>
+        <span class="c1">// assert initial state</span>
+        <span class="nx">compare</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">store</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nx">test_increment</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">store</span><span class="p">.</span><span class="nx">increment</span><span class="p">();</span>
+        <span class="nx">tryCompare</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">count</span><span class="p">,</span> <span class="nx">service</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="k">void</span> <span class="nx">test_decrement</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">store</span><span class="p">.</span><span class="nx">decrement</span><span class="p">();</span>
+        <span class="nx">tryCompare</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">count</span><span class="p">,</span> <span class="nx">service</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Discuss a way when the service can not be embedded into the test case, e.g. sequential testing ...</p>
+</div>
+<p>In case the service can not be integrated into the QML test case it is often desirable to let the test case start the service server and reset the particular server. Additional the test should run in sequence. For this we would need to write a small plugin which controls the server (start/stop) ans waits notifies the test case when the server is fully loaded. Also the server control should expose a reset operation to reset the data on the server. Resetting is often faster then shutdown/startup sequence. Finally the test functions should be arranged in sequence. For this we need to ensure the tests are named in a way to they are ordered by name.</p>
+<div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
+    <span class="k">when:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">ready</span>
+    <span class="nx">ServerControl</span> <span class="p">{</span>
+        <span class="kd">id: control</span>
+        <span class="k">services:</span> <span class="s2">&quot;counter&quot;</span>
+    <span class="p">}</span>
+    <span class="nx">ServerSniffer</span> <span class="p">{</span>
+        <span class="kd">id: sniffer</span>
+        <span class="k">server:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">server</span>
+    <span class="p">}</span>
+    <span class="nx">CounterClient</span> <span class="p">{</span>
+        <span class="kd">id: client</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">test_001_increment</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">sniffer</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+        <span class="nx">client</span><span class="p">.</span><span class="nx">increment</span><span class="p">();</span>
+        <span class="nx">tryCompare</span><span class="p">(</span><span class="nx">sniffer</span><span class="p">.</span><span class="nx">received</span><span class="p">,</span> <span class="s2">&quot;increment&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">test_002_decrement</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">sniffer</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+        <span class="nx">client</span><span class="p">.</span><span class="nx">decrement</span><span class="p">();</span>
+        <span class="nx">tryCompare</span><span class="p">(</span><span class="nx">sniffer</span><span class="p">.</span><span class="nx">received</span><span class="p">,</span> <span class="s2">&quot;decrement&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="service-testing">Service Testing</h3>
+<p>Testing a service is often divided into testing the client, the transport and the service implementation. As the service implementation is not under the control of the UI layer it is out of scope here. A client can be tested if the simulation back-end uses the same client component and the same transport. A transport should always be tested in isolation as this is often an external library.</p>
+<p>If the simulation back-end uses a different client and only shares the client API then there is a need to ensure the client is also tested. Often this is not done due to a client is often semi-generated and there is no need to test generated code.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../services/" title="Services" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Services
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../uilayer/" title="UI Layer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                UI Layer
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2019 Luxoft GmbH
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

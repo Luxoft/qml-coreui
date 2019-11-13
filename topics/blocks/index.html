@@ -1,0 +1,1172 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="guide to the core ui architecture for QML driven projects">
+      
+      
+      
+        <meta name="author" content="Juergen Ryannel">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>Building Blocks - QML Core UI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#building-blocks" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="QML Core UI" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">bookmark</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              QML Core UI
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Building Blocks
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Overview
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../guide/install/" class="md-tabs__link">
+          Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Topics
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../download/" class="md-tabs__link">
+          Download
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../api/" class="md-tabs__link">
+          API Reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../team/" class="md-tabs__link">
+          Team
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../support/" class="md-tabs__link">
+          Support This
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="QML Core UI" class="md-nav__button md-logo">
+      
+        <i class="md-icon">bookmark</i>
+      
+    </a>
+    QML Core UI
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/install/" title="Install" class="md-nav__link">
+      Install
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/whatis/" title="What is Clean UI" class="md-nav__link">
+      What is Clean UI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/cookbook/" title="CookBook" class="md-nav__link">
+      CookBook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../foundations/" title="Foundations" class="md-nav__link">
+      Foundations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Building Blocks
+      </label>
+    
+    <a href="./" title="Building Blocks" class="md-nav__link md-nav__link--active">
+      Building Blocks
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#user-interface" class="md-nav__link">
+    User Interface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui-runtime" class="md-nav__link">
+    UI Runtime
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui-extensions" class="md-nav__link">
+    UI Extensions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-ui" class="md-nav__link">
+    System UI
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-ui-layers" class="md-nav__link">
+    System UI Layers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controls/" title="Controls" class="md-nav__link">
+      Controls
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fslayout/" title="Filesystem layout" class="md-nav__link">
+      Filesystem layout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layouts/" title="Layouts" class="md-nav__link">
+      Layouts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prototyping/" title="Protoyping" class="md-nav__link">
+      Protoyping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uilayer/" title="UI Layer" class="md-nav__link">
+      UI Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../refactor/" title="Refactoring" class="md-nav__link">
+      Refactoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../styles/" title="Styles" class="md-nav__link">
+      Styles
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Download
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Download
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../download/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      API Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Team
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Team
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../team/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Resources
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Support This
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Support This
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#user-interface" class="md-nav__link">
+    User Interface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui-runtime" class="md-nav__link">
+    UI Runtime
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui-extensions" class="md-nav__link">
+    UI Extensions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-ui" class="md-nav__link">
+    System UI
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-ui-layers" class="md-nav__link">
+    System UI Layers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/topics/blocks.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="building-blocks">Building Blocks</h1>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<p>Building blocks are loosely coupled concepts which when arranged in the right order they form the foundation of the CoreUI. Through the loose coupling, you can also create a different architecture. This follows the principle that CoreUI is an opinionated stack and as such reflects our best efforts. Don't expect ready-made code solutions, these are concepts.</p>
+</div>
+<h2 id="user-interface">User Interface</h2>
+<p>We consider the user interface as the front-facing interface towards the user, aka front-end. For the underlying system facing interface, we use the term back-end. The front-end is concerned about the visual integrity of the UI and its appeal. A special focus lies upon the dialog with the user interface design team to create a stunning user experience for the users as one.</p>
+<p>The User Interface requires to communicate with the underlying system services as well as with services outside the system (aka remote services). The user interface is responsible to render every pixel on the screen and to achieve being an emotional user interface using animations and transitions.</p>
+<p>Typically a user interface is seen as a user interface tree, where the root is the initial UI portion being loaded. It is important that the user interface has control about which portions of the UI are loaded as the UI is the only layer which has the understanding.
+The user interface is typically developed in QML/JavaScript and Qt/C++.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Describe the definition of the UI and the different building blocks (e.g. SUI/AppS/UIControls)</p>
+</div>
+<p>The user interface is the highest layer inside a system. It offers information and interactions to the user. It is driven by the information architecture specification and the user-interface design specification. The central screens of a user interface are typically centralized inside the system UI. These screens are used to show to the user frequently needed information but also other information and interactions to navigate deeper into the user interface.</p>
+<p>The user interface itself is often seen as a tree of user interface elements, where on the root level you have the display and the structure follows on the high level of the information architecture. There are often links between unrelated UI nodes which provide shortcuts to the user to show or retrieve certain information. The UI tree on the higher levels is also divided into UI layers to ensure the most important information is shown above other less important information.</p>
+<p>The user interface is framed by the requirements specification, the user interface specification, the UI testing, and the underlying system.</p>
+<p><img alt="User Interface" src="../../assets/user_interface.svg" /></p>
+<p>For working on a particular software layer it is always important to understand and embrace the adjacent layers. Here the user interface developers work closely together with the design team that creates the user interface specification. The requirements team provides non-functional and functional requirements which need to be adherent by the UI developers. The testing team needs to have support to allow smooth planning of the user interface layer. And the system provides the foundation where the user interface can be executed (either desktop or embedded) and also provides the underlying services the user interface needs to interface with.</p>
+<h2 id="ui-runtime">UI Runtime</h2>
+<p>A runtime is responsible to initialize the user interface library and load a minimal set of extensions that are required to load the initial UI. From then on, the UI itself will take control of the loading of other UI parts.</p>
+<p><img alt="Runtime Model" src="../../assets/coreui-runtime.svg" /></p>
+<div class="codehilite"><pre><span></span>runtime --import imports Main.qml
+</pre></div>
+
+
+<p>Often a runtime is made using a configuration document which can be written in JSON or a similar data-interchange format.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;imports&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;imports&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;document&quot;</span><span class="p">:</span> <span class="s2">&quot;Main.qml&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>In the Qt/QML case, the default runtime is the qmlscene which is great for simple prototypes but for a more complex project you want to create a custom runtime, especially for loading your custom boot extensions.</p>
+<h2 id="ui-extensions">UI Extensions</h2>
+<p>An extension extends the runtime with new features and capabilities on dynamically on runtime. They are delivered as a module and typically loaded on-demand from the UI code. In the Qt/QML context, the extensions are called QML plug-ins. An extension, in general, can extend the runtime horizontally with new capabilities (for example to render a new type of content) or vertically (for example to communicate with a tuner service).</p>
+<p><img alt="Extensions" src="../../assets/extensions.svg#center" /></p>
+<p>Loading the extensions on demand allows the execution from different code paths using different extensions. Also as the extensions are looked up using the import path you can inject a mock extension into the import path before the real extension for test purposes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These extensions can be either written in QML or in Qt/C++ (or mixed). Often a developer first starts to write some extensions in QML for prototyping and later those will be re-written as C++ extensions to use a browser API and achieve the best performance.</p>
+</div>
+<h2 id="system-ui">System UI</h2>
+<p>The UI started first is called the System UI. Think about your user interface and remove all applications, what is left is called the System UI. The System UI is responsible for booting the user interface system efficiently enough so that a minimal usable user interface, is operational by the user, is reached to be shown on the screen. The System UI is also responsible for layout application windows and to provide additional information overlays to the user. Another important point of the system UI is to act as a gateway to control and prioritize access to the display surface for dialogs and notifications. Lastly, it's responsible for displaying the application launcher that acts as a shell to launch applications.</p>
+<ul>
+<li>Boot the user interface until a minimal usable state is reached</li>
+<li>Layout application window surfaces</li>
+<li>Control display access for dialogs and notifications</li>
+<li>Manage user interface overlays</li>
+<li>Present a user interface to launch applications</li>
+</ul>
+<h3 id="system-ui-layers">System UI Layers</h3>
+<p>The System UI defines the fundamental visual layering structure of the user interface. It creates the main rendering surface and controls other applications and dialog windows. A typical System UI can be divided into several layer containers.
+The visual topmost layer is the dialog layer which displays notifications. The notifications are system-wide controlled allowing the system UI to decide when and how a notification shall be displayed, as another, more important, the notification may be currently displayed.</p>
+<p>Just below the dialog layer, lies the overlay layer. This layer provides additional, not primary, information to the user, enhancing the information awareness and providing shortcuts to frequently used functions such as volume, climate information, etc.</p>
+<p>Below the overlays there are the application surfaces, that is a standard way to extend the system UI using features packed into applications. An application is mostly displayed full-screen but can also have different states, for example when used as a widget to preview and/or interact with certain application information in a condensed way.</p>
+<p>The launcher finally displays all available applications. A traditional way to display the different applications is using a grid with icons and a small text containing the application name and when this is clicked to launch the respective application full-screen. Another possibility could be to use a flexible grid of application widgets which when each is clicked expands into a full-screen application. The advantage of the first approach is that the application doesn't have to be launched but only meta information is presented (like its icon and name).</p>
+<p>Below the launcher, there could be an optional background image, e.g. the desktop background.</p>
+<p><img alt="Layers" src="../../assets/layers.svg" /></p>
+<p>In QML code this would roughly look like this.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Display.qml</span>
+<span class="nx">Item</span> <span class="p">{</span>
+  <span class="kd">id: root</span>
+  <span class="nx">Image</span> <span class="p">{</span>
+    <span class="kd">id: background</span>
+  <span class="p">}</span>
+  <span class="nx">Container</span> <span class="p">{</span>
+    <span class="kd">id: launcherLayer</span>
+  <span class="p">}</span>
+  <span class="nx">Container</span> <span class="p">{</span>
+    <span class="kd">id: appLayer</span>
+  <span class="p">}</span>
+  <span class="nx">Container</span> <span class="p">{</span>
+    <span class="kd">id: overlayLayer</span>
+  <span class="p">}</span>
+  <span class="nx">Container</span> <span class="p">{</span>
+    <span class="kd">id: dialogLayer</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h1 id="stage-loading">Stage Loading</h1>
+<p>To allow the System UI to be launched in a controlled and efficient manner the typical way is to stage load the SysUI. Stage loading is a practice to dynamically load partially user interfaces using a state machine or a similar controller which is controlled by external information and/or the current state of the machine.</p>
+<p><img alt="Stage Loading" src="../../assets/stage_loading.svg" /></p>
+<p>For this reason, the UI tree represented by the System UI has to be divided into smaller parts that can be loaded independently. The partitioning is done using a standard component approach and the loading is done using the Loader type which is directed by an SCXML state machine. The state machine state changes are triggered by either external events and conditions and the overall loading state.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>For development purposes, it is also possible to shortcut some loading stages.</p>
+<h2 id="application">Application</h2>
+<p>An application is a set of UI screens that represent the same logical context and are rendered into the same window surface. In a multi-process system, an application is started into its own process. An application should share ideally only a small and generic API with the other horizontal components (System UI, other applications) on the same layer and use a vertical communication to interface with the system.</p>
+<p><img alt="Application" src="../../assets/application.svg" /></p>
+<p>The System UI is also seen as a special application which responsibilities are specialized in the sense that it is responsible for the early UI startup, managing application windows and displaying a UI to launch these applications as extensions to the UI. Using an application does not have to be the only way to extend or structure the user interface.</p>
+<p>A small portion of the application will interact with the system UI and window handling. These parts shall be refactored out into own components. Similar is true for application logic interacting with the underlying services. That user interface portion of the application ideally should not expose services to the UI, it should instead be wrapped into an own module bundling this application logic and empowering this way better testability.</p>
+<h2 id="communication">Communication</h2>
+<p>There are several interfaces defined where an application can interact with the rest of the user interface. In general, it is prohibited that an application directly communicates with another application. These communications should always be routed either through the system UI or the underlying services. If the interface shall also be used by for example other displays, the information is better routed through a service. If the information is only relevant for the current display it shall be routed through the system UI.</p>
+<p><img alt="Communication" src="../../assets/communications.svg" /></p>
+<p>In general, we talk about horizontal communication if an application talks to the system UI and vertical communication if an application talks to a service.</p>
+<h2 id="ui-types">UI Types</h2>
+<p>The user interface follows a hierarchical tree structure. Each node displays a fragment of the information or is used to structure the user interface. Some nodes inside the UI tree have a special purpose and ensure the tree has clear border lines and certain areas do not get exposed to unnecessary dependencies. Adding a dependency to a UI element makes it harder to test it or to launch it independently from the rest of the UI tree. But this should be our target to test and launch individual UI components independently from each other and thus creating an environment where adding more UI elements not necessarily slows down the process.</p>
+<p><img alt="UI Tree" src="../../assets/ui_tree.svg" /></p>
+<p>The most prominent UI type is the component. It encapsulates a portion of the UI tree and uses other components to delegate rendering of the required information. As such it provides a higher level of abstraction (<code>C1</code>, <code>C2</code>, <code>C3</code>) to a UI feature. These components form an own hierarchy within the UI tree and are used as the base for further specializing components.</p>
+<p><img alt="UI Types" src="../../assets/ui_types.svg" /></p>
+<p>In general, we differentiate between UI primitives (e.g. rectangles and images) and controls (e.g. buttons) as individual UI types. To combine several UI types panels or views shall be used. These are specific container-types to layout other containers as child UI types or controls. UI primitives are only used inside controls, as the controls have support for styling the UI. The difference between a panel and a view is that the view interfaces with the stores (the business logic layer of the application) but the panel not.</p>
+<h2 id="services">Services</h2>
+<p>Service offers a feature to the user interface or other services. Service is located from the architectural perspective below the user interface in a separate layer. Typically a service runs on a different process belonging to the platform. The service exposes a client API which allows the client to access the service. Service is normally started by the system but often can also be started on demand when first used by the client through its API.</p>
+<p>Services are bundled into a server. A server can contain one or more services. Each service exposes an API to the clients. Typically a service interfaces with the system or external services. Ideally, a service provides the data in a way that clients can easily consume them efficiently. The generic APIs will increase the work needed on the client side to gather all relevant data for a UI view.</p>
+<p><img alt="Services and Servers" src="../../assets/services.svg" /></p>
+<p>Services shall be constructed as micro-services and should not directly depend on other services or services APIs. If there are needs for some dependencies between services it is better to use some form of an ID (e.g. a text identifier) to identify the referenced information on the other service. It is then up to the service implementation to resolve the reference.</p>
+<h2 id="jobs">Jobs</h2>
+<p>A job is a long-running piece of work which may return some results. A job execution length is long enough to disturb the UI from rendering. Typically this computing is done on a service in a different process but this is not always possible or desirable. To run a job on the UI process it needs to run inside a thread pool and the result needs to be reported back.</p>
+<p>In QtC++ the easiest way of doing this would be the QRunnable in conjunction with the QThreadPool. In QML this would be the WorkerScript to execute a long-running JS script.</p>
+<h2 id="single-multi-process">Single / Multi Process</h2>
+<p>In a single-process architecture, all UI code is executed inside a single process. This makes the initial coding and architecture much simpler. A single process architecture lacks separation of concerns. All UI code can access all other UI code API surface and by this depend on each other. This can easily create dirty code when no experienced developers take part in a project. Also, the security means are nonexistent in a single process UI in comparison to a multi-process one.</p>
+<p>A multi-process UI separates concerns into separate processes and uses the security system of the OS to isolate these processes. An application developer has no means of playing around with the system UI memory apart from the APIs offered to him. This allows for much better scaling of application development efforts as independent teams can work on independent code spots which are separated by process boundaries. Ideally, one team would work on the system UI process and the interface for applications whereas others would work on the applications themselves.</p>
+<p>The CoreUI architecture is designed to support a single and multi-process architecture. The main difference between these two setups is the separation of applications into different processes.</p>
+<h2 id="debugging">Debugging</h2>
+<p>Qt debugging is described at <a href="https://doc.qt.io/qt-5.10/debug.html">https://doc.qt.io/qt-5.10/debug.html</a> and QML debugging is described here: <a href="http://doc.qt.io/qt-5/qtquick-debugging.html">http://doc.qt.io/qt-5/qtquick-debugging.html</a>. This section is more about visual UI debugging techniques.</p>
+<p>As the UI is composed of larger building blocks which the CoreUI Architecture forces to be of a specific type we can add debugging instruments into these blocks. For example, to visually trace views and panels the base classes can render their outline and by this allow a developer to validate its layout.</p>
+<h2 id="testing">Testing</h2>
+<p>CoreUI forces the developer to extract all business logic into stores. These stores are pure data elements and thus can be nicely tested. The UI shall be concerned only about the UI logic and not the business logic. Further CoreUI cuts the UI into smaller logical pieces called controls, panels, views where each of them has a defined dependency and such it is fairly easy to create a test harness for each of these UI elements.</p>
+<p>Testing is an integral part of CoreUI. There are dedicated folders with test runners in QML and C++ to ensure your tests are bundled with the code.</p>
+<h2 id="inspection">Inspection</h2>
+<p>Inspection appears when a running UI is inspected live. As a user, you get live insights from the running execution by using a console interface (for QML/JS) or via a visual interface (e.g. visualize the UI hierarchy, component boundaries, z-ordering), or through event reporting where events are logged more or less visually (e.g. events, signals). But also you want to inspect the communication the UI holds horizontally and vertically with the services.</p>
+<p>Inspection can be either embedded into the process (e.g. into the runtime) or can be attached to a running process. The first case is great for deployment as the runtime is already enabled with the inspection UI but it might have an impact on the runtime performance. The other option is to launch an independent inspector tool (e.g. <code>GammaRay &lt;https://www.kdab.com/development-resources/qt-tools/gammaray/&gt;</code>) and attach it to the running executable. This inspector tool comes with a dedicated user interface to help you understand the UI execution flow but also being able to manipulate certain values.</p>
+<h2 id="package-manager">Package Manager</h2>
+<p>A package manager allows the user or the system to install a binary package. There are two different package types: application and system packages.</p>
+<p>The application package is used to install and remove an application. It is designed to be easy to use and to bundle all dependencies into the application package. It relies on a refined version of the platform.</p>
+<p>The system package is a bundle which also contains dependency information and may even run some initialization scripts. The number of features depends on the package system used. This allows a system builder to build a new version of the system and ensure all dependent packages will be also installed.</p>
+<p>The application package is designed to be self-contained, for security and stability issues. It is not allowed that an application package modifies the system, by e.g. installing a depending service or a new version of a library. Allowing this could lead to an unstable system.</p>
+<p>It should be noted that it is possible to wrap an application package into a system package. The system package installer would then run the application package manager to install the bundled application. Normally this does not work in reverse: An application package to bundle a system package.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../foundations/" title="Foundations" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Foundations
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../controls/" title="Controls" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Controls
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2019 Luxoft GmbH
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

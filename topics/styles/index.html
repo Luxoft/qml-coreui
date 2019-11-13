@@ -1,0 +1,1434 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="guide to the core ui architecture for QML driven projects">
+      
+      
+      
+        <meta name="author" content="Juergen Ryannel">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>Styles - QML Core UI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#ui-styling" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="QML Core UI" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">bookmark</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              QML Core UI
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Styles
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Overview
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../guide/install/" class="md-tabs__link">
+          Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Topics
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../download/" class="md-tabs__link">
+          Download
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../api/" class="md-tabs__link">
+          API Reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../team/" class="md-tabs__link">
+          Team
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../support/" class="md-tabs__link">
+          Support This
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="QML Core UI" class="md-nav__button md-logo">
+      
+        <i class="md-icon">bookmark</i>
+      
+    </a>
+    QML Core UI
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/install/" title="Install" class="md-nav__link">
+      Install
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/whatis/" title="What is Clean UI" class="md-nav__link">
+      What is Clean UI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/cookbook/" title="CookBook" class="md-nav__link">
+      CookBook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../foundations/" title="Foundations" class="md-nav__link">
+      Foundations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blocks/" title="Building Blocks" class="md-nav__link">
+      Building Blocks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controls/" title="Controls" class="md-nav__link">
+      Controls
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fslayout/" title="Filesystem layout" class="md-nav__link">
+      Filesystem layout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layouts/" title="Layouts" class="md-nav__link">
+      Layouts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prototyping/" title="Protoyping" class="md-nav__link">
+      Protoyping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uilayer/" title="UI Layer" class="md-nav__link">
+      UI Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../refactor/" title="Refactoring" class="md-nav__link">
+      Refactoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Styles
+      </label>
+    
+    <a href="./" title="Styles" class="md-nav__link md-nav__link--active">
+      Styles
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#skin-style-theme" class="md-nav__link">
+    Skin / Style / Theme
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#styling-versus-creating-new-controls" class="md-nav__link">
+    Styling versus creating new controls
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-an-existing-style" class="md-nav__link">
+    Customizing an existing Style
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-new-style" class="md-nav__link">
+    Creating a new Style
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collecting-values-in-a-style-object" class="md-nav__link">
+    Collecting values in a Style object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-theming-support" class="md-nav__link">
+    Adding theming support
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-conventions" class="md-nav__link">
+    Naming conventions
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Download
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Download
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../download/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      API Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Team
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Team
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../team/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Resources
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Support This
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Support This
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#skin-style-theme" class="md-nav__link">
+    Skin / Style / Theme
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#styling-versus-creating-new-controls" class="md-nav__link">
+    Styling versus creating new controls
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-an-existing-style" class="md-nav__link">
+    Customizing an existing Style
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-new-style" class="md-nav__link">
+    Creating a new Style
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collecting-values-in-a-style-object" class="md-nav__link">
+    Collecting values in a Style object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-theming-support" class="md-nav__link">
+    Adding theming support
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naming-conventions" class="md-nav__link">
+    Naming conventions
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/topics/styles.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="ui-styling">UI Styling</h1>
+<p>A style changes the visual appearance of styled controls. These can be common controls as part of the component library but also application controls or even containers. To be able to style a UI successfully, all controls need to adhere to a common style programming guide which shows the developer how to ensure that newly created components are styleable.</p>
+<p>In case the application does not use custom controls and all styling is already done by the common controls library and no work is needed here. This chapter is more for people who need to create custom controls or have specific UI requirements deviating from a common set.</p>
+<h2 id="skin-style-theme">Skin / Style / Theme</h2>
+<p>There are often different terms used for a similar set of functionality offered to change the appearance of the user interface. Here are the terms used in this book.</p>
+<ul>
+<li><strong>Skin</strong> - A skin is a re-programming of the topmost UI layer. It may re-use or adapt larger parts of the existing UI code but in general, a skin deviates so much from the original UI that it can not be embedded into the original code and often this leads to a fork of the UI layer.</li>
+<li><strong>Style</strong> - A central visual appearance hub to manage the appearance of controls. This can contain geometry, colors, effects, font and font geometry or other output methods.</li>
+<li><strong>Theme</strong> - Themes are variants of a given Style. They change some properties of it, such as the color palette, but still share the same essence and major design features. A classic example is having a "light" and a "dark" theme for you Style, which you change at runtime depending on the time of day or user preference.</li>
+</ul>
+<p>A theme is the simplest visual change. A theme requires a style which supports the theming functionality. A skin changes the layout of the user interface. If the information architecture is preserved the work required is to re-write the UI layer based custom style. All appearance changes require they run on top of the same platform.</p>
+<h2 id="styling-versus-creating-new-controls">Styling versus creating new controls</h2>
+<p>You should strive to have the UI code of your QML application look familiar to any experienced QML UI developer. This means avoiding the introduction of new idioms and concepts unless when actually necessary. Qt Quick Controls 2 comes already with several common controls, such as Button, CheckBox, ComboBox, etc. It's worth making an effort to use those and make them look and behave according to your design specs via styling instead of jumping into the creation new controls such as MySpecialButton, MyProjectNameComboBox, and so on. It's a harder route, but it has multiple benefits, such as:</p>
+<ul>
+<li>It reduces the learning curve for new members in your team, as there are less new APIs and concepts to be learned.</li>
+<li>Makes your application easier to maintain. A consequence of the previous point.</li>
+<li>It's easier to port QML applications made for other platforms into your platform, as there are less APIs and concepts exclusive to your project or platform, which translates into less code changes.</li>
+<li>Don't reinvent the wheel, or "stand on the shoulders of giants". Time and effort was put into making the APIs of Qt Quick Controls 2 components, so it makes sense to try to use them instead of coming up with your own, which could be just duplicating effort.</li>
+</ul>
+<h2 id="customizing-an-existing-style">Customizing an existing Style</h2>
+<p>This is the process of modifying one of the built-in styles. It is often the initial step when defining your own style. The API of the controls does not change and for an initial UI, using an existing style and tweaking it for your own purposes is notably simpler than creating a brand new one from scratch. How to customize an existing style is covered :qt5:<code>here &lt;qtquickcontrols2-styles.html&gt;</code>.</p>
+<h2 id="creating-a-new-style">Creating a new Style</h2>
+<p>If your HMI has its own particlar look and feel, its own UI design guide, the :qt5:<code>existing Qt Quick Controls 2 styles &lt;qtquickcontrols2-styles.html&gt;</code> probably won't suite you and you will have to create your own style to implement what the UI/UX designers envisioned.</p>
+<p>To exemplify how this is achieved let's start with a simple UI, a sort of components gallery showcasing a handful of Qt Quick Controls 2 components in different states.</p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.11</span>
+<span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span> <span class="mf">2.1</span>
+
+<span class="nx">Pane</span> <span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">600</span>
+    <span class="k">height:</span> <span class="mi">600</span>
+
+    <span class="nx">Column</span> <span class="p">{</span>
+        <span class="k">anchors.fill:</span> <span class="nx">parent</span>
+
+        <span class="k">padding:</span> <span class="mi">50</span>
+        <span class="k">spacing:</span> <span class="mi">25</span>
+
+        <span class="nx">Row</span> <span class="p">{</span>
+            <span class="k">spacing:</span> <span class="mi">25</span>
+            <span class="nx">Button</span> <span class="p">{</span> <span class="k">text:</span> <span class="s2">&quot;Button&quot;</span> <span class="p">}</span>
+            <span class="nx">Button</span> <span class="p">{</span> <span class="k">text:</span> <span class="s2">&quot;Button&quot;</span><span class="p">;</span> <span class="k">enabled:</span> <span class="kc">false</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="nx">Row</span> <span class="p">{</span>
+            <span class="k">spacing:</span> <span class="mi">25</span>
+            <span class="nx">CheckBox</span> <span class="p">{</span> <span class="k">text:</span> <span class="s2">&quot;Checkbox&quot;</span> <span class="p">}</span>
+            <span class="nx">CheckBox</span> <span class="p">{</span> <span class="k">text:</span> <span class="s2">&quot;Checkbox&quot;</span><span class="p">;</span> <span class="k">checked:</span> <span class="kc">true</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="nx">Row</span> <span class="p">{</span>
+            <span class="k">spacing:</span> <span class="mi">25</span>
+            <span class="nx">Switch</span> <span class="p">{}</span>
+            <span class="nx">Switch</span> <span class="p">{</span> <span class="k">checked:</span> <span class="kc">true</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="nx">Label</span> <span class="p">{</span> <span class="k">text:</span> <span class="s2">&quot;Label&quot;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Save it as, say, controls.qml. Now run it with the qml tool</p>
+<div class="codehilite"><pre><span></span>$ qml controls.qml
+</pre></div>
+
+
+<p>You should see something like this:</p>
+<p><img alt="" src="assets/controls-default.png" /></p>
+<p>Then try it with one of the styles shipped with Qt Quick Controls 2, such as "material"</p>
+<div class="codehilite"><pre><span></span>$ qml controls.qml -style material
+</pre></div>
+
+
+<p><img alt="" src="assets/controls-material.png" /></p>
+<p>Or "fusion" (in a desktop environment that's using a dark theme)</p>
+<div class="codehilite"><pre><span></span>$ qml controls.qml -style fusion
+</pre></div>
+
+
+<p><img alt="" src="assets/controls-fusion.png" /></p>
+<p>You can see that by using Qt Quick Controls 2 styles you can have the application code independent of the look and feel of its components. So no changes are needed in the components' API exposed to application code.</p>
+<p>Now we are going to create a new style that implements a different look and feel, which we will call "foobar". The first component we will customize in the foobar style is going to be the Pane, as it's the simplest. Create a subdirectory called "foobar". Then copy the file <code>QT_INSTALL_DIR/qml/QtQuick/Controls.2/Pane.qml</code> to it, where <code>QT_INSTALL_DIR</code> is the path where your Qt is installed. It should look like the following:</p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.12</span>
+<span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span> <span class="mf">2.5</span>
+<span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">impl</span> <span class="mf">2.5</span>
+<span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Templates</span> <span class="mf">2.5</span> <span class="nx">as</span> <span class="nx">T</span>
+
+<span class="nx">T</span><span class="p">.</span><span class="nx">Pane</span> <span class="p">{</span>
+    <span class="kd">id: control</span>
+
+    <span class="k">implicitWidth:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">implicitBackgroundWidth</span> <span class="o">+</span> <span class="nx">leftInset</span> <span class="o">+</span> <span class="nx">rightInset</span><span class="p">,</span>
+                            <span class="nx">contentWidth</span> <span class="o">+</span> <span class="nx">leftPadding</span> <span class="o">+</span> <span class="nx">rightPadding</span><span class="p">)</span>
+    <span class="k">implicitHeight:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">implicitBackgroundHeight</span> <span class="o">+</span> <span class="nx">topInset</span> <span class="o">+</span> <span class="nx">bottomInset</span><span class="p">,</span>
+                             <span class="nx">contentHeight</span> <span class="o">+</span> <span class="nx">topPadding</span> <span class="o">+</span> <span class="nx">bottomPadding</span><span class="p">)</span>
+
+    <span class="k">padding:</span> <span class="mi">12</span>
+
+    <span class="k">background:</span> <span class="nx">Rectangle</span> <span class="p">{</span>
+        <span class="k">color:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nb">window</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The idea is to collect the standard implementation of the component whose look &amp; feel you want to customize in your style from that directory in Qt to your own style directory and then modify it at will. In our foobar style we want the Pane background to be a Gradient instead, hence we will make the following change:</p>
+<div class="codehilite"><pre><span></span>    <span class="p">...</span>
+    <span class="k">background:</span> <span class="nx">Rectangle</span> <span class="p">{</span>
+        <span class="k">gradient:</span> <span class="nx">Gradient</span> <span class="p">{</span>
+            <span class="nx">GradientStop</span> <span class="p">{</span> <span class="k">position:</span> <span class="mf">0.0</span><span class="p">;</span> <span class="k">color:</span> <span class="s2">&quot;dodgerblue&quot;</span> <span class="p">}</span>
+            <span class="nx">GradientStop</span> <span class="p">{</span> <span class="k">position:</span> <span class="mf">1.0</span><span class="p">;</span> <span class="k">color:</span> <span class="s2">&quot;lightsteelblue&quot;</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="p">...</span>
+</pre></div>
+
+
+<p>Now let's run our controls.qml app with our brand new style. For that we will have to supply two additional environment variables: <code>QT_QUICK_CONTROLS_STYLE_PATH</code> to tell Qt where in the filesystem to look for more styles and <code>QT_QUICK_CONTROLS_FALLBACK_STYLE</code> to tell Qt which style to fallback on in case the chosen one is missing the implementation of some component (more info :qt5:<code>here &lt;qtquickcontrols2-environment.html&gt;</code>). Since our foobar style just has the implementation of Pane, all other components will fallback to another implementation.</p>
+<div class="codehilite"><pre><span></span>$ <span class="nv">QT_QUICK_CONTROLS_STYLE_PATH</span><span class="o">=</span>. <span class="nv">QT_QUICK_CONTROLS_FALLBACK_STYLE</span><span class="o">=</span>Material qml controls.qml -style foobar
+</pre></div>
+
+
+<p><img alt="" src="assets/controls-foobar-pane.png" /></p>
+<p>Next we want to style the Button component. As with did with Pane, just copy Button.qml over from <code>QT_INSTALL_DIR/qml/QtQuick/Controls.2</code> into our foobar style directory. If you open that file now you will see that it's quite more involded than the Pane:</p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.12</span>
+<span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span> <span class="mf">2.5</span>
+<span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">impl</span> <span class="mf">2.5</span>
+<span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Templates</span> <span class="mf">2.5</span> <span class="nx">as</span> <span class="nx">T</span>
+
+<span class="nx">T</span><span class="p">.</span><span class="nx">Button</span> <span class="p">{</span>
+    <span class="kd">id: control</span>
+
+    <span class="k">implicitWidth:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">implicitBackgroundWidth</span> <span class="o">+</span> <span class="nx">leftInset</span> <span class="o">+</span> <span class="nx">rightInset</span><span class="p">,</span>
+                            <span class="nx">implicitContentWidth</span> <span class="o">+</span> <span class="nx">leftPadding</span> <span class="o">+</span> <span class="nx">rightPadding</span><span class="p">)</span>
+    <span class="k">implicitHeight:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">implicitBackgroundHeight</span> <span class="o">+</span> <span class="nx">topInset</span> <span class="o">+</span> <span class="nx">bottomInset</span><span class="p">,</span>
+                             <span class="nx">implicitContentHeight</span> <span class="o">+</span> <span class="nx">topPadding</span> <span class="o">+</span> <span class="nx">bottomPadding</span><span class="p">)</span>
+
+    <span class="k">padding:</span> <span class="mi">6</span>
+    <span class="k">horizontalPadding:</span> <span class="nx">padding</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">spacing:</span> <span class="mi">6</span>
+
+    <span class="k">icon.width:</span> <span class="mi">24</span>
+    <span class="k">icon.height:</span> <span class="mi">24</span>
+    <span class="k">icon.color:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">checked</span> <span class="o">||</span> <span class="nx">control</span><span class="p">.</span><span class="nx">highlighted</span> <span class="o">?</span> <span class="k">control.palette.brightText :</span>
+                <span class="nx">control</span><span class="p">.</span><span class="nx">flat</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">control</span><span class="p">.</span><span class="nx">down</span> <span class="o">?</span> <span class="p">(</span><span class="nx">control</span><span class="p">.</span><span class="nx">visualFocus</span> <span class="o">?</span> <span class="k">control.palette.highlight :</span> <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nx">windowText</span><span class="p">)</span> <span class="o">:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nx">buttonText</span>
+
+    <span class="k">contentItem:</span> <span class="nx">IconLabel</span> <span class="p">{</span>
+        <span class="k">spacing:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">spacing</span>
+        <span class="k">mirrored:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">mirrored</span>
+        <span class="k">display:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">display</span>
+
+        <span class="k">icon:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">icon</span>
+        <span class="k">text:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">text</span>
+        <span class="k">font:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">font</span>
+        <span class="k">color:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">checked</span> <span class="o">||</span> <span class="nx">control</span><span class="p">.</span><span class="nx">highlighted</span> <span class="o">?</span> <span class="k">control.palette.brightText :</span>
+               <span class="nx">control</span><span class="p">.</span><span class="nx">flat</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">control</span><span class="p">.</span><span class="nx">down</span> <span class="o">?</span> <span class="p">(</span><span class="nx">control</span><span class="p">.</span><span class="nx">visualFocus</span> <span class="o">?</span> <span class="k">control.palette.highlight :</span> <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nx">windowText</span><span class="p">)</span> <span class="o">:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nx">buttonText</span>
+    <span class="p">}</span>
+
+    <span class="k">background:</span> <span class="nx">Rectangle</span> <span class="p">{</span>
+        <span class="k">implicitWidth:</span> <span class="mi">100</span>
+        <span class="k">implicitHeight:</span> <span class="mi">40</span>
+        <span class="k">visible:</span> <span class="o">!</span><span class="nx">control</span><span class="p">.</span><span class="nx">flat</span> <span class="o">||</span> <span class="nx">control</span><span class="p">.</span><span class="nx">down</span> <span class="o">||</span> <span class="nx">control</span><span class="p">.</span><span class="nx">checked</span> <span class="o">||</span> <span class="nx">control</span><span class="p">.</span><span class="nx">highlighted</span>
+        <span class="k">color:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">blend</span><span class="p">(</span><span class="nx">control</span><span class="p">.</span><span class="nx">checked</span> <span class="o">||</span> <span class="nx">control</span><span class="p">.</span><span class="nx">highlighted</span> <span class="o">?</span> <span class="k">control.palette.dark :</span> <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nx">button</span><span class="p">,</span>
+                                                                    <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nx">mid</span><span class="p">,</span> <span class="nx">control</span><span class="p">.</span><span class="nx">down</span> <span class="o">?</span> <span class="mf">0.5</span> <span class="o">:</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">border.color:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">palette</span><span class="p">.</span><span class="nx">highlight</span>
+        <span class="k">border.width:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">visualFocus</span> <span class="o">?</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>You're free to change anything at will. This is just a default look &amp; feel implementation. You're free to take it as it is, do some small modifications on top of it or wipe it out and do something completely different. What's important is to try to and obey the exising properties (icon, text, impleicitWidth, etc) as much as it makes sense to in your HMI usage and to put the foreground content of your button (eg, text and icon) in <code>contentItem</code> and its background, if any, in <code>background</code>.</p>
+<p>It's worth noting the widespread usage of the <code>palette</code> property. If you want to tweak its values in your style, the best place to do so would be in the <code>Control.qml</code> style implementation, as all Qt Quick Controls 2 components inherit from it. But if the categories (button, windowText, highlight, etc) in that <code>palette</code> type don't really suite your needs or your UI design guide you're free to use your own structure to keep your custom color and other values instead. We will come back to it later.</p>
+<p>For now let's just set a hardcoded background color, make the background rounded, make the button larger when down/pushed and have its text rotating (just because we can :) ). These would be the modifications:</p>
+<div class="codehilite"><pre><span></span><span class="gd">--- a/foobar/Button.qml</span>
+<span class="gi">+++ b/foobar/Button.qml</span>
+<span class="gu">@@ -15,12 +15,18 @@ T.Button {</span>
+     horizontalPadding: padding + 2
+     spacing: 6
+
+<span class="gi">+    scale: control.down ? 1.4 : 1</span>
+<span class="gi">+    Behavior on scale {</span>
+<span class="gi">+        NumberAnimation { easing.type: Easing.OutCubic; duration: 200 }</span>
+<span class="gi">+    }</span>
+<span class="gi">+</span>
+     icon.width: 24
+     icon.height: 24
+     icon.color: control.checked || control.highlighted ? control.palette.brightText :
+                 control.flat &amp;&amp; !control.down ? (control.visualFocus ? control.palette.highlight : control.palette.windowText) : control.palette.buttonText
+
+     contentItem: IconLabel {
+<span class="gi">+        id: iconLabel</span>
+         spacing: control.spacing
+         mirrored: control.mirrored
+         display: control.display
+<span class="gu">@@ -30,15 +36,29 @@ T.Button {</span>
+         font: control.font
+         color: control.checked || control.highlighted ? control.palette.brightText :
+                control.flat &amp;&amp; !control.down ? (control.visualFocus ? control.palette.highlight : control.palette.windowText) : control.palette.buttonText
+<span class="gi">+</span>
+<span class="gi">+        RotationAnimator {</span>
+<span class="gi">+            target: iconLabel</span>
+<span class="gi">+            from: 0; to: 360</span>
+<span class="gi">+            duration: 1500</span>
+<span class="gi">+            running: true</span>
+<span class="gi">+            loops: Animation.Infinite</span>
+<span class="gi">+        }</span>
+     }
+
+     background: Rectangle {
+         implicitWidth: 100
+         implicitHeight: 40
+         visible: !control.flat || control.down || control.checked || control.highlighted
+<span class="gd">-        color: Color.blend(control.checked || control.highlighted ? control.palette.dark : control.palette.button,</span>
+<span class="gd">-                                                                    control.palette.mid, control.down ? 0.5 : 0.0)</span>
+<span class="gi">+</span>
+<span class="gi">+        color: &quot;seagreen&quot;</span>
+<span class="gi">+        opacity: control.down ? 1 : 0.8</span>
+<span class="gi">+        Behavior on opacity {</span>
+<span class="gi">+            NumberAnimation { easing.type: Easing.OutCubic; duration: 200 }</span>
+<span class="gi">+        }</span>
+<span class="gi">+</span>
+         border.color: control.palette.highlight
+         border.width: control.visualFocus ? 2 : 0
+<span class="gi">+        radius: width / 2</span>
+     }
+ }
+</pre></div>
+
+
+<p>If you run that application again you should see that the buttons are animated and look wildly different from the other styles. This is just to give an idea of how flexible and powerful the Qt Quick Controls 2 styling is.</p>
+<p><img alt="" src="assets/controls-foobar-button.png" /></p>
+<h3 id="collecting-values-in-a-style-object">Collecting values in a Style object</h3>
+<p>So far we have been hardcoding color values directly in the component's style implementation. But for better reusability it's prefferable to give them names and collect them all into a single entity. There are a couple of ways of doing it but, again, we will start with the simplest: creating a new qml module containing a singleton QtObject which will hold all the color and other values used throughout the style implementation. In this example we will name that singleton <code>FoobarStyle</code>. Create a subdirectory called <code>imports</code> and inside it yet another subdirectory called <code>FoobarStyle</code>, which will be the name of our qml module.</p>
+<p>Inside <code>imports/FoobarStyle</code> create a file named <code>qmldir</code> with the following content::</p>
+<div class="codehilite"><pre><span></span><span class="k">module</span> <span class="n">FoobarStyle</span>
+<span class="n">singleton</span> <span class="n">FoobarStyle</span> <span class="mf">1.0</span> <span class="n">FoobarStyle</span>.<span class="n">qml</span>
+</pre></div>
+
+
+<p>Then proceed to create the file <code>FoobarStyle.qml</code> also inside <code>imports/FoobarStyle</code>::</p>
+<div class="codehilite"><pre><span></span><span class="n">pragma</span> <span class="n">singleton</span>
+
+<span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.11</span>
+
+<span class="n">QtObject</span> <span class="p">{</span>
+    <span class="nb">property</span> <span class="n">color</span> <span class="n">gradientBackgroundTopColor</span><span class="p">:</span> <span class="s2">&quot;dodgerblue&quot;</span>
+    <span class="nb">property</span> <span class="n">color</span> <span class="n">gradientBackgroundBottomColor</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span>
+    <span class="nb">property</span> <span class="n">color</span> <span class="n">buttonBackgroundColor</span><span class="p">:</span> <span class="s2">&quot;seagreen&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><code>FoobarStyle</code> collects the colors have been used so far. You can have those names be more specific (eg. button background color) or more generic (eg. secondary control color) according to how they're used throught the implenentation and how your UI Style guide describes them. Now let's get back to <code>Panel.qml</code> and <code>Button.qml</code> replacing the hardcoded values with their corresponding named colors::</p>
+<div class="codehilite"><pre><span></span><span class="gd">--- a/foobar/Button.qml</span>
+<span class="gi">+++ b/foobar/Button.qml</span>
+<span class="gu">@@ -3,6 +3,8 @@ import QtQuick.Controls 2.5</span>
+ import QtQuick.Controls.impl 2.5
+ import QtQuick.Templates 2.5 as T
+
+<span class="gi">+import FoobarStyle 1.0</span>
+<span class="gi">+</span>
+ T.Button {
+     id: control
+
+<span class="gu">@@ -51,7 +53,7 @@ T.Button {</span>
+         implicitHeight: 40
+         visible: !control.flat || control.down || control.checked || control.highlighted
+
+<span class="gd">-        color: &quot;seagreen&quot;</span>
+<span class="gi">+        color: FoobarStyle.buttonBackgroundColor</span>
+         opacity: control.down ? 1 : 0.8
+         Behavior on opacity {
+             NumberAnimation { easing.type: Easing.OutCubic; duration: 200 }
+<span class="gh">diff --git a/foobar/Pane.qml b/foobar/Pane.qml</span>
+<span class="gh">index f903afa..b82be7f 100644</span>
+<span class="gd">--- a/foobar/Pane.qml</span>
+<span class="gi">+++ b/foobar/Pane.qml</span>
+<span class="gu">@@ -3,6 +3,8 @@ import QtQuick.Controls 2.5</span>
+ import QtQuick.Controls.impl 2.5
+ import QtQuick.Templates 2.5 as T
+
+<span class="gi">+import FoobarStyle 1.0</span>
+<span class="gi">+</span>
+ T.Pane {
+     id: control
+
+<span class="gu">@@ -15,8 +17,8 @@ T.Pane {</span>
+
+     background: Rectangle {
+         gradient: Gradient {
+<span class="gd">-            GradientStop { position: 0.0; color: &quot;dodgerblue&quot; }</span>
+<span class="gd">-            GradientStop { position: 1.0; color: &quot;lightsteelblue&quot; }</span>
+<span class="gi">+            GradientStop { position: 0.0; color: FoobarStyle.gradientBackgroundTopColor }</span>
+<span class="gi">+            GradientStop { position: 1.0; color: FoobarStyle.gradientBackgroundBottomColor }</span>
+         }
+     }
+ }
+</pre></div>
+
+
+<p>Now to be able to run our <code>controls.qml</code> application we will also have to tell the <code>qml</code> tool to look into the <code>imports</code> subdirectory for qml modules. Hence::</p>
+<div class="codehilite"><pre><span></span><span class="n">QT_QUICK_CONTROLS_STYLE_PATH</span><span class="o">=</span><span class="p">.</span> <span class="n">QT_QUICK_CONTROLS_FALLBACK_STYLE</span><span class="o">=</span><span class="n">Material</span> <span class="n">qml</span> <span class="o">-</span><span class="n">I</span> <span class="n">imports</span> <span class="n">controls</span><span class="p">.</span><span class="n">qml</span> <span class="o">-</span><span class="n">style</span> <span class="n">foobar</span>
+</pre></div>
+
+
+<p>Note that having our named colors conveniently collected in a singleton also enables application code import FoobarStyle and use them directly whenever needed.</p>
+<h3 id="adding-theming-support">Adding theming support</h3>
+<p>After having our hardcoded values such as named colors collected in a singleton, adding theming support is a simple, straightforward, step. The idea is that a single property in <code>FooBarStyle</code>, which we will name as <code>theme</code>, will define the value of all others. So this is our improved <code>FoobarStyle.qml</code>, now with theme support:</p>
+<div class="codehilite"><pre><span></span><span class="nx">pragma</span> <span class="nx">Singleton</span>
+
+<span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.11</span>
+
+<span class="nx">QtObject</span> <span class="p">{</span>
+    <span class="c1">// Available themes</span>
+    <span class="nx">readonly</span> <span class="nx">property</span> <span class="kr">int</span> <span class="k">dayTheme:</span> <span class="mi">0</span>
+    <span class="nx">readonly</span> <span class="nx">property</span> <span class="kr">int</span> <span class="k">nightTheme:</span> <span class="mi">1</span>
+
+    <span class="c1">// The chosen theme</span>
+    <span class="nx">property</span> <span class="kr">int</span> <span class="k">theme:</span> <span class="nx">dayTheme</span>
+
+    <span class="c1">// The values that make up a theme</span>
+    <span class="nx">readonly</span> <span class="nx">property</span> <span class="nx">color</span> <span class="k">gradientBackgroundTopColor:</span> <span class="nx">theme</span> <span class="o">===</span> <span class="nx">dayTheme</span> <span class="o">?</span> <span class="s2">&quot;dodgerblue&quot;</span> <span class="o">:</span> <span class="s2">&quot;black&quot;</span>
+    <span class="nx">readonly</span> <span class="nx">property</span> <span class="nx">color</span> <span class="k">gradientBackgroundBottomColor:</span> <span class="nx">theme</span> <span class="o">===</span> <span class="nx">dayTheme</span> <span class="o">?</span> <span class="s2">&quot;lightsteelblue&quot;</span> <span class="o">:</span> <span class="s2">&quot;darkblue&quot;</span>
+    <span class="nx">readonly</span> <span class="nx">property</span> <span class="nx">color</span> <span class="k">buttonBackgroundColor:</span> <span class="nx">theme</span> <span class="o">===</span> <span class="nx">dayTheme</span> <span class="o">?</span> <span class="s2">&quot;seagreen&quot;</span> <span class="o">:</span> <span class="s2">&quot;maroon&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>And modifying the application code, <code>controls.qml</code>, so that clicking on the first button switches the theme::</p>
+<div class="codehilite"><pre><span></span><span class="gd">--- a/controls.qml</span>
+<span class="gi">+++ b/controls.qml</span>
+<span class="gu">@@ -1,6 +1,8 @@</span>
+ import QtQuick 2.11
+ import QtQuick.Controls 2.1
+
+<span class="gi">+import FoobarStyle 1.0</span>
+<span class="gi">+</span>
+ Pane {
+     width: 500
+     height: 400
+<span class="gu">@@ -13,7 +15,16 @@ Pane {</span>
+
+         Row {
+             spacing: 25
+<span class="gd">-            Button { text: &quot;Button&quot; }</span>
+<span class="gi">+            Button {</span>
+<span class="gi">+                text: FoobarStyle.theme === FoobarStyle.dayTheme ? &quot;Day&quot; : &quot;Night&quot;</span>
+<span class="gi">+                onClicked: {</span>
+<span class="gi">+                    if (FoobarStyle.theme === FoobarStyle.dayTheme) {</span>
+<span class="gi">+                        FoobarStyle.theme = FoobarStyle.nightTheme;</span>
+<span class="gi">+                    } else {</span>
+<span class="gi">+                        FoobarStyle.theme = FoobarStyle.dayTheme;</span>
+<span class="gi">+                    }</span>
+<span class="gi">+                }</span>
+<span class="gi">+            }</span>
+             Button { text: &quot;Button&quot;; enabled: false }
+         }
+</pre></div>
+
+
+<p>This is how our <code>controls.qml</code> application should look like after having the theme support added to it:</p>
+<p><img alt="" src="assets/controls-foobar-themes.png" /></p>
+<h2 id="naming-conventions">Naming conventions</h2>
+<p>One common mistake when naming colors in particular is naming them after what they look like instead of their function or where they are used. So avoid names such as "orangeBackgroundColor" or "lightTextColor" and prefer usage, such as "buttonBackgroundColor" or a category such as "primaryColor" or "accentColor". After all, as soon as you have a day/light and a night/dark theme, a color property that used to have a "yellow" or "light" value will switch to have the opposite, having a "dark" or "brown" one instead. Naming a color property after the visual caracteristics of its value will void the abstraction level (and hence flexibility) it provides when compared to using hardcoded values directly.</p>
+<p>Having that said, there might still be value in naming a color in a explicit way in your style object, such as FoobarStyle.red, meaning that whenever your UI uses red, it's not just any red, or the standard 0xFF0000, but a very particular hue of red, which is specified in your style. And that only if the usage of this named red throught the UI is always the same, regardless of the theme. Such as the red that makes up the visual identity of your company or the red that signifies alert or the interruption of a call.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>describe why a sheet is a good concept to display your controls and how should it be built.</p>
+</div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../refactor/" title="Refactoring" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Refactoring
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../download/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Getting Started
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2019 Luxoft GmbH
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

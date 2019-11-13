@@ -1,0 +1,1141 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="guide to the core ui architecture for QML driven projects">
+      
+      
+      
+        <meta name="author" content="Juergen Ryannel">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>Foundations - QML Core UI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#agile-principles" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="QML Core UI" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">bookmark</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              QML Core UI
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Foundations
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Overview
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../guide/install/" class="md-tabs__link">
+          Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Topics
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../download/" class="md-tabs__link">
+          Download
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../api/" class="md-tabs__link">
+          API Reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../team/" class="md-tabs__link">
+          Team
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../support/" class="md-tabs__link">
+          Support This
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="QML Core UI" class="md-nav__button md-logo">
+      
+        <i class="md-icon">bookmark</i>
+      
+    </a>
+    QML Core UI
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/install/" title="Install" class="md-nav__link">
+      Install
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/whatis/" title="What is Clean UI" class="md-nav__link">
+      What is Clean UI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/cookbook/" title="CookBook" class="md-nav__link">
+      CookBook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Foundations
+      </label>
+    
+    <a href="./" title="Foundations" class="md-nav__link md-nav__link--active">
+      Foundations
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#agile-principles" class="md-nav__link">
+    Agile Principles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-reloading" class="md-nav__link">
+    Live-reloading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testability-and-controlled-dependency" class="md-nav__link">
+    Testability and Controlled Dependency
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separation-of-hardware-from-software" class="md-nav__link">
+    Separation of Hardware from Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ux-design-conversations" class="md-nav__link">
+    UX Design Conversations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thinking-in-components" class="md-nav__link">
+    Thinking in Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#components-vs-processes" class="md-nav__link">
+    Components vs. Processes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aspect-driven-components" class="md-nav__link">
+    Aspect-driven Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-early-release-often" class="md-nav__link">
+    Release Early, Release Often
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blocks/" title="Building Blocks" class="md-nav__link">
+      Building Blocks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controls/" title="Controls" class="md-nav__link">
+      Controls
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fslayout/" title="Filesystem layout" class="md-nav__link">
+      Filesystem layout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layouts/" title="Layouts" class="md-nav__link">
+      Layouts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prototyping/" title="Protoyping" class="md-nav__link">
+      Protoyping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uilayer/" title="UI Layer" class="md-nav__link">
+      UI Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../refactor/" title="Refactoring" class="md-nav__link">
+      Refactoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../styles/" title="Styles" class="md-nav__link">
+      Styles
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Download
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Download
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../download/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      API Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Team
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Team
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../team/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Resources
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Support This
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Support This
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#agile-principles" class="md-nav__link">
+    Agile Principles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-reloading" class="md-nav__link">
+    Live-reloading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testability-and-controlled-dependency" class="md-nav__link">
+    Testability and Controlled Dependency
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separation-of-hardware-from-software" class="md-nav__link">
+    Separation of Hardware from Software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ux-design-conversations" class="md-nav__link">
+    UX Design Conversations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thinking-in-components" class="md-nav__link">
+    Thinking in Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#components-vs-processes" class="md-nav__link">
+    Components vs. Processes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aspect-driven-components" class="md-nav__link">
+    Aspect-driven Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-early-release-often" class="md-nav__link">
+    Release Early, Release Often
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/topics/foundations.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Foundations</h1>
+                
+                <div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<p>CoreUI is founded on some core-principles collected over the years, which all contribute to the overall design decisions. These principles are based on the opinions of many but may not be applicable to everyone.</p>
+</div>
+<p>Here are some key principles:</p>
+<ul>
+<li><strong>Follow the Agile Principles</strong> - UX depends on flexibility and agility. Keep it that way.</li>
+<li><strong>Enable Hot-Reloading everywhere</strong> - Allow changes to be visible in a fraction of a second.</li>
+<li><strong>Testability and dependency management is paramount</strong> - You can't trust code you cannot test. And trust is the foundation of large systems.</li>
+<li><strong>Separation of Hardware and Software</strong> - As a UI developer you don't want to depend on something you cannot control or isn't even available at an early stage.</li>
+<li><strong>UX Design is a bi-directional conversation</strong> - Design has a great impact on the UX, but also the chosen technology. Finding the balance and pushing forward together makes heroes.</li>
+<li><strong>Thinking in Components and Building Blocks</strong> - Component-based programming leads to a better structure and allows for building larger user interfaces.</li>
+<li><strong>Component separation is good, process separation is better</strong> - Trust is good, having control is better. A process gives you more control.</li>
+<li><strong>Aspect driven components</strong> - Design your component layers around different aspects of your software. Each aspect provides another piece to the puzzle.</li>
+</ul>
+<p>A detailed description for each principle can be found below.</p>
+<h2 id="agile-principles">Agile Principles</h2>
+<p>CoreUI embodies the core values of the Manifesto for Agile Software development. Agility means in its core to "walk the path even if you don't know the whole path yet". It is about taking the opportunity and relying on motivated teams.</p>
+<ul>
+<li><strong>Individuals and Interactions</strong> over processes and tools: Tools and processes are important, but it's more important to have competent people working together effectively.</li>
+<li><strong>Working Software over comprehensive documentation</strong>: Good documentation is useful in helping people to understand how the software is built and how to use it, but the main point of development is to create software, not documentation.</li>
+<li><strong>Customer Collaboration over contract negotiation</strong>: A contract is important but is no substitute for working closely with customers to discover what they need.</li>
+<li><strong>Responding to Change over following a plan</strong>: A project plan is important, but it mustn't be too rigid to accommodate changes in technology or the environment, stakeholders' priorities, and people's understanding of the problem and its solution.</li>
+</ul>
+<p>In short, while there is value in the items on the right, they value the items on the left more. [^AgilePrinciples]
+Sources: Wikipedia, Agile Manifesto</p>
+<h2 id="live-reloading">Live-reloading</h2>
+<p>Live-reloading is the practice of reloading the program as a whole or as part of a particular change in the underlying source code. That change can be triggered by a keystroke, a timer, or based on document persistence. The reloading can be either state preserving or state resetting.</p>
+<p>Enabling live-reloading throughout the CoreUI architecture serves several goals:</p>
+<ul>
+<li>Productivity: CoreUI enforces a clean abstraction of business-logic and visual-logic, thus making the reloading of business tests part of the daily work-flow.</li>
+<li>Testability: CoreUI not only supports live-reloading of the whole program but also encourages Developers to live-reload individual pieces of the user interface. As such it encourages the developer to think about components and their dependencies, thus resulting in better testability.</li>
+<li>UX Creation: Reloading also plays a crucial role in enabling great UX by making the conversation that the developer has with the UI teams more fluent.</li>
+</ul>
+<h2 id="testability-and-controlled-dependency">Testability and Controlled Dependency</h2>
+<p>CoreUI separates user interface pieces into different components with clearly-defined dependencies and interfaces. CoreUI encourages the developer to create smaller, well-defined, components. The idea is less about re-use but more about splitting the UI into small, manageable, pieces which can be implemented independently. This principle manages dependencies and smaller components, enabling testability with fewer headaches or overhead.</p>
+<p>CoreUI comes with a test harness which enables both manual component testing and automated component testing. Manual component testing is especially useful during development, when you want to try out a specific component. All of this can be paired with live-reloading of such tests: either when the test code itself or the underlying component changes.</p>
+<h2 id="separation-of-hardware-from-software">Separation of Hardware from Software</h2>
+<p>Developing embedded software means always working with the target hardware. However, often the target hardware is not available in the early stages of development or even at later stages. Additionally, there may also be a shortage of devices and each developer can't have his or her own device to work with. These hardware can be big and difficult to place in an office. Consequently, the ability to develop as much software as possible without depending on the target hardware is highly desirable. Nevertheless, it is still required to go on the hardware as early as possible. This brings up the requirement of being flexible enough to support compatibility between different back-ends using the same front-end software.</p>
+<p>Ideally, you are able to run the front-end with either a simulation backend or with the real, production, one. Ideally, the simulation back-end can also run on the target HW. To foster easier front-end development it should also be possible to run the front-end on a desktop and have it using a back-end running on the target HW. To achieve this, the interface between front-end and back-end must be done via a cross-device communication protocol (typically TCP/IP based).</p>
+<h2 id="ux-design-conversations">UX Design Conversations</h2>
+<p>Creating a stunning UX is a team effort involving UI designers, UI developers, and other stakeholders. The System needs to be able to deliver the processing power and graphics capabilities allowing a stunning user experience at first place, but even if this is given, still there is not a guarantee that a great UX will be created. To achieve a truly beautiful UX it is required that the visionary people who design the product and deliver the information architecture and UI appearance, work closely together with the people programming the UI. Only then a great UX can be achieved.</p>
+<p>The UI developers know what the system can deliver and which special effects and/or animations will take down the system and will start introducing an unsatisfying user experience to the user. The UI designers have their own vision into their head but often the documentation is lacking behind and also does not tell the whole story. These internal concepts not documented but expressed in design are important for the UI developers as they also need to base their detailed UI appearance on fundamental concepts. If these fundamental concepts diverge because of not being aware of each other, the UI code will always look like someone has patched it to make it work.</p>
+<p>A true harmony and understanding of UI design of the UI developer can be seen in the clean UI code produced by the developers.</p>
+<h2 id="thinking-in-components">Thinking in Components</h2>
+<p>While the UI developer using QML is forced to think in components as its basic building block, designers often don't think in terms of components. This is probably related to the pixels on a display and the tooling used that is based on pixel manipulation, less vector art, and objects.</p>
+<p>A component is a piece of a reusable user interface from which the information architecture receives a clear set of data and provides a clearly defined interaction to the user. This component can then be re-used in other parts of the user interface by manipulating the incoming properties.</p>
+<p>For example, a Button receives a text property which can be set when created, and allows the user to click on it as its interaction. This component can be used anywhere a button is used by assigning a different text property and reacting differently to the click interaction.</p>
+<p>Designing a square rectangle of pixels with a nice gradient, without thinking about how this rectangle eventually becomes a component with appearance, incoming data, and interaction - will result in the designer not being able to use the button everywhere coherently. Consequently, the developer will have to implement each of these buttons, providing the different flavors of buttons by adding more complex code to the initial component.</p>
+<p>Ideally, the designer comes up with a Style and Component guide which lists all common usable components together with their modifiers and interactions. This list should then be used to construct concrete user interfaces out of these components; custom components should be a rare exception.</p>
+<p>There is a common set of components that users are used to, which are often provided as standard components by the UI toolkits. Qt, for example, provides the QtQuick Controls 2 library.</p>
+<p>On a higher level, it is also worth thinking about larger components, such as components that act as a container for other components. In CoreUI, they are called panels. Panels provide a defined layout and interaction possibility for a set of components laid out together, for either a specific or a more general purpose.</p>
+<p>If a component can be re-used in different contexts it can also be re-used in a test setup. That said, it's important to display a component independently from its UI context to validate its appearance and behavior.</p>
+<h2 id="components-vs-processes">Components vs. Processes</h2>
+<p>A component is a reusable piece of user interface, with a known exported programming interface. A process is an execution unit, which allows the CPU to schedule it independently from other processes and manage the memory independently from other processes. A process provides security and separation of interfaces. Inside a process, you cannot easily call an API which is available inside another process. You always need to export this API and then make use of that from within the other process via some form of IPC. But processes can be re-used the same as components, but on a different level and with a much stricter control.</p>
+<p>Typically an application is a deciding factor to create a new process. An application can stem from a 3rd party and might introduce a security risk, so it is better to control its access to the system. In a single process UI where an application is merely a component, these security mechanisms do not exist, so any application can in general access every API.</p>
+<h2 id="aspect-driven-components">Aspect-driven Components</h2>
+<p>Traditional UI development follows the user interface specifications and starts with the main document and then the folder structure mirrors the feature set of the UI specification. Applying this on larger user interfaces provides several drawbacks. The code gets more complex as deeper the folder structure goes. There is no guideline about dependency, which leads to the fact that even components on the edge of the UI tree might have dependencies to central components or worse other edges of the tree. Not controlling dependency is the main factor that the development speed slows down when the UI gets more complex.</p>
+<p>Aspect driven development tries to focus on the different aspects of a user interface (e.g. views, panels, controls, animations, helpers) and tries to provide clear guidance how such a component shall be constructed and which dependencies it might create.</p>
+<h2 id="release-early-release-often">Release Early, Release Often</h2>
+<p>Celebrate releasing your software. Releasing software is a practice which needs to be repeated and automated as much as possible. Always keep your software in a releasable state.</p>
+<p>Releasing usually means you have to interrupt your software development to make a release. By repeating this process over and over and perfecting the workflow, you can minimize the disruption a release creates and ensure your code stays in good health.</p>
+<p>You want to run a Continuous Integration (CI) workflow with a maximum number of automated tests, which ideally proves the test coverage. Try to release software that acts as feedback to your developers so that they experience releasing as a natural step forward. in the software development process. For example, if you work on the UI, you can release the platform that the UI is based on and ensure all developers use the same platform.</p>
+<p>See: <a href="https://en.wikipedia.org/wiki/Release_early,_release_often">https://en.wikipedia.org/wiki/Release_early,_release_often</a></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Introduction
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../blocks/" title="Building Blocks" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Building Blocks
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2019 Luxoft GmbH
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

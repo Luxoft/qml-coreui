@@ -1,0 +1,1173 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="guide to the core ui architecture for QML driven projects">
+      
+      
+      
+        <meta name="author" content="Juergen Ryannel">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>Refactoring - QML Core UI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700|Ubuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Ubuntu","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#refactoring" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="QML Core UI" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">bookmark</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              QML Core UI
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Refactoring
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Overview
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../guide/install/" class="md-tabs__link">
+          Guide
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Topics
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../download/" class="md-tabs__link">
+          Download
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../api/" class="md-tabs__link">
+          API Reference
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../team/" class="md-tabs__link">
+          Team
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../support/" class="md-tabs__link">
+          Support This
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="QML Core UI" class="md-nav__button md-logo">
+      
+        <i class="md-icon">bookmark</i>
+      
+    </a>
+    QML Core UI
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/Luxoft/qml-coreui-guide/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/install/" title="Install" class="md-nav__link">
+      Install
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/whatis/" title="What is Clean UI" class="md-nav__link">
+      What is Clean UI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../guide/cookbook/" title="CookBook" class="md-nav__link">
+      CookBook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Topics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Topics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../intro/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../foundations/" title="Foundations" class="md-nav__link">
+      Foundations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blocks/" title="Building Blocks" class="md-nav__link">
+      Building Blocks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controls/" title="Controls" class="md-nav__link">
+      Controls
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fslayout/" title="Filesystem layout" class="md-nav__link">
+      Filesystem layout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layouts/" title="Layouts" class="md-nav__link">
+      Layouts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prototyping/" title="Protoyping" class="md-nav__link">
+      Protoyping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" title="Testing" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uilayer/" title="UI Layer" class="md-nav__link">
+      UI Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Refactoring
+      </label>
+    
+    <a href="./" title="Refactoring" class="md-nav__link md-nav__link--active">
+      Refactoring
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-kpis" class="md-nav__link">
+    Architecture KPIs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kpi-number-of-singletons-used-in-edge-nodes" class="md-nav__link">
+    KPI - Number of singletons used in edge nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kpi-relation-of-kind-of-components-count-vs-the-classic-component-count" class="md-nav__link">
+    KPI - Relation of kind of components count vs the classic component count
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kpi-number-of-harmful-imports-per-kind-of-component" class="md-nav__link">
+    KPI - Number of harmful imports per kind of component
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refactoring-cookbook" class="md-nav__link">
+    Refactoring Cookbook
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recipe-stop-leaking-objects-from-singletons" class="md-nav__link">
+    Recipe: Stop leaking objects from singletons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-push-singletons-up" class="md-nav__link">
+    Recipe: Push singletons up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-eliminate-singletons" class="md-nav__link">
+    Recipe: Eliminate singletons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-extract-harmful-dependency-conditions" class="md-nav__link">
+    Recipe: Extract harmful dependency conditions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-convert-component-to-kinds" class="md-nav__link">
+    Recipe: Convert Component to Kinds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-extract-a-store" class="md-nav__link">
+    Recipe: Extract a Store
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../styles/" title="Styles" class="md-nav__link">
+      Styles
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Download
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Download
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../download/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      API Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Team
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Team
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../team/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Resources
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Support This
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Support This
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-kpis" class="md-nav__link">
+    Architecture KPIs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kpi-number-of-singletons-used-in-edge-nodes" class="md-nav__link">
+    KPI - Number of singletons used in edge nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kpi-relation-of-kind-of-components-count-vs-the-classic-component-count" class="md-nav__link">
+    KPI - Relation of kind of components count vs the classic component count
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kpi-number-of-harmful-imports-per-kind-of-component" class="md-nav__link">
+    KPI - Number of harmful imports per kind of component
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#refactoring-cookbook" class="md-nav__link">
+    Refactoring Cookbook
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recipe-stop-leaking-objects-from-singletons" class="md-nav__link">
+    Recipe: Stop leaking objects from singletons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-push-singletons-up" class="md-nav__link">
+    Recipe: Push singletons up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-eliminate-singletons" class="md-nav__link">
+    Recipe: Eliminate singletons
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-extract-harmful-dependency-conditions" class="md-nav__link">
+    Recipe: Extract harmful dependency conditions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-convert-component-to-kinds" class="md-nav__link">
+    Recipe: Convert Component to Kinds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recipe-extract-a-store" class="md-nav__link">
+    Recipe: Extract a Store
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/topics/refactor.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="refactoring">Refactoring</h1>
+<p>Refactoring shall provide the reader with insights how to re-factor slowly an existing user interface architecture toward the CoreUI architecture by applying a series of micro-re-factorings.</p>
+<p>A micro-refactoring is a small rewrite of source code which fits mentally inside the developers head. This is important to ensure the developer is aware about any side-effects and can fix these before committing.</p>
+<p>We must avoid a large refactoring where the developer require days before the software is stable again. Ideally the software stays stable all the time during refactoring.</p>
+<p>Refactoring must be planned and executed over time. A larger user interface project can not be moved over night into a new direction, especially when many developer participate and still defects and features are on the road-map. To ensure the team has an understanding of the healthiness of the architecture certain KPI must be introduced and measured over time.</p>
+<h2 id="architecture-kpis">Architecture KPIs</h2>
+<p>A KPI (key performance indicator) provides high level insights about the healthiness of the software architecture. To understand the KPIs presented we need to understand that the UI is a tree with a root node and edge nodes and many nodes in between. Ideally the outer nodes are clean from difficult dependencies, whereas the inner notes can depend on those dependencies but even here ideally these dependencies are extracted into another set of objects, the stores.</p>
+<p>In general we have stores, views, panels and controls. The controls form the edge nodes of our UI tree. Right above the controls are the panels. The panels care the most UI load as they use semantic free controls to introduce application semantic. On top of the panels sit the views, they bring together the UI surface with the data providers the stores. Ideally these views only depend on these store. The stores finally encapsulate the application business logic and interface the platform services. Based on this description we can start to extract some KPIs.</p>
+<p>At first we need to identify the difficult dependencies. These are dependencies which make unit testing more painful. These harmful dependencies can be a module which uses a network service or a global object introducing global state or a rendering node which introduces certain hardware dependencies. We must ensure our goal to decompose the UI and unit test each component must not be compromised.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Ensure UI can be decomposed and run independent and the testability is guaranteed.</p>
+</div>
+<h3 id="kpi-number-of-singletons-used-in-edge-nodes">KPI - Number of singletons used in edge nodes</h3>
+<p>Measure the number of singletons used in edge nodes and above (2nd level edges). This number indicates how much these nodes depend on global state. This number should go down over time.</p>
+<h3 id="kpi-relation-of-kind-of-components-count-vs-the-classic-component-count">KPI - Relation of kind of components count vs the classic component count</h3>
+<p>This measures the relation between the identified and converted kind of components to the uncategorized components. The goal is to ensure over time the number of components with unmanaged dependencies are reduced and the converted components can be checked for harmful imports.</p>
+<h3 id="kpi-number-of-harmful-imports-per-kind-of-component">KPI - Number of harmful imports per kind of component</h3>
+<p>This counts the number of harmful imports per kind of component. Ideally the controls and panels will reduce the number of harmful components and most harmful imports will be isolated inside the stores.</p>
+<h2 id="refactoring-cookbook">Refactoring Cookbook</h2>
+<p>See also: <a href="https://martinfowler.com/tags/refactoring.html">https://martinfowler.com/tags/refactoring.html</a></p>
+<h3 id="recipe-stop-leaking-objects-from-singletons">Recipe: Stop leaking objects from singletons</h3>
+<p>A singleton which exposes an object opens the opportunity for everyone to navigate the object internals. By this open up all kind of cross-dependencies. To close down this leakage we need to investigate how the object is used. Often we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object. Over time we will be able to eliminate the object from the public interface and only allow users to use these functions. From now on we can ensure no new internals of this object will be leaked.</p>
+<h3 id="recipe-push-singletons-up">Recipe: Push singletons up</h3>
+<p>When investigating the usage of certain singletons often they are used in a related code area. It seems developers where to lazy to pass in these dependencies and rather shortcut the relations.</p>
+<p>We can revert this by looking at the singleton usage in one component and move the usage up to the root level. In the next step we can then move the singleton onto the other side and pass it into the component. By this we effectively push the singleton usage on level up. Normally it is expected after several of these pushes you will reach a level where several child components suddenly depend on the same information injected from the singleton. To effectively predict how many levels you need to push up this dependency we would need to identify the node which creates the child nodes using the singleton. If we reach that point there is no need for a singleton and we can convert the singleton into an instance of even eliminate it all together.</p>
+<h3 id="recipe-eliminate-singletons">Recipe: Eliminate singletons</h3>
+<p>A singleton normally shares global state, functionality and events. To eliminate this we need to find the common ancestor node from where we can inject the dependencies. For a share event, we often can just connect the signal with a state change on that level, for shared properties we could do similar. For common functionality we can connect a signal which bubbles up to a function being executed. Ideally the function is extracted into a store if its application business relevant.</p>
+<h3 id="recipe-extract-harmful-dependency-conditions">Recipe: Extract harmful dependency conditions</h3>
+<p>A harmful dependency is a dependency which breaks decomposition and testability by introducing (often indirect) not testable dependencies (e.g. network, hardware, global state).</p>
+<p>For this to be eliminated we need to push the dependency up, by first moving the dependency out of the internal of the component to the root level of the component and in a second step injecting the dependency into the component form the outside. By this practically removing the dependency from that particular component.</p>
+<h3 id="recipe-convert-component-to-kinds">Recipe: Convert Component to Kinds</h3>
+<p>A kind of component is a component which fits into a category. For this the component needs to be moved to a kind folder where all components of the same kind and which similar dependencies are collected. Ideally you start with the edge nodes and convert them to controls or panels.</p>
+<p>A component which uses other controls or panels is a panel. If a panel uses another panel it is better to start with the child panel.</p>
+<p>The component is just moved into a kind folder and the dependency from the calling component is updated.</p>
+<p>In a later step we can now start with that component. Be sure to only move components which follow the dependency guidelines, otherwise it is better to first eliminate of push up the harmful dependencies before moving the component.</p>
+<h3 id="recipe-extract-a-store">Recipe: Extract a Store</h3>
+<p>After pushing conditions up tot he root level of the current component sometimes it is a good practice to collect them into an object. So the object gets injected into this component. This component is the first version of a potential store.
+This object then collects these dependencies and will carry the harmful dependencies. The component itself will only depend on this particular object (aka store).</p>
+<p>This makes it also easier to push dependencies up the UI tree as we only have to push the object up not individual properties.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../uilayer/" title="UI Layer" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                UI Layer
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../styles/" title="Styles" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Styles
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            2019 Luxoft GmbH
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
