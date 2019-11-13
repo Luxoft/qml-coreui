@@ -46,6 +46,7 @@ nav:
       - "Refactoring": "topics/refactor.md"
       - "Styles": "topics/styles.md"
   - Admin:
+      - "Introduction": "admin/intro.md"
       - "Quick Start": "admin/start.md"
       - "Concepts": "admin/concepts.md"
       - "Installation": "admin/install.md"
