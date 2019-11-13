@@ -89,7 +89,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#refactoring" tabindex="1" class="md-skip">
+      <a href="#micro-refactorings" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -661,16 +661,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#refactoring-cookbook" class="md-nav__link">
-    Refactoring Cookbook
+  <a href="#mico-refactoring-cookbook" class="md-nav__link">
+    Mico Refactoring Cookbook
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#recipe-stop-leaking-objects-from-singletons" class="md-nav__link">
-    Recipe: Stop leaking objects from singletons
+  <a href="#recipe-stop-leaking-object-internals-from-singletons" class="md-nav__link">
+    Recipe: Stop leaking object internals from singletons
   </a>
   
 </li>
@@ -712,6 +712,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
   
 </li>
       
@@ -1062,16 +1069,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#refactoring-cookbook" class="md-nav__link">
-    Refactoring Cookbook
+  <a href="#mico-refactoring-cookbook" class="md-nav__link">
+    Mico Refactoring Cookbook
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#recipe-stop-leaking-objects-from-singletons" class="md-nav__link">
-    Recipe: Stop leaking objects from singletons
+  <a href="#recipe-stop-leaking-object-internals-from-singletons" class="md-nav__link">
+    Recipe: Stop leaking object internals from singletons
   </a>
   
 </li>
@@ -1116,6 +1123,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
       
       
       
@@ -1135,7 +1149,7 @@
                   <a href="https://github.com/Luxoft/qml-coreui-guide/edit/master/docs/topics/refactor.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="refactoring">Refactoring</h1>
+                <h1 id="micro-refactorings">Micro - Refactorings</h1>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This material is work in progress and will change!</p>
@@ -1158,9 +1172,13 @@
 <p>This measures the relation between the identified and converted kind of components to the uncategorized components. The goal is to ensure over time the number of components with unmanaged dependencies are reduced and the converted components can be checked for harmful imports.</p>
 <h3 id="kpi-number-of-harmful-imports-per-kind-of-component">KPI - Number of harmful imports per kind of component</h3>
 <p>This counts the number of harmful imports per kind of component. Ideally the controls and panels will reduce the number of harmful components and most harmful imports will be isolated inside the stores.</p>
-<h2 id="refactoring-cookbook">Refactoring Cookbook</h2>
-<p>See also: <a href="https://martinfowler.com/tags/refactoring.html">https://martinfowler.com/tags/refactoring.html</a></p>
-<h3 id="recipe-stop-leaking-objects-from-singletons">Recipe: Stop leaking objects from singletons</h3>
+<h2 id="mico-refactoring-cookbook">Mico Refactoring Cookbook</h2>
+<p>Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
+<blockquote>
+<p>Its heart is a series of small behavior preserving transformations. Each transformation (called a "refactoring") does little, but a sequence of these transformations can produce a significant restructuring. Since each refactoring is small, it's less likely to go wrong. The system is kept fully working after each refactoring, reducing the chances that a system can get seriously broken during the restructuring.
+Martin Fowler (<a href="https://refactoring.com">https://refactoring.com</a>)</p>
+</blockquote>
+<h3 id="recipe-stop-leaking-object-internals-from-singletons">Recipe: Stop leaking object internals from singletons</h3>
 <p>A singleton which exposes an object opens the opportunity for everyone to navigate the object internals. By this open up all kind of cross-dependencies.</p>
 <p>So assume a singleton exposes an object</p>
 <div class="codehilite"><pre><span></span><span class="c1">// HelperSingleton.qml</span>
@@ -1181,7 +1199,7 @@
 </pre></div>
 
 
-<p>But could also be used like this. The point is the user of the singleton could now navigate een to the parents of the widow, just to fulfill is use case.</p>
+<p>But could also be used like this. The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.</p>
 <blockquote>
 <p>whatever can happen will happen</p>
 </blockquote>
@@ -1196,39 +1214,42 @@
 
 
 <p>To close down this leakage we need to investigate how the object is used. Often we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// HelperSingleton.qml - improved</span>
-<span class="nx">QtObject</span> <span class="p">{</span>
-    <span class="nx">property</span> <span class="nx">Item</span> <span class="nx">__appWindow</span>
+<div class="codehilite"><pre><span></span>// HelperSingleton.qml - improved
+QtObject {
+<span class="gd">-   property Item appWindow</span>
+<span class="gi">+   property Item __appWindow</span>
 
-    <span class="kd">function</span> <span class="nx">hideWindow</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">__appWindow</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="p">}</span>
+<span class="gi">+   function hideWindow() {</span>
+<span class="gi">+       __appWindow.visible = false</span>
+<span class="gi">+   }</span>
 
-    <span class="kd">function</span> <span class="nx">setWindowTitle</span><span class="p">(</span><span class="nx">title</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">__appWindow</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">title</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="gi">+   function setWindowTitle(title) {</span>
+<span class="gi">+       __appWindow.setTitle(title)</span>
+<span class="gi">+   }</span>
+}
 </pre></div>
 
 
 <p>And better panel</p>
-<div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml - improved</span>
-<span class="nx">Panel</span> <span class="p">{</span>
-    <span class="nx">Button</span> <span class="p">{</span>
-        <span class="k">text:</span> <span class="s2">&quot;Hide window&quot;</span>
-        <span class="k">onClicked:</span> <span class="nx">HelperSingleton</span><span class="p">.</span><span class="nx">hideWindow</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span>// AppPanel.qml - improved
+Panel {
+    Button {
+        text: &quot;Hide window&quot;
+<span class="gd">-       onClicked: HelperSingleton.appWindow.visible = false</span>
+<span class="gi">+       onClicked: HelperSingleton.hideWindow()</span>
+    }
+}
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span><span class="c1">// EvilPanel.qml - improved</span>
-<span class="nx">Panel</span> <span class="p">{</span>
-    <span class="nx">Button</span> <span class="p">{</span>
-        <span class="k">text:</span> <span class="s2">&quot;Set Title of Window&quot;</span>
-        <span class="k">onClicked:</span> <span class="nx">HelperSingleton</span><span class="p">.</span><span class="nx">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;A new title&quot;</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span>// EvilPanel.qml - improved
+Panel {
+    Button {
+        text: &quot;Set Title of Window&quot;
+<span class="gd">-       onClicked: HelperSingleton.appWindow.children[0].text = &quot;A new title&quot;</span>
+<span class="gi">+       onClicked: HelperSingleton.setWindowTitle(&quot;A new title&quot;)</span>
+    }
+}
 </pre></div>
 
 
@@ -1238,7 +1259,7 @@
 </blockquote>
 <h3 id="recipe-push-singletons-up">Recipe: Push singletons up</h3>
 <p>When investigating the usage of certain singletons often they are used in a related code area. It seems developers where to lazy to pass in these dependencies and rather shortcut the relations.</p>
-<p>Assume we have a panel which show a title and some content. The title shall present the current time and the content shall presetn the time but also be able to reset the current time.</p>
+<p>Assume we have a panel which show a title and some content. The title shall present the current time and the content shall present the time but also be able to reset the current time.</p>
 <p>The parent application panel, which holds both children panels.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
@@ -1310,7 +1331,7 @@ Panel {
 
 <p>In the next step we can then move the singleton onto the other side and pass it into the component.</p>
 <div class="codehilite"><pre><span></span>// AppPanel.qml
-import service.time 1.0
+<span class="gi">+ import service.time 1.0</span>
 
 Panel {
     TitlePanel {
@@ -1318,13 +1339,13 @@ Panel {
     }
     ContentPanel {
 <span class="gi">+       currentTime: Clock.currentTime</span>
-<span class="gi">+       onResetTime: Clock.resetTime</span>
+<span class="gi">+       onResetTime: Clock.resetTime()</span>
     }
 }
 </pre></div>
 
 
-<p>Now we can elimate the usage of the singletons in the children.</p>
+<p>Now we can eliminate the usage of the singletons in the children.</p>
 <div class="codehilite"><pre><span></span>// TitlePanel.qml
 <span class="gd">- import service.time 1.0</span>
 Panel {
@@ -1360,6 +1381,52 @@ Panel {
 <p>By this we effectively push the singleton usage on level up. Normally it is expected after several of these pushes you will reach a level where several child components suddenly depend on the same information injected from the singleton. To effectively predict how many levels you need to push up this dependency we would need to identify the node which creates the child nodes using the singleton. If we reach that point there is no need for a singleton and we can convert the singleton into an instance of even eliminate it all together.</p>
 <h3 id="recipe-eliminate-singletons">Recipe: Eliminate singletons</h3>
 <p>A singleton normally shares global state, functionality and events. To eliminate this we need to find the common ancestor node from where we can inject the dependencies. For a share event, we often can just connect the signal with a state change on that level, for shared properties we could do similar. For common functionality we can connect a signal which bubbles up to a function being executed. Ideally the function is extracted into a store if its application business relevant.</p>
+<p>So after we pushed the singleton up, we could now convert it to an instance, which acts like a small store.</p>
+<div class="codehilite"><pre><span></span>// AppPanel.qml
+<span class="gi">+ import service.time 1.0</span>
+
+Panel {
+<span class="gi">+   Clock {</span>
+<span class="gi">+       id: clock</span>
+<span class="gi">+   }</span>
+    TitlePanel {
+<span class="gd">-       currentTime: Clock.currentTime</span>
+<span class="gi">+       currentTime: clock.currentTime</span>
+    }
+    ContentPanel {
+<span class="gd">-       currentTime: Clock.currentTime</span>
+<span class="gi">+       currentTime: clock.currentTime</span>
+
+<span class="gd">-       onResetTime: Clock.resetTime()</span>
+<span class="gi">+       onResetTime: clock.resetTime()</span>
+    }
+}
+</pre></div>
+
+
+<p>Now that we have an instance, we can in our tests create and destroy this instance. Also when this UI portion is destroyed, the service instance will also be destroyed and does not use any resources.</p>
+<p>To go a step forward we can even inject the service as a dependency.</p>
+<div class="codehilite"><pre><span></span>// AppPanel.qml
+<span class="gi">+ import service.time 1.0</span>
+
+Panel {
+<span class="gd">-   Clock {</span>
+<span class="gd">-       id: clock</span>
+<span class="gd">-   }</span>
+<span class="gi">+   property Clock clock : Clock { }</span>
+    TitlePanel {
+        currentTime: clock.currentTime
+    }
+    ContentPanel {
+        currentTime: clock.currentTime
+
+        onResetTime: clock.resetTime()
+    }
+}
+</pre></div>
+
+
+<p>This allows use to configure the dependency of the AppPanel and with this make it better testable.</p>
 <h3 id="recipe-extract-harmful-dependency-conditions">Recipe: Extract harmful dependency conditions</h3>
 <p>A harmful dependency is a dependency which breaks decomposition and testability by introducing (often indirect) not testable dependencies (e.g. network, hardware, global state).</p>
 <p>For this to be eliminated we need to push the dependency up, by first moving the dependency out of the internal of the component to the root level of the component and in a second step injecting the dependency into the component form the outside. By this practically removing the dependency from that particular component.</p>
@@ -1369,9 +1436,255 @@ Panel {
 <p>The component is just moved into a kind folder and the dependency from the calling component is updated.</p>
 <p>In a later step we can now start with that component. Be sure to only move components which follow the dependency guidelines, otherwise it is better to first eliminate of push up the harmful dependencies before moving the component.</p>
 <h3 id="recipe-extract-a-store">Recipe: Extract a Store</h3>
-<p>After pushing conditions up tot he root level of the current component sometimes it is a good practice to collect them into an object. So the object gets injected into this component. This component is the first version of a potential store.
-This object then collects these dependencies and will carry the harmful dependencies. The component itself will only depend on this particular object (aka store).</p>
+<p>After pushing conditions up to the root level of the current component sometimes it is a good practice to collect them into an object. So the object gets injected into this component. This component is the first version of a potential store.</p>
+<p>This object then collects these dependencies and will carry the harmful dependencies. The component itself will only depend on this particular object (aka store).</p>
 <p>This makes it also easier to push dependencies up the UI tree as we only have to push the object up not individual properties.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
+<span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">time</span> <span class="mf">1.0</span>
+
+<span class="nx">Panel</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">Clock</span> <span class="k">clock :</span> <span class="nx">Clock</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="nx">property</span> <span class="nx">string</span> <span class="nx">stationName</span>
+    <span class="nx">TitlePanel</span> <span class="p">{</span>
+        <span class="k">title:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">stationName</span>
+        <span class="k">currentTime:</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">currentTime</span>
+    <span class="p">}</span>
+    <span class="nx">ContentPanel</span> <span class="p">{</span>
+        <span class="k">currentTime:</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">currentTime</span>
+        <span class="k">onResetTime:</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">resetTime</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong>Step: name space your dependency</strong></p>
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="n">AppStore</span><span class="o">.</span><span class="n">qml</span>
+<span class="kn">import</span> <span class="nn">service.time</span> <span class="mf">1.0</span>
+
+<span class="n">Store</span> <span class="p">{</span>
+    <span class="nb">property</span> <span class="n">Clock</span> <span class="n">clock</span><span class="p">:</span> <span class="n">Clock</span> <span class="p">{}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>// AppPanel.qml
+<span class="gd">- import service.time 1.0</span>
+
+Panel {
+    id: root
+<span class="gd">-   property Clock clock : Clock { }</span>
+<span class="gi">+   property AppStore store: AppStore {}</span>
+    property string stationName
+    TitlePanel {
+        title: root.stationName
+<span class="gd">-       currentTime: clock.currentTime</span>
+<span class="gi">+       currentTime: store.clock.currentTime</span>
+    }
+    ContentPanel {
+<span class="gi">+       currentTime: clock.currentTime</span>
+<span class="gi">+       currentTime: store.clock.currentTime</span>
+<span class="gd">-       onResetTime: clock.resetTime()</span>
+<span class="gi">+       onResetTime: store.clock.resetTime()</span>
+    }
+}
+</pre></div>
+
+
+<p><strong>Step: Prevent object leaking</strong></p>
+<p>We still have a problem in the store, we leak an object and the internals of the object can be discovered. We could prevent it by hiding the object behind the store interface.</p>
+<div class="codehilite"><pre><span></span>// AppStore.qml
+import service.time 1.0
+
+Store {
+<span class="gd">-   property Clock clock: Clock {}</span>
+<span class="gi">+   property Clock __clock: Clock {}</span>
+
+<span class="gi">+   property string currentTime: __clock.currentTime</span>
+<span class="gi">+   function resetTime() {</span>
+<span class="gi">+       __clock.resetTime()</span>
+<span class="gi">+   }</span>
+}
+</pre></div>
+
+
+<p>This will change our panel to</p>
+<div class="codehilite"><pre><span></span>// AppPanel.qml
+
+Panel {
+    id: root
+    property AppStore store: AppStore {}
+    property string stationName
+    TitlePanel {
+        title: root.stationName
+<span class="gd">-       currentTime: store.clock.currentTime</span>
+<span class="gi">+       currentTime: store.currentTime</span>
+    }
+    ContentPanel {
+<span class="gd">-       currentTime: store.clock.currentTime</span>
+<span class="gi">+       currentTime: store.clock.currentTime</span>
+<span class="gd">-       onResetTime: store.clock.resetTime()</span>
+<span class="gi">+       onResetTime: store.clock.resetTime()</span>
+    }
+}
+</pre></div>
+
+
+<p><strong>Step: extract data interface into a data object</strong></p>
+<p>Now we can also add the remaining station name, which might come from another service. We do not know here into the store.</p>
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="n">AppStore</span><span class="o">.</span><span class="n">qml</span>
+<span class="kn">import</span> <span class="nn">service.time</span> <span class="mf">1.0</span>
+
+<span class="n">Store</span> <span class="p">{</span>
+    <span class="nb">property</span> <span class="n">Clock</span> <span class="n">clock</span><span class="p">:</span> <span class="n">Clock</span> <span class="p">{}</span>
+<span class="o">+</span>   <span class="nb">property</span> <span class="n">string</span> <span class="n">stationName</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>// AppPanel.qml
+
+Panel {
+    id: root
+<span class="gd">-   property AppStore store: AppStore {}</span>
+<span class="gi">+   property AppStore store: AppStore {</span>
+<span class="gi">+       stationName: root.stationName</span>
+<span class="gi">+   }</span>
+    property string stationName
+    TitlePanel {
+<span class="gd">-       title: root.stationName</span>
+<span class="gi">+       title: store.stationName</span>
+        currentTime: store.clock.currentTime
+    }
+    ContentPanel {
+        currentTime: store.clock.currentTime
+        onResetTime: store.clock.resetTime()
+    }
+}
+</pre></div>
+
+
+<p>On the first sight this seems to make thing more complicated. But think about, we want to inject dependency. So we want to make it the duty of the instance which instantiates us to think about where the data comes from.</p>
+<p><strong>Step: inject store</strong></p>
+<p>So this allows us now to inject the store as dependency and make our dependency much more clearer.</p>
+<div class="codehilite"><pre><span></span>// AppPanel.qml
+// import service.time 1.0
+
+Panel {
+    id: root
+<span class="gd">-   property AppStore store: AppStore {</span>
+<span class="gd">-       stationName: root.stationName</span>
+<span class="gd">-   }</span>
+<span class="gd">-   property string stationName</span>
+<span class="gi">+   property AppStore store</span>
+    TitlePanel {
+        title: store.stationName
+        currentTime: store.clock.currentTime
+    }
+    ContentPanel {
+        currentTime: store.clock.currentTime
+        onResetTime: store.clock.resetTime()
+    }
+}
+</pre></div>
+
+
+<p>We would call this component now a View, as it depends on a store. A panels just depend on data properties, a view on a store.</p>
+<div class="codehilite"><pre><span></span><span class="gd">- // AppPanel.qml</span>
+<span class="gi">+ // AppView.qml</span>
+
+<span class="gd">- Panel {</span>
+<span class="gi">+ View {</span>
+    id: root
+    property AppStore store
+    ...
+}
+</pre></div>
+
+
+<p>Maybe our AppPanel is called by a Main item, this would be the change there.</p>
+<div class="codehilite"><pre><span></span>// Main.qml
+Item {
+    width: 800
+    height: 600
+    AppPanel {
+<span class="gd">-       stationName: &#39;Last Station&#39;</span>
+<span class="gi">+       store: AppStore {</span>
+<span class="gi">+           stationName: &#39;Last Station&#39;</span>
+<span class="gi">+       }</span>
+    }
+}
+</pre></div>
+
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Injecting dependencies, means roughly: make it the problem of someone else. When looking back we have now a set of nice to test components and clear idea where the data comes from.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Main.qml</span>
+<span class="nx">Item</span> <span class="p">{</span>
+    <span class="k">width:</span> <span class="mi">800</span>
+    <span class="k">height:</span> <span class="mi">600</span>
+    <span class="nx">AppPanel</span> <span class="p">{</span>
+        <span class="k">store:</span> <span class="nx">AppStore</span> <span class="p">{</span>
+            <span class="k">stationName:</span> <span class="s1">&#39;Last Station&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// AppStore.qml</span>
+<span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">time</span> <span class="mf">1.0</span>
+
+<span class="nx">Store</span> <span class="p">{</span>
+    <span class="nx">property</span> <span class="nx">Clock</span> <span class="nx">__clock</span><span class="o">:</span> <span class="nx">Clock</span> <span class="p">{}</span>
+    <span class="nx">property</span> <span class="nx">string</span> <span class="nx">stationName</span>
+    <span class="nx">property</span> <span class="nx">string</span> <span class="k">currentTime:</span> <span class="nx">__clock</span><span class="p">.</span><span class="nx">currentTime</span>
+    <span class="kd">function</span> <span class="nx">resetTime</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">__clock</span><span class="p">.</span><span class="nx">resetTime</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
+<span class="nx">Panel</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">AppStore</span> <span class="nx">store</span>
+    <span class="nx">TitlePanel</span> <span class="p">{</span>
+        <span class="k">title:</span> <span class="nx">store</span><span class="p">.</span><span class="nx">stationName</span>
+        <span class="k">currentTime:</span> <span class="nx">store</span><span class="p">.</span><span class="nx">currentTime</span>
+    <span class="p">}</span>
+    <span class="nx">ContentPanel</span> <span class="p">{</span>
+        <span class="k">currentTime:</span> <span class="nx">store</span><span class="p">.</span><span class="nx">currentTime</span>
+        <span class="k">onResetTime:</span> <span class="nx">store</span><span class="p">.</span><span class="nx">resetTime</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// ContentPanel.qml</span>
+<span class="nx">Panel</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">string</span> <span class="nx">currentTime</span>
+    <span class="nx">signal</span> <span class="nx">resetTime</span><span class="p">()</span>
+
+    <span class="nx">Button</span> <span class="p">{</span>
+        <span class="k">text:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">currentTime</span>
+        <span class="k">onClicked:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">resetTime</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c1">// TitlePanel.qml</span>
+<span class="nx">Panel</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">string</span> <span class="nx">currentTime</span>
+    <span class="nx">Label</span> <span class="p">{</span>
+        <span class="k">text:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">currentTime</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
                 
                   
                 
