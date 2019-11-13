@@ -223,6 +223,7 @@ Now we can elimate the usage of the singletons in the children.
 
 ```diff
 // TitlePanel.qml
+- import service.time 1.0
 Panel {
     id: root
 -   property string currentTime: Clock.currentTime
@@ -243,7 +244,7 @@ Panel {
 -   property string currentTime: Clock.currentTime
 +   property string currentTime
     signal resetTime()
--   onResetTime: Clock.resetTime
+-   onResetTime: Clock.resetTime()
 
     Button {
         text: root.currentTime
