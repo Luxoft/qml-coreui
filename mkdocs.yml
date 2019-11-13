@@ -56,8 +56,8 @@ nav:
       - "Reference": "admin/reference.md"
   - "Download":
       - "Getting Started": "download/index.md"
-  - "API Reference":
-      - "Getting Started": "api/index.md"
+  - "Extensions":
+      - "Overview": "extensions/overview.md"
   - "Resources":
       - "Getting Started": "resources/index.md"
   - "Support This":

@@ -1,0 +1,2 @@
+module CoreUI.SQL
+plugin plugin_sql
