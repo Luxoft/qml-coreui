@@ -1,0 +1,11 @@
+include LICENSE
+include README.md
+
+graft coreui_admin/commands/templates
+
+global-exclude *.so
+global-exclude *.pyc
+global-exclude *~
+global-exclude \#*
+global-exclude .git*
+global-exclude .DS_Store

@@ -2,7 +2,9 @@ site_name: QML Core UI
 site_description: guide to the core ui architecture for QML driven projects
 site_author: Juergen Ryannel
 copyright: 2019 Luxoft GmbH
+repo_url: https://github.com/Luxoft/qml-coreui-guide
 google_analytics:
+
 theme:
   name: "material"
   palette:
@@ -24,7 +26,7 @@ nav:
   - "Overview": index.md
   - "Guide":
       - "Install": "guide/install.md"
-      - "What is Clean UI": "guide/whatis.md"
+      - "What is Core UI": "guide/whatis.md"
       - "Getting Started": "guide/index.md"
       - "Examples": "guide/examples.md"
       - "CookBook": "guide/cookbook.md"
@@ -43,12 +45,18 @@ nav:
       - "UI Layer": "topics/uilayer.md"
       - "Refactoring": "topics/refactor.md"
       - "Styles": "topics/styles.md"
+  - Admin:
+      - "Quick Start": "admin/start.md"
+      - "Concepts": "admin/concepts.md"
+      - "Installation": "admin/install.md"
+      - "Building": "admin/build.md"
+      - "Developing": "admin/dev.md"
+      - "Project Creation": "admin/projects.md"
+      - "Reference": "admin/reference.md"
   - "Download":
       - "Getting Started": "download/index.md"
   - "API Reference":
       - "Getting Started": "api/index.md"
-  - "Team":
-      - "Getting Started": "team/index.md"
   - "Resources":
       - "Getting Started": "resources/index.md"
   - "Support This":
@@ -59,4 +67,3 @@ markdown_extensions:
   - codehilite
   - pymdownx.magiclink
 
-repo_url: https://github.com/Luxoft/qml-coreui-guide

@@ -5,20 +5,29 @@
     This material is work in progress and will change!
 
 
-CoreUI is not really something to be installed. It is more a methodic approach to writing user inerfaces using Qt5.
-Still ther is a helper library and tools to help you getting started.
+CoreUI is not really something to be installed. It is more an approach to write large scaled user interfaces using Qt and Qt Auto. Still there is a helper library and tools to help you getting started and which is used throughout the guide.
 
-The `coreui-admin` tool is a script which can be easily installed using standard python tooling.
+The tool is called `coreui-admin` which can be used to create new sample projects or add aspects to these projects. This shall make the guide more compact. Instead of describing in detail how to setup a project, we can now just tell `coreui-admin new myproject`.
+
+The `coreui-admin` tool is a Python 3 script which can be easily installed using the standard python tooling.
 
 ## Requirements
 
-The script requires a python (2.x or 3.x ) installation with the PIP package manager installed.
+The script requires a Python (3.5> ) installation with the PIP package manager installed.
 
-## Installation from Git
+## Installation
 
-You can also direcly install from git using the python package manager
+Normally you would install the `coreui-admin` using the pip package manager.
 
-    pip install git+https://github.com/Luxoft/coreui-admin.git@develop --upgrade
+    pip install coreui-admin
+
+This will install an executable `coreui-admin` into your path.
+
+## Install from git
+
+You can also directly install from git using the python package manager
+
+    pip install git+https://github.com/Luxoft/coreui-admin.git@master --upgrade
 
 !!!note
 
@@ -26,7 +35,7 @@ You can also direcly install from git using the python package manager
 
 ## Editable Installation
 
-An editable installation only installs links to the orignal source. In effect updating the git checkout also installs the script.
+An editable installation only installs links to the original source. In effect updating the git checkout also installs the script.
 
     git clone https://github.com/Luxoft/coreui-admin.git
     cd coreui-admin
@@ -40,9 +49,9 @@ To update the installation you need to update the repository.
 Now the `coreui-admin` is updated to the latest from the remote repository.
 
 
-## Uninstalling
+## Uninstall
 
-To uninstall the script you can to use the pip tool
+To de install the script you can to use the pip tool
 
     pip uninstall coreui-admin
 
@@ -51,6 +60,7 @@ To uninstall the script you can to use the pip tool
 
 In case you do not want to pollute your local python installation you can use python virtualenv
 
+    pip install virtualenv
     virtualenv -p python3 venv
     source venv/bin/activate
 
@@ -61,3 +71,5 @@ Now install coreui-admin and to exit this python virtual environment call `deact
 After the installation the `coreui-admin` command is at your disposal.
 
     coreui-admin --help
+
+
