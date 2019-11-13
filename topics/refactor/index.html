@@ -1326,6 +1326,7 @@ Panel {
 
 <p>Now we can elimate the usage of the singletons in the children.</p>
 <div class="codehilite"><pre><span></span>// TitlePanel.qml
+<span class="gd">- import service.time 1.0</span>
 Panel {
     id: root
 <span class="gd">-   property string currentTime: Clock.currentTime</span>
@@ -1345,7 +1346,7 @@ Panel {
 <span class="gd">-   property string currentTime: Clock.currentTime</span>
 <span class="gi">+   property string currentTime</span>
     signal resetTime()
-<span class="gd">-   onResetTime: Clock.resetTime</span>
+<span class="gd">-   onResetTime: Clock.resetTime()</span>
 
     Button {
         text: root.currentTime
