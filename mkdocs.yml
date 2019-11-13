@@ -67,4 +67,3 @@ markdown_extensions:
   - admonition
   - codehilite
   - pymdownx.magiclink
-

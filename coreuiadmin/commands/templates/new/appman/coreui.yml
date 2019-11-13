@@ -1,0 +1,11 @@
+---
+config:
+  jobs: 2
+env:
+  QT_QUICK_CONTROLS_CONF: "./qtquickcontrols2.conf"
+repos:
+scripts:
+  start: 'cd ui && $QTDIR/appman -r -c am-config.yml -I imports'
+  native: 'cd native && qmake && make && make install'
+targets:
+

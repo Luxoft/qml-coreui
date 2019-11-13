@@ -1,0 +1,4 @@
+{
+    "interfaces" : [
+      "{{uri}}.Counter/1.0"    ]
+}

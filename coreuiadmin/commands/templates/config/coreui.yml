@@ -1,0 +1,50 @@
+---
+config:
+  source: repos/source
+  install: repos/install
+  build: repos/build
+  jobs: 2
+env: {}
+repos:
+  appman:
+    url: git://code.qt.io/qt/qtapplicationmanager.git
+    branch: '5.13'
+    build: qmake
+    os: [linux, macos]
+    codereview: qt/qtapplicationmanager
+    qt_module: true
+  ivi:
+    url: git://code.qt.io/qt/qtivi.git
+    branch: '5.13'
+    build: qmake
+    os: [linux, macos]
+    codereview: qt/qtivi
+    qt_module: true
+  neptune3-ui:
+    url: git://code.qt.io/qt-apps/neptune3-ui.git
+    branch: '5.13'
+    build: qmake
+    os: [linux, macos]
+    codereview: qt-apps/neptune3-ui
+  qmllive:
+    url: git://code.qt.io/qt-apps/qmllive.git
+    branch: '5.13'
+    build: qmake
+    os: [linux, macos]
+    codereview: qt-apps/qmllive
+  gammaray:
+    url: git://github.com/KDAB/GammaRay.git
+    branch: master
+    build: cmake
+    os: [linux, macos]
+scripts:
+  start: 'cd ./repos/install/neptune3/ && ./neptune3-ui'
+targets:
+  auto:
+  - ivi
+  - appman
+  - neptune3-ui
+  tools:
+  - qmllive
+  - gammaray
+

@@ -1,0 +1,42 @@
+formatVersion: 1
+formatType: am-configuration
+---
+installationLocations:
+- id: "internal-0"
+  installationPath: "/tmp/demo/apps"
+  documentPath: "/tmp/demo/docs"
+  mountPoint: "/tmp"
+  isDefault: true
+
+runtimes:
+  qml:
+    importPaths: [ "${CONFIG_PWD}/imports" ]
+
+applications:
+  builtinAppsManifestDir: "${CONFIG_PWD}/apps"
+  installedAppsManifestDir: "/tmp/demo/manifests"
+  appImageMountDir: "/tmp/demo/image-mounts"
+  database: "/tmp/demo/apps.db"
+
+logging:
+  rules:
+    - "*=false"
+    - "qt.*=false"
+    - "am.*=false"
+    - "qml*=true"
+    - "*.warning=true"
+    - "*.critical=true"
+
+ui:
+  fullscreen: no
+  mainQml: "${CONFIG_PWD}/Main.qml"
+  importPaths: [ "${CONFIG_PWD}/imports" ]
+
+systemProperties:
+  protected:
+    light: on
+
+# development setup
+flags:
+  noSecurity: yes
+  noUiWatchdog: yes
