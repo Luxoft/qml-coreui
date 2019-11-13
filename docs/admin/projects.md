@@ -14,7 +14,7 @@ This will by default create a new project in the `myproject` folder using the `s
 
 To launch your newly created project you can use
 
-```
+```sh
 coreui-admin start
 ```
 
