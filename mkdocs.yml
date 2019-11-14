@@ -25,14 +25,12 @@ theme:
 nav:
   - "Overview": index.md
   - "Guide":
-      - "Install": "guide/install.md"
       - "What is Core UI": "guide/whatis.md"
+      - "Install": "guide/install.md"
       - "Getting Started": "guide/index.md"
       - "Examples": "guide/examples.md"
       - "CookBook": "guide/cookbook.md"
   - Topics:
-      - "Preface": "topics/preface.md"
-      - "Introduction": "topics/intro.md"
       - "Foundations": "topics/foundations.md"
       - "Building Blocks": "topics/blocks.md"
       - "Controls": "topics/controls.md"

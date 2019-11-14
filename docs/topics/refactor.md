@@ -56,7 +56,7 @@ QtObject {
 }
 ```
 
-The usage could be like this
+The anticipated or desired usage could be to allow others to control window visibility.
 
 ```qml
 // AppPanel.qml
@@ -68,9 +68,7 @@ Panel {
 }
 ```
 
-But could also be used like this. The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.
-
-> whatever can happen will happen
+But others could expose the object in an evil way like this.
 
 ```qml
 // EvilPanel.qml
@@ -81,6 +79,12 @@ Panel {
     }
 }
 ```
+
+Now the EvilPanel depends on the internal structure and even existence of internal UI types. And even worse the developer of the AppWindow is not aware someone is using this API. Don't expose your object internals, and do not use other objects internals.
+
+The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.
+
+> whatever can happen will happen
 
 To close down this leakage we need to investigate how the object is used. Often we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.
 
@@ -360,19 +364,20 @@ Panel {
 }
 ```
 
-__Step: name space your dependency__
+**Step: name space your dependency**
 
+We create a new object called AppStore. This object shall wrap the dependencies.
 
+```diff
++ // AppStore.qml
++ import service.time 1.0
++
++ Store {
++     property Clock clock: Clock {}
++ }
 ```
-// AppStore.qml
-import service.time 1.0
 
-Store {
-    property Clock clock: Clock {}
-}
-```
-
-
+Now we can replace the direct dependencies with indirect dependencies using the new used store object. So practically name spacing the dependencies.
 
 ```diff
 // AppPanel.qml
@@ -397,7 +402,9 @@ Panel {
 }
 ```
 
-__Step: Prevent object leaking__
+In the next step this will allow us now to do the trick and remove the dependencies from our panels.
+
+**Step: Prevent object leaking**
 
 We still have a problem in the store, we leak an object and the internals of the object can be discovered. We could prevent it by hiding the object behind the store interface.
 
@@ -416,7 +423,7 @@ Store {
 }
 ```
 
-This will change our panel to
+This will change our panel in a way that it only depends on properties, signals or functions of the store and the store is able to conceal its internals.
 
 ```diff
 // AppPanel.qml
@@ -439,12 +446,11 @@ Panel {
 }
 ```
 
-__Step: extract data interface into a data object__
+**Step: extract data interface into a data object**
 
-Now we can also add the remaining station name, which might come from another service. We do not know here into the store.
+Now we can also add the remaining station name, which might come from another service. The relevant part is it is not a visual property it is a data property, and as such should be contained inside the data store.
 
-
-```
+```diff
 // AppStore.qml
 import service.time 1.0
 
@@ -454,6 +460,7 @@ Store {
 }
 ```
 
+Now the panel does not use the name property anymore it gets the information from the store.
 
 ```diff
 // AppPanel.qml
@@ -479,10 +486,11 @@ Panel {
 
 On the first sight this seems to make thing more complicated. But think about, we want to inject dependency. So we want to make it the duty of the instance which instantiates us to think about where the data comes from.
 
-__Step: inject store__
+As the panel does now solely depend on the store for its data, testing the panel also now gets much more easier as also passing on the data between parts its now easier. To test now the business side, we can simple test the none visual store.
+
+**Step: inject store**
 
 So this allows us now to inject the store as dependency and make our dependency much more clearer.
-
 
 ```diff
 // AppPanel.qml
@@ -506,7 +514,7 @@ Panel {
 }
 ```
 
-We would call this component now a View, as it depends on a store. A panels just depend on data properties, a view on a store.
+We would call this component now a View (from View in [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern), as it depends on a store. A panels just depend on data properties, a view on a store.
 
 ```diff
 - // AppPanel.qml
@@ -536,10 +544,9 @@ Item {
 }
 ```
 
-
 ## Conclusion
 
-Injecting dependencies, means roughly: make it the problem of someone else. When looking back we have now a set of nice to test components and clear idea where the data comes from.
+Injecting dependencies, means roughly: make it the problem of the object calling you. When looking back we have now a set of nice to test components and clear idea where the data comes from.
 
 ```qml
 // Main.qml
@@ -569,8 +576,8 @@ Store {
 ```
 
 ```qml
-// AppPanel.qml
-Panel {
+// AppView.qml
+View {
     id: root
     property AppStore store
     TitlePanel {
@@ -598,7 +605,6 @@ Panel {
 }
 ```
 
-
 ```qml
 // TitlePanel.qml
 Panel {
@@ -609,17 +615,3 @@ Panel {
     }
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
