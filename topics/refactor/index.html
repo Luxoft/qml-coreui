@@ -204,7 +204,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../guide/install/" class="md-tabs__link">
+        <a href="../../guide/whatis/" class="md-tabs__link">
           Guide
         </a>
       
@@ -217,7 +217,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+        <a href="../foundations/" class="md-tabs__link md-tabs__link--active">
           Topics
         </a>
       
@@ -370,8 +370,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../guide/install/" title="Install" class="md-nav__link">
-      Install
+    <a href="../../guide/whatis/" title="What is Core UI" class="md-nav__link">
+      What is Core UI
     </a>
   </li>
 
@@ -382,8 +382,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../guide/whatis/" title="What is Core UI" class="md-nav__link">
-      What is Core UI
+    <a href="../../guide/install/" title="Install" class="md-nav__link">
+      Install
     </a>
   </li>
 
@@ -449,30 +449,6 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../preface/" title="Preface" class="md-nav__link">
-      Preface
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../intro/" title="Introduction" class="md-nav__link">
-      Introduction
-    </a>
-  </li>
-
         
           
           
@@ -1188,7 +1164,7 @@ Martin Fowler (<a href="https://refactoring.com">https://refactoring.com</a>)</p
 </pre></div>
 
 
-<p>The usage could be like this</p>
+<p>The anticipated or desired usage could be to allow others to control window visibility.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
     <span class="nx">Button</span> <span class="p">{</span>
@@ -1199,10 +1175,7 @@ Martin Fowler (<a href="https://refactoring.com">https://refactoring.com</a>)</p
 </pre></div>
 
 
-<p>But could also be used like this. The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.</p>
-<blockquote>
-<p>whatever can happen will happen</p>
-</blockquote>
+<p>But others could expose the object in an evil way like this.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// EvilPanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
     <span class="nx">Button</span> <span class="p">{</span>
@@ -1213,6 +1186,11 @@ Martin Fowler (<a href="https://refactoring.com">https://refactoring.com</a>)</p
 </pre></div>
 
 
+<p>Now the EvilPanel depends on the internal structure and even existence of internal UI types. And even worse the developer of the AppWindow is not aware someone is using this API. Don't expose your object internals, and do not use other objects internals.</p>
+<p>The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.</p>
+<blockquote>
+<p>whatever can happen will happen</p>
+</blockquote>
 <p>To close down this leakage we need to investigate how the object is used. Often we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.</p>
 <div class="codehilite"><pre><span></span>// HelperSingleton.qml - improved
 QtObject {
@@ -1459,15 +1437,17 @@ Panel {
 
 
 <p><strong>Step: name space your dependency</strong></p>
-<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="n">AppStore</span><span class="o">.</span><span class="n">qml</span>
-<span class="kn">import</span> <span class="nn">service.time</span> <span class="mf">1.0</span>
-
-<span class="n">Store</span> <span class="p">{</span>
-    <span class="nb">property</span> <span class="n">Clock</span> <span class="n">clock</span><span class="p">:</span> <span class="n">Clock</span> <span class="p">{}</span>
-<span class="p">}</span>
+<p>We create a new object called AppStore. This object shall wrap the dependencies.</p>
+<div class="codehilite"><pre><span></span><span class="gi">+ // AppStore.qml</span>
+<span class="gi">+ import service.time 1.0</span>
+<span class="gi">+</span>
+<span class="gi">+ Store {</span>
+<span class="gi">+     property Clock clock: Clock {}</span>
+<span class="gi">+ }</span>
 </pre></div>
 
 
+<p>Now we can replace the direct dependencies with indirect dependencies using the new used store object. So practically name spacing the dependencies.</p>
 <div class="codehilite"><pre><span></span>// AppPanel.qml
 <span class="gd">- import service.time 1.0</span>
 
@@ -1491,6 +1471,7 @@ Panel {
 </pre></div>
 
 
+<p>In the next step this will allow us now to do the trick and remove the dependencies from our panels.</p>
 <p><strong>Step: Prevent object leaking</strong></p>
 <p>We still have a problem in the store, we leak an object and the internals of the object can be discovered. We could prevent it by hiding the object behind the store interface.</p>
 <div class="codehilite"><pre><span></span>// AppStore.qml
@@ -1508,7 +1489,7 @@ Store {
 </pre></div>
 
 
-<p>This will change our panel to</p>
+<p>This will change our panel in a way that it only depends on properties, signals or functions of the store and the store is able to conceal its internals.</p>
 <div class="codehilite"><pre><span></span>// AppPanel.qml
 
 Panel {
@@ -1531,17 +1512,18 @@ Panel {
 
 
 <p><strong>Step: extract data interface into a data object</strong></p>
-<p>Now we can also add the remaining station name, which might come from another service. We do not know here into the store.</p>
-<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="n">AppStore</span><span class="o">.</span><span class="n">qml</span>
-<span class="kn">import</span> <span class="nn">service.time</span> <span class="mf">1.0</span>
+<p>Now we can also add the remaining station name, which might come from another service. The relevant part is it is not a visual property it is a data property, and as such should be contained inside the data store.</p>
+<div class="codehilite"><pre><span></span>// AppStore.qml
+import service.time 1.0
 
-<span class="n">Store</span> <span class="p">{</span>
-    <span class="nb">property</span> <span class="n">Clock</span> <span class="n">clock</span><span class="p">:</span> <span class="n">Clock</span> <span class="p">{}</span>
-<span class="o">+</span>   <span class="nb">property</span> <span class="n">string</span> <span class="n">stationName</span>
-<span class="p">}</span>
+Store {
+    property Clock clock: Clock {}
+<span class="gi">+   property string stationName</span>
+}
 </pre></div>
 
 
+<p>Now the panel does not use the name property anymore it gets the information from the store.</p>
 <div class="codehilite"><pre><span></span>// AppPanel.qml
 
 Panel {
@@ -1565,6 +1547,7 @@ Panel {
 
 
 <p>On the first sight this seems to make thing more complicated. But think about, we want to inject dependency. So we want to make it the duty of the instance which instantiates us to think about where the data comes from.</p>
+<p>As the panel does now solely depend on the store for its data, testing the panel also now gets much more easier as also passing on the data between parts its now easier. To test now the business side, we can simple test the none visual store.</p>
 <p><strong>Step: inject store</strong></p>
 <p>So this allows us now to inject the store as dependency and make our dependency much more clearer.</p>
 <div class="codehilite"><pre><span></span>// AppPanel.qml
@@ -1589,7 +1572,7 @@ Panel {
 </pre></div>
 
 
-<p>We would call this component now a View, as it depends on a store. A panels just depend on data properties, a view on a store.</p>
+<p>We would call this component now a View (from View in <a href="https://en.wikipedia.org/wiki/Model–view–viewmodel">Model-View-ViewModel</a> pattern), as it depends on a store. A panels just depend on data properties, a view on a store.</p>
 <div class="codehilite"><pre><span></span><span class="gd">- // AppPanel.qml</span>
 <span class="gi">+ // AppView.qml</span>
 
@@ -1618,7 +1601,7 @@ Item {
 
 
 <h2 id="conclusion">Conclusion</h2>
-<p>Injecting dependencies, means roughly: make it the problem of someone else. When looking back we have now a set of nice to test components and clear idea where the data comes from.</p>
+<p>Injecting dependencies, means roughly: make it the problem of the object calling you. When looking back we have now a set of nice to test components and clear idea where the data comes from.</p>
 <div class="codehilite"><pre><span></span><span class="c1">// Main.qml</span>
 <span class="nx">Item</span> <span class="p">{</span>
     <span class="k">width:</span> <span class="mi">800</span>
@@ -1646,8 +1629,8 @@ Item {
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
-<span class="nx">Panel</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="c1">// AppView.qml</span>
+<span class="nx">View</span> <span class="p">{</span>
     <span class="kd">id: root</span>
     <span class="nx">property</span> <span class="nx">AppStore</span> <span class="nx">store</span>
     <span class="nx">TitlePanel</span> <span class="p">{</span>
