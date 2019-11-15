@@ -66,7 +66,7 @@ Creating a stunning UX is a team effort involving UI designers, UI developers, a
 
 The UI developers know what the system can deliver and which special effects and/or animations will take down the system and will start introducing an unsatisfying user experience to the user. The UI designers have their own vision into their head but often the documentation is lacking behind and also does not tell the whole story. These internal concepts not documented but expressed in design are important for the UI developers as they also need to base their detailed UI appearance on fundamental concepts. If these fundamental concepts diverge because of not being aware of each other, the UI code will always look like someone has patched it to make it work.
 
-A true harmony and understanding of UI design of the UI developer can be seen in the clean UI code produced by the developers.
+A true harmony and understanding of UI design of the UI developer can be seen in the UI code produced by the developers.
 
 
 ## Thinking in Components

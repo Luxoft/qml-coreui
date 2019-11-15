@@ -19,6 +19,7 @@ The script requires a Python (3.5> ) installation with the PIP package manager i
 
 Normally you would install the `coreui-admin` using the pip package manager.
 
+
     pip install coreui-admin
 
 This will install an executable `coreui-admin` into your path.
@@ -27,19 +28,17 @@ This will install an executable `coreui-admin` into your path.
 
 You can also directly install from git using the python package manager
 
-    pip install git+https://github.com/Luxoft/coreui-admin.git@master --upgrade
+    git clone https://github.com/Luxoft/qml-coreui.git
+    cd qml-coreui    
+    pip install .
 
 !!!note
 
     On Ubuntu you might need to add ``$HOME/.local/bin`` to you `$PATH`
 
-## Editable Installation
-
 An editable installation only installs links to the original source. In effect updating the git checkout also installs the script.
 
-    git clone https://github.com/Luxoft/coreui-admin.git
-    cd coreui-admin
-    pip install -e .
+    pip install -e . --upgrade
 
 To update the installation you need to update the repository.
 
@@ -71,5 +70,3 @@ Now install coreui-admin and to exit this python virtual environment call `deact
 After the installation the `coreui-admin` command is at your disposal.
 
     coreui-admin --help
-
-

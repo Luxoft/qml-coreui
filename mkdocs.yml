@@ -27,9 +27,9 @@ nav:
   - "Guide":
       - "What is Core UI": "guide/whatis.md"
       - "Install": "guide/install.md"
-      - "Getting Started": "guide/index.md"
-      - "Examples": "guide/examples.md"
+      - "Getting Started": "guide/start.md"
       - "CookBook": "guide/cookbook.md"
+      - "Examples": "guide/examples.md"
   - Topics:
       - "Foundations": "topics/foundations.md"
       - "Building Blocks": "topics/blocks.md"

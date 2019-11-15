@@ -19,6 +19,7 @@ here = Path(__file__).parent
 
 cmd_folder = here.joinpath('commands').abspath()
 
+
 class CommandLine(click.MultiCommand):
     def list_commands(self, ctx):
         result = []
@@ -33,7 +34,7 @@ class CommandLine(click.MultiCommand):
         try:
             if PY2:
                 name = name.encode('ascii', 'replace')
-            mod = __import__('coreui.commands.cmd_' + name, None, None, ['app'])
+            mod = __import__('coreuiadmin.commands.cmd_' + name, None, None, ['app'])
         except ImportError as err:
             if 'verbose' in ctx.params:
                 options.warning(err.msg)
