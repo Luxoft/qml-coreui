@@ -396,20 +396,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../" title="Getting Started" class="md-nav__link">
+    <a href="../start/" title="Getting Started" class="md-nav__link">
       Getting Started
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../examples/" title="Examples" class="md-nav__link">
-      Examples
     </a>
   </li>
 
@@ -428,10 +416,112 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        CookBook
+      </label>
+    
     <a href="./" title="CookBook" class="md-nav__link md-nav__link--active">
       CookBook
     </a>
     
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-ui-components" class="md-nav__link">
+    Create UI Components
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-an-application" class="md-nav__link">
+    Create an Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-view" class="md-nav__link">
+    Adding a View
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-store" class="md-nav__link">
+    Adding a store
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-native-components" class="md-nav__link">
+    Adding native components
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-an-plugin" class="md-nav__link">
+    Adding an plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-service" class="md-nav__link">
+    Adding a service
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
   </li>
 
         
@@ -889,6 +979,83 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-ui-components" class="md-nav__link">
+    Create UI Components
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-an-application" class="md-nav__link">
+    Create an Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-view" class="md-nav__link">
+    Adding a View
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-store" class="md-nav__link">
+    Adding a store
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-native-components" class="md-nav__link">
+    Adding native components
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-an-plugin" class="md-nav__link">
+    Adding an plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-service" class="md-nav__link">
+    Adding a service
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -907,6 +1074,123 @@
 <p class="admonition-title">Info</p>
 <p>This material is work in progress and will change!</p>
 </div>
+<p>CoreUI defines a set of component kinds, these are controls, panels, views, stores as also applications on the UI side but also services on the native side.</p>
+<p>To make it easier <code>coreui-admin</code> allows you to generate these kinds for educational purpose and demonstration purpose.</p>
+<h2 id="create-ui-components">Create UI Components</h2>
+<h3 id="create-an-application">Create an Application</h3>
+<p>To create an application you need to define the application package as also the application name. </p>
+<p>For example to create an empty <code>About</code> application using the package <code>org.example.about</code> use the <code>app</code> command.</p>
+<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">app</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">About</span>
+</pre></div>
+
+
+<p>The output will be</p>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">info</span><span class="p">.</span><span class="n">yaml</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">AppShell</span><span class="p">.</span><span class="n">qml</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">stores</span><span class="o">/</span><span class="n">RootStore</span><span class="p">.</span><span class="n">qml</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">WelcomeView</span><span class="p">.</span><span class="n">qml</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">panels</span><span class="o">/</span><span class="n">WelcomePanel</span><span class="p">.</span><span class="n">qml</span>
+</pre></div>
+
+
+<p>This will create the about app inside the <code>ui/apps/org.example.about</code> using the initial CoreUI architecture. Have a look and see the code.</p>
+<h3 id="adding-a-view">Adding a View</h3>
+<p>A view is a visual type and uses a store to access business logic. The top level store is called <code>RootStore</code>. </p>
+<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="k">view</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">About</span>
+</pre></div>
+
+
+<p>The output will be</p>
+<div class="codehilite"><pre><span></span><span class="n">generate</span> <span class="n">aspect</span> <span class="k">view</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">AboutView</span><span class="p">.</span><span class="n">qml</span>
+</pre></div>
+
+
+<p>This will create a view named <code>AboutView</code> inside the application views folder.</p>
+<h3 id="adding-a-store">Adding a store</h3>
+<p>To add a child store to the <code>RootStore</code> you need to provide the applicationpackage as also the store name.</p>
+<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">store</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">Status</span>
+</pre></div>
+
+
+<p>The output should be</p>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<span class="n">generate</span> <span class="n">aspect</span> <span class="n">store</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">stores</span><span class="o">/</span><span class="n">StatusStore</span><span class="p">.</span><span class="n">qml</span>
+<span class="n">PATCH</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">jryannel</span><span class="o">/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">/</span><span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">stores</span><span class="o">/</span><span class="n">RootStore</span><span class="p">.</span><span class="n">qml</span> <span class="k">with</span> <span class="n">property</span> <span class="n">StatusStore</span> <span class="n">statusStore</span><span class="p">:</span> <span class="n">StatusStore</span> <span class="err">{</span> <span class="err">}</span>
+</pre></div>
+
+
+<p>The last <code>PATCH</code> line indicates the <code>RootStore</code> was patched with a reference with the newly created <code>StatusStore</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Adding a <strong>Panel</strong>, <strong>Control</strong>, <strong>Helper</strong></p>
+<p>Adding components of these kinds works very similar to the points above.</p>
+</div>
+<h2 id="adding-native-components">Adding native components</h2>
+<h3 id="adding-an-plugin">Adding an plugin</h3>
+<p>To add a QtQuick plugin you need to run the <code>gen plugin</code> generator. For example to add a <code>heater</code> plugin we can just write</p>
+<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">plugin</span> <span class="n">heater</span>
+</pre></div>
+
+
+<p>This will produce</p>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<span class="n">generate</span> <span class="n">aspect</span> <span class="n">plugin</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">heater</span><span class="o">/</span><span class="n">heater</span><span class="p">.</span><span class="n">pro</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">heater</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">h</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">heater</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">cpp</span>
+<span class="n">PATCH</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">jryannel</span><span class="o">/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">/</span><span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">plugins</span><span class="p">.</span><span class="n">pro</span> <span class="k">with</span> <span class="n">SUBDIRS</span> <span class="o">+=</span> <span class="n">heater</span>
+</pre></div>
+
+
+<p>This will create a scaffold plugin named heater in the <code>native/plugins</code> directory and register the project with the <code>plugins</code> project file.</p>
+<h3 id="adding-a-service">Adding a service</h3>
+<p>To add a QtIVI service to the native project use the <code>gen service</code> generator.</p>
+<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">service</span> <span class="n">service</span><span class="p">.</span><span class="n">heater</span>
+</pre></div>
+
+
+<p>This would create a heater service with the package <code>service.heater</code>. The QtIVI service will support a simulation backend, a default backend and a QtRemoteObjects backend. To suport shared business logic the logic shouldbe placed into the service plugin whch can be used by the service backends.</p>
+<p>The command above will output</p>
+<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<span class="n">generate</span> <span class="n">aspect</span> <span class="n">service</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
+<span class="k">write</span> <span class="n">initial</span> <span class="n">service</span> <span class="p">..</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">interfaces</span><span class="o">/</span><span class="n">service_heater</span><span class="p">.</span><span class="n">qface</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">service_heater</span><span class="p">.</span><span class="n">pro</span>
+<span class="n">PATCH</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">jryannel</span><span class="o">/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">/</span><span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">services</span><span class="p">.</span><span class="n">pro</span> <span class="k">with</span> <span class="n">SUBDIRS</span> <span class="o">+=</span> <span class="n">service_heater</span>
+<span class="n">PATCH</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">jryannel</span><span class="o">/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">/</span><span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">services</span><span class="p">.</span><span class="n">pro</span> <span class="k">with</span> <span class="n">OTHER_FILES</span> <span class="o">+=</span> <span class="n">interfaces</span><span class="o">/</span><span class="n">service_heater</span><span class="p">.</span><span class="n">qface</span>
+<span class="k">write</span> <span class="n">frontend</span> <span class="n">library</span><span class="p">...</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">frontend</span><span class="o">/</span><span class="n">frontend</span><span class="p">.</span><span class="n">pro</span>
+<span class="k">write</span> <span class="n">qml</span><span class="o">-</span><span class="n">plugin</span><span class="p">...</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">pro</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">h</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">cpp</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">plugin</span><span class="o">/</span><span class="n">qmldir</span>
+<span class="k">write</span> <span class="n">custom</span> <span class="n">backend</span> <span class="n">ivi</span><span class="o">-</span><span class="n">plugin</span><span class="p">..</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">backend</span><span class="p">.</span><span class="n">pro</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">h</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">cpp</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">heater</span><span class="p">.</span><span class="n">json</span>
+<span class="k">write</span> <span class="n">simulation</span> <span class="n">backend</span> <span class="n">ivi</span><span class="o">-</span><span class="n">plugin</span><span class="p">...</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend_simu</span><span class="o">/</span><span class="n">backend_simu</span><span class="p">.</span><span class="n">pro</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend_simu</span><span class="o">/</span><span class="n">plugin_resource</span><span class="p">.</span><span class="n">qrc</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend_simu</span><span class="o">/</span><span class="n">simulation</span><span class="p">.</span><span class="n">qml</span>
+<span class="k">write</span> <span class="n">qtro</span> <span class="n">backend</span> <span class="n">ivi</span><span class="o">-</span><span class="n">plugin</span><span class="p">...</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">backend_qtro</span><span class="o">/</span><span class="n">backend_qtro</span><span class="p">.</span><span class="n">pro</span>
+<span class="k">write</span> <span class="n">qtro</span> <span class="n">server</span> <span class="n">executable</span><span class="p">...</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">server_qtro</span><span class="o">/</span><span class="n">server_qtro</span><span class="p">.</span><span class="n">pro</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">server_qtro</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">server_qtro</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">cpp</span>
+<span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">server_qtro</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">h</span>
+</pre></div>
+
+
+<p>Please read the <a href="https://doc.qt.io/QtIVI/">QtIVI</a> documentation to get more insights about the structure.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p><code>coreui-admin</code> allows you to easily scaffold many kind of UI or native components. This code generation capabilities target mostly the educational purpose to make it esier to document the process. </p>
+<p>Just play around with the code geenration part. And you will encounter issues :-)</p>
                 
                   
                 
@@ -927,7 +1211,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../examples/" title="Examples" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../start/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -936,19 +1220,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Examples
+                Getting Started
               </span>
             </div>
           </a>
         
         
-          <a href="../../topics/foundations/" title="Foundations" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../examples/" title="Examples" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Foundations
+                Examples
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
