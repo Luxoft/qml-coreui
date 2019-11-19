@@ -680,6 +680,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1071,7 +1083,40 @@
 <h2 id="creating-a-new-style">Creating a new Style</h2>
 <p>If your HMI has its own particlar look and feel, its own UI design guide, the :qt5:<code>existing Qt Quick Controls 2 styles &lt;qtquickcontrols2-styles.html&gt;</code> probably won't suite you and you will have to create your own style to implement what the UI/UX designers envisioned.</p>
 <p>To exemplify how this is achieved let's start with a simple UI, a sort of components gallery showcasing a handful of Qt Quick Controls 2 components in different states.</p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.11</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.11</span>
 <span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span> <span class="mf">2.1</span>
 
 <span class="nx">Pane</span> <span class="p">{</span>
@@ -1106,30 +1151,48 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Save it as, say, controls.qml. Now run it with the qml tool</p>
-<div class="codehilite"><pre><span></span>$ qml controls.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>$ qml controls.qml
 </pre></div>
-
+</td></tr></table>
 
 <p>You should see something like this:</p>
 <p><img alt="" src="assets/controls-default.png" /></p>
 <p>Then try it with one of the styles shipped with Qt Quick Controls 2, such as "material"</p>
-<div class="codehilite"><pre><span></span>$ qml controls.qml -style material
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>$ qml controls.qml -style material
 </pre></div>
-
+</td></tr></table>
 
 <p><img alt="" src="assets/controls-material.png" /></p>
 <p>Or "fusion" (in a desktop environment that's using a dark theme)</p>
-<div class="codehilite"><pre><span></span>$ qml controls.qml -style fusion
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>$ qml controls.qml -style fusion
 </pre></div>
-
+</td></tr></table>
 
 <p><img alt="" src="assets/controls-fusion.png" /></p>
 <p>You can see that by using Qt Quick Controls 2 styles you can have the application code independent of the look and feel of its components. So no changes are needed in the components' API exposed to application code.</p>
 <p>Now we are going to create a new style that implements a different look and feel, which we will call "foobar". The first component we will customize in the foobar style is going to be the Pane, as it's the simplest. Create a subdirectory called "foobar". Then copy the file <code>QT_INSTALL_DIR/qml/QtQuick/Controls.2/Pane.qml</code> to it, where <code>QT_INSTALL_DIR</code> is the path where your Qt is installed. It should look like the following:</p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.12</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.12</span>
 <span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span> <span class="mf">2.5</span>
 <span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">impl</span> <span class="mf">2.5</span>
 <span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Templates</span> <span class="mf">2.5</span> <span class="nx">as</span> <span class="nx">T</span>
@@ -1149,10 +1212,17 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The idea is to collect the standard implementation of the component whose look &amp; feel you want to customize in your style from that directory in Qt to your own style directory and then modify it at will. In our foobar style we want the Pane background to be a Gradient instead, hence we will make the following change:</p>
-<div class="codehilite"><pre><span></span>    <span class="p">...</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="p">...</span>
     <span class="k">background:</span> <span class="nx">Rectangle</span> <span class="p">{</span>
         <span class="k">gradient:</span> <span class="nx">Gradient</span> <span class="p">{</span>
             <span class="nx">GradientStop</span> <span class="p">{</span> <span class="k">position:</span> <span class="mf">0.0</span><span class="p">;</span> <span class="k">color:</span> <span class="s2">&quot;dodgerblue&quot;</span> <span class="p">}</span>
@@ -1161,16 +1231,59 @@
     <span class="p">}</span>
     <span class="p">...</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Now let's run our controls.qml app with our brand new style. For that we will have to supply two additional environment variables: <code>QT_QUICK_CONTROLS_STYLE_PATH</code> to tell Qt where in the filesystem to look for more styles and <code>QT_QUICK_CONTROLS_FALLBACK_STYLE</code> to tell Qt which style to fallback on in case the chosen one is missing the implementation of some component (more info :qt5:<code>here &lt;qtquickcontrols2-environment.html&gt;</code>). Since our foobar style just has the implementation of Pane, all other components will fallback to another implementation.</p>
-<div class="codehilite"><pre><span></span>$ <span class="nv">QT_QUICK_CONTROLS_STYLE_PATH</span><span class="o">=</span>. <span class="nv">QT_QUICK_CONTROLS_FALLBACK_STYLE</span><span class="o">=</span>Material qml controls.qml -style foobar
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>$ <span class="nv">QT_QUICK_CONTROLS_STYLE_PATH</span><span class="o">=</span>. <span class="nv">QT_QUICK_CONTROLS_FALLBACK_STYLE</span><span class="o">=</span>Material qml controls.qml -style foobar
 </pre></div>
-
+</td></tr></table>
 
 <p><img alt="" src="assets/controls-foobar-pane.png" /></p>
 <p>Next we want to style the Button component. As with did with Pane, just copy Button.qml over from <code>QT_INSTALL_DIR/qml/QtQuick/Controls.2</code> into our foobar style directory. If you open that file now you will see that it's quite more involded than the Pane:</p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.12</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.12</span>
 <span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span> <span class="mf">2.5</span>
 <span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">impl</span> <span class="mf">2.5</span>
 <span class="kr">import</span> <span class="nx">QtQuick</span><span class="p">.</span><span class="nx">Templates</span> <span class="mf">2.5</span> <span class="nx">as</span> <span class="nx">T</span>
@@ -1215,12 +1328,64 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>You're free to change anything at will. This is just a default look &amp; feel implementation. You're free to take it as it is, do some small modifications on top of it or wipe it out and do something completely different. What's important is to try to and obey the exising properties (icon, text, impleicitWidth, etc) as much as it makes sense to in your HMI usage and to put the foreground content of your button (eg, text and icon) in <code>contentItem</code> and its background, if any, in <code>background</code>.</p>
 <p>It's worth noting the widespread usage of the <code>palette</code> property. If you want to tweak its values in your style, the best place to do so would be in the <code>Control.qml</code> style implementation, as all Qt Quick Controls 2 components inherit from it. But if the categories (button, windowText, highlight, etc) in that <code>palette</code> type don't really suite your needs or your UI design guide you're free to use your own structure to keep your custom color and other values instead. We will come back to it later.</p>
 <p>For now let's just set a hardcoded background color, make the background rounded, make the button larger when down/pushed and have its text rotating (just because we can :) ). These would be the modifications:</p>
-<div class="codehilite"><pre><span></span><span class="gd">--- a/foobar/Button.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="gd">--- a/foobar/Button.qml</span>
 <span class="gi">+++ b/foobar/Button.qml</span>
 <span class="gu">@@ -15,12 +15,18 @@ T.Button {</span>
      horizontalPadding: padding + 2
@@ -1274,20 +1439,29 @@
      }
  }
 </pre></div>
-
+</td></tr></table>
 
 <p>If you run that application again you should see that the buttons are animated and look wildly different from the other styles. This is just to give an idea of how flexible and powerful the Qt Quick Controls 2 styling is.</p>
 <p><img alt="" src="assets/controls-foobar-button.png" /></p>
 <h3 id="collecting-values-in-a-style-object">Collecting values in a Style object</h3>
 <p>So far we have been hardcoding color values directly in the component's style implementation. But for better reusability it's prefferable to give them names and collect them all into a single entity. There are a couple of ways of doing it but, again, we will start with the simplest: creating a new qml module containing a singleton QtObject which will hold all the color and other values used throughout the style implementation. In this example we will name that singleton <code>FoobarStyle</code>. Create a subdirectory called <code>imports</code> and inside it yet another subdirectory called <code>FoobarStyle</code>, which will be the name of our qml module.</p>
 <p>Inside <code>imports/FoobarStyle</code> create a file named <code>qmldir</code> with the following content::</p>
-<div class="codehilite"><pre><span></span><span class="k">module</span> <span class="n">FoobarStyle</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">module</span> <span class="n">FoobarStyle</span>
 <span class="n">singleton</span> <span class="n">FoobarStyle</span> <span class="mf">1.0</span> <span class="n">FoobarStyle</span>.<span class="n">qml</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Then proceed to create the file <code>FoobarStyle.qml</code> also inside <code>imports/FoobarStyle</code>::</p>
-<div class="codehilite"><pre><span></span><span class="n">pragma</span> <span class="n">singleton</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">pragma</span> <span class="n">singleton</span>
 
 <span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.11</span>
 
@@ -1297,10 +1471,53 @@
     <span class="nb">property</span> <span class="n">color</span> <span class="n">buttonBackgroundColor</span><span class="p">:</span> <span class="s2">&quot;seagreen&quot;</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p><code>FoobarStyle</code> collects the colors have been used so far. You can have those names be more specific (eg. button background color) or more generic (eg. secondary control color) according to how they're used throught the implenentation and how your UI Style guide describes them. Now let's get back to <code>Panel.qml</code> and <code>Button.qml</code> replacing the hardcoded values with their corresponding named colors::</p>
-<div class="codehilite"><pre><span></span><span class="gd">--- a/foobar/Button.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="gd">--- a/foobar/Button.qml</span>
 <span class="gi">+++ b/foobar/Button.qml</span>
 <span class="gu">@@ -3,6 +3,8 @@ import QtQuick.Controls 2.5</span>
  import QtQuick.Controls.impl 2.5
@@ -1345,17 +1562,33 @@
      }
  }
 </pre></div>
-
+</td></tr></table>
 
 <p>Now to be able to run our <code>controls.qml</code> application we will also have to tell the <code>qml</code> tool to look into the <code>imports</code> subdirectory for qml modules. Hence::</p>
-<div class="codehilite"><pre><span></span><span class="n">QT_QUICK_CONTROLS_STYLE_PATH</span><span class="o">=</span><span class="p">.</span> <span class="n">QT_QUICK_CONTROLS_FALLBACK_STYLE</span><span class="o">=</span><span class="n">Material</span> <span class="n">qml</span> <span class="o">-</span><span class="n">I</span> <span class="n">imports</span> <span class="n">controls</span><span class="p">.</span><span class="n">qml</span> <span class="o">-</span><span class="n">style</span> <span class="n">foobar</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">QT_QUICK_CONTROLS_STYLE_PATH</span><span class="o">=</span><span class="p">.</span> <span class="n">QT_QUICK_CONTROLS_FALLBACK_STYLE</span><span class="o">=</span><span class="n">Material</span> <span class="n">qml</span> <span class="o">-</span><span class="n">I</span> <span class="n">imports</span> <span class="n">controls</span><span class="p">.</span><span class="n">qml</span> <span class="o">-</span><span class="n">style</span> <span class="n">foobar</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Note that having our named colors conveniently collected in a singleton also enables application code import FoobarStyle and use them directly whenever needed.</p>
 <h3 id="adding-theming-support">Adding theming support</h3>
 <p>After having our hardcoded values such as named colors collected in a singleton, adding theming support is a simple, straightforward, step. The idea is that a single property in <code>FooBarStyle</code>, which we will name as <code>theme</code>, will define the value of all others. So this is our improved <code>FoobarStyle.qml</code>, now with theme support:</p>
-<div class="codehilite"><pre><span></span><span class="nx">pragma</span> <span class="nx">Singleton</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">pragma</span> <span class="nx">Singleton</span>
 
 <span class="kr">import</span> <span class="nx">QtQuick</span> <span class="mf">2.11</span>
 
@@ -1373,10 +1606,37 @@
     <span class="nx">readonly</span> <span class="nx">property</span> <span class="nx">color</span> <span class="k">buttonBackgroundColor:</span> <span class="nx">theme</span> <span class="o">===</span> <span class="nx">dayTheme</span> <span class="o">?</span> <span class="s2">&quot;seagreen&quot;</span> <span class="o">:</span> <span class="s2">&quot;maroon&quot;</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>And modifying the application code, <code>controls.qml</code>, so that clicking on the first button switches the theme::</p>
-<div class="codehilite"><pre><span></span><span class="gd">--- a/controls.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="gd">--- a/controls.qml</span>
 <span class="gi">+++ b/controls.qml</span>
 <span class="gu">@@ -1,6 +1,8 @@</span>
  import QtQuick 2.11
@@ -1405,7 +1665,7 @@
              Button { text: &quot;Button&quot;; enabled: false }
          }
 </pre></div>
-
+</td></tr></table>
 
 <p>This is how our <code>controls.qml</code> application should look like after having the theme support added to it:</p>
 <p><img alt="" src="assets/controls-foobar-themes.png" /></p>
@@ -1451,13 +1711,13 @@
           </a>
         
         
-          <a href="../../admin/intro/" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../runtime/" title="Runtime & Modules" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Introduction
+                Runtime & Modules
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -646,6 +646,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -985,17 +997,20 @@
 <p>The structure is the physical file and folder structure which defines the UI layer. It is composed of a sysui, applications, a controls library and styles. The UI is launched using a runtime and can be extended by native and qml extensions.</p>
 </div>
 <p>The high-level structure divides the UI in SysUI and Apps as also an imports folder where shared components are located.</p>
-<div class="codehilite"><pre><span></span><span class="n">Main</span><span class="p">.</span><span class="n">qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">Main</span><span class="p">.</span><span class="n">qml</span>
 <span class="n">sysui</span><span class="o">/</span>
 <span class="n">apps</span><span class="o">/</span>
 <span class="n">imports</span><span class="o">/</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>You would run the UI using your custom runtime something like this:</p>
-<div class="codehilite"><pre><span></span>runtime -I imports Main.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>runtime -I imports Main.qml
 </pre></div>
-
+</td></tr></table>
 
 <p>The SysUI is seen as a specialized application. The concept of an application allows the developer to split the code into smaller manageable parts which are loosely coupled and have a high degree of separation (open-close-principle). Thus allowing a developer to extend an application with clean interfaces without harming the system UI.</p>
 <div class="admonition note">
@@ -1005,7 +1020,22 @@
 <h2 id="system-ui-structure">System UI Structure</h2>
 <p>The System UI is a specialized application which is the initial UI is started. Depending of the complexity of the SysUI the sysui itself can be structured like an application or in a complex SysUI each aspect of the SysUI (e.g. home, launcher, app container, overlays) can be structured similarly to an application.</p>
 <p>For a simple and medium complex SysUI the structure might look like this</p>
-<div class="codehilite"><pre><span></span><span class="n">sysui</span><span class="o">/</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">sysui</span><span class="o">/</span>
     <span class="n">AppShell</span><span class="p">.</span><span class="n">qml</span>
     <span class="n">controls</span><span class="o">/</span>
     <span class="n">panels</span><span class="o">/</span>
@@ -1022,10 +1052,29 @@
         <span class="n">OverlayStore</span><span class="p">.</span><span class="n">qml</span>
     <span class="n">helpers</span><span class="o">/</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>For a complex SysUI the structure might be divided by the different UI aspects and each aspect will be formed as an independent application structure. It is important that an aspect does not directly depend on other aspects. They might depend on incoming properties, and services.</p>
-<div class="codehilite"><pre><span></span><span class="n">sysui</span><span class="o">/</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">sysui</span><span class="o">/</span>
     <span class="n">AppShell</span><span class="p">.</span><span class="n">qml</span>
     <span class="n">home</span><span class="o">/</span>
         <span class="n">controls</span><span class="o">/</span>
@@ -1046,7 +1095,7 @@
         <span class="n">stores</span><span class="o">/</span>
         <span class="n">helpers</span><span class="o">/</span>
 </pre></div>
-
+</td></tr></table>
 
 <ul>
 <li><code>display</code> - Is concerned about UI portions which affect the entire display, such as the main display UI element or virtual keyboard.</li>
@@ -1066,7 +1115,20 @@
 <p class="admonition-title">Todo</p>
 <p>Add diagram for store and UI relationship</p>
 </div>
-<div class="codehilite"><pre><span></span><span class="n">apps</span><span class="o">/</span><span class="n">demo</span><span class="o">/</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">apps</span><span class="o">/</span><span class="n">demo</span><span class="o">/</span>
     <span class="n">Application</span><span class="p">.</span><span class="n">qml</span>
     <span class="n">info</span><span class="p">.</span><span class="n">yaml</span>
     <span class="n">stores</span><span class="o">/</span>
@@ -1081,7 +1143,7 @@
     <span class="n">controls</span><span class="o">/</span>
         <span class="n">CustomButton</span><span class="p">.</span><span class="n">qml</span>
 </pre></div>
-
+</td></tr></table>
 
 <ul>
 <li><code>store</code> - A store encapsulates the business logic and vertical communication</li>
@@ -1103,13 +1165,17 @@
 <li><code>utils</code> - for shared helper modules</li>
 </ul>
 <p>The SysUI has an own import path to ensure privately used modules by the SysUI are not exposed to other applications.</p>
-<div class="codehilite"><pre><span></span><span class="n">ui</span><span class="o">/</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">ui</span><span class="o">/</span>
     <span class="n">apps</span><span class="o">/</span>
     <span class="n">imports</span><span class="o">/</span>
     <span class="n">sysui</span><span class="o">/</span>
         <span class="n">imports</span><span class="o">/</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Native plugins are part of the platform layer and are nor part of the UI layer.</p>
 <div class="admonition note">

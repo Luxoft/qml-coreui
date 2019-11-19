@@ -592,6 +592,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../topics/runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1035,9 +1047,9 @@
 <p>The script requires a python (2.x or 3.x ) installation with the PIP package manager installed.</p>
 <h2 id="installation-from-git">Installation from Git</h2>
 <p>You can also directly install from git using the python package manager</p>
-<div class="codehilite"><pre><span></span>pip install git+https://github.com/Luxoft/coreui-admin.git@develop --upgrade
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>pip install git+https://github.com/Luxoft/coreui-admin.git@develop --upgrade
 </pre></div>
-
+</td></tr></table>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1045,37 +1057,42 @@
 </div>
 <h3 id="editable-installation">Editable Installation</h3>
 <p>An editable installation only installs links to the original source. In effect updating, the git checkout also installs the script.</p>
-<div class="codehilite"><pre><span></span>git clone https://github.com/Luxoft/coreui-admin.git
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>git clone https://github.com/Luxoft/coreui-admin.git
 <span class="nb">cd</span> coreui-admin
 pip install -e .
 </pre></div>
-
+</td></tr></table>
 
 <p>To update the installation you need to update the repository.</p>
-<div class="codehilite"><pre><span></span><span class="nb">cd</span> coreui-admin
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> coreui-admin
 git pull
 </pre></div>
-
+</td></tr></table>
 
 <p>Now the <code>coreui-admin</code> is updated to the latest from the remote repository.</p>
 <h2 id="uninstalling">Uninstalling</h2>
 <p>To uninstall the script you can to use the pip tool</p>
-<div class="codehilite"><pre><span></span>pip uninstall coreui-admin
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>pip uninstall coreui-admin
 </pre></div>
-
+</td></tr></table>
 
 <h2 id="using-virtualenv">Using Virtualenv</h2>
 <p>In case you do not want to pollute your local python installation you can use python virtualenv</p>
-<div class="codehilite"><pre><span></span>virtualenv -p python3 venv
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>virtualenv -p python3 venv
 <span class="nb">source</span> venv/bin/activate
 </pre></div>
-
+</td></tr></table>
 
 <p>Now install coreui-admin and to exit this python virtual environment run <code>deactivate</code>.</p>
 <h2 id="first-usage">First Usage</h2>
 <p>After the installation, the <code>coreui-admin</code> command is at your disposal.</p>
-<div class="codehilite"><pre><span></span>coreui-admin --help
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin --help
 </pre></div>
+</td></tr></table>
                 
                   
                 

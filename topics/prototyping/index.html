@@ -646,6 +646,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1000,7 +1012,36 @@
 <p class="admonition-title">Todo</p>
 <p>Draw a diagram which showcases a production setup and a prototyping setup where the services are using other technologies but the client APIs are in QML.</p>
 </div>
-<div class="codehilite"><pre><span></span><span class="c1">// service/counter/Counter.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// service/counter/Counter.qml</span>
 
 <span class="kr">import</span> <span class="nx">http</span><span class="p">.</span><span class="nx">requests</span> <span class="mf">1.0</span>
 
@@ -1031,12 +1072,36 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The code snippet above uses a JSON rest API provided on local host, which on every call will return the full state of that interface. This makes the coding of the state update much easier. Your prototyping implementation might look completely different. A good technology to use could be the JSON server from NodeJS (see <a href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a>).</p>
 <p>Ideally, the resulting QML API can be easily consumed by the UI or the Stores. The API should hide which technology was used and only export the data and operations of the client API. By this, we can later change the implementation using a different technology and keep the UI from being cluttered with IPC calls.</p>
 <p>You would then use this mocked service client API as usual inside the RootStore.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// stores/RootStore.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// stores/RootStore.qml</span>
 
 <span class="kr">import</span> <span class="nx">services</span><span class="p">.</span><span class="nx">counter</span> <span class="mf">1.0</span>
 
@@ -1062,7 +1127,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>This code snippet looks a little bit superficial as nothing really happens here, but in a more complex UI, a client and a store both carry different aspects of logic. It is a good practice to separate this aspect. A client to adopt an IPC conversation to a QML API and the Store to ensure the UI is clean of business logic.</p>
 <h2 id="reloading">Reloading</h2>

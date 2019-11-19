@@ -592,6 +592,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../topics/runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1007,15 +1019,15 @@
 <p>This chapter expects you have already successfully setup the coreui-admin script (see script setup) and build the QtAuto components (see QtAuto setup).</p>
 </div>
 <p>You can create a new project using the <code>new</code> command.</p>
-<div class="codehilite"><pre><span></span>coreui-admin new myproject
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin new myproject
 </pre></div>
-
+</td></tr></table>
 
 <p>This will by default create a new project in the <code>myproject</code> folder using the <code>single-process</code> template. To change the template you can provide a <code>--template</code> option.</p>
 <p>To launch your newly created project you can use</p>
-<div class="codehilite"><pre><span></span>coreui-admin start
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin start
 </pre></div>
-
+</td></tr></table>
 
 <p>It will launch the <code>qmlscene</code> from your given Qt SDK with the correct setup.</p>
 <div class="admonition note">
@@ -1024,9 +1036,9 @@
 </div>
 <h2 id="single-process-ui">Single Process UI</h2>
 <p>The single process user interface is created using</p>
-<div class="codehilite"><pre><span></span>coreui-admin new single-ui --template single
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin new single-ui --template single
 </pre></div>
-
+</td></tr></table>
 
 <p>It will create a UI project which can be launched from a QtCreator <code>.qmlproject</code> file. External native dependencies are served using QML Plugins.</p>
 <p>The project is built around the idea that there is a system UI that displays the system-wide user interface portion and applications which display the feature-specific information.</p>
@@ -1040,16 +1052,16 @@
 <p>An application is contained inside a apps folder and has its own <code>Application.qml</code> document. It is registered with the SystemUI and added to the launcher menu of the SystemUI.</p>
 <h2 id="multi-process-ui">Multi Process UI</h2>
 <p>To create a new multi-process project you can use the <code>new</code> command with the <code>--template multi</code> option.</p>
-<div class="codehilite"><pre><span></span>coreui-admin new multi-ui --template multi
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin new multi-ui --template multi
 </pre></div>
-
+</td></tr></table>
 
 <p>This will create a new user interface project which has support for the Qt ApplicationManager built-in.</p>
 <p>It follows very similar concepts than the single-process UI but the applications are now designed to be run as separate processed and provide a higher level of flexibility and security.</p>
 <p>The newly created project can be launched using</p>
-<div class="codehilite"><pre><span></span>coreui-admin start
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin start
 </pre></div>
-
+</td></tr></table>
 
 <p>The start script invokes the <code>appman</code> executable form your QAuto installation and reads the generated <code>am-config.yaml</code> document in the project which provides all startup information to the application manager.</p>
 <div class="admonition note">

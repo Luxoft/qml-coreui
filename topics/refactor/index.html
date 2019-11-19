@@ -721,6 +721,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1135,9 +1147,9 @@
 <p>We must avoid a large refactoring where the developer require days before the software is stable again. Ideally the software stays stable all the time during refactoring.</p>
 <p>Refactoring must be planned and executed over time. A larger user interface project can not be moved over night into a new direction, especially when many developer participate and still defects and features are on the road-map. To ensure the team has an understanding of the healthiness of the architecture certain KPI must be introduced and measured over time.</p>
 <h2 id="architecture-kpis">Architecture KPIs</h2>
-<p>A KPI (key performance indicator) provides high level insights about the healthiness of the software architecture. To understand the KPIs presented we need to understand that the UI is a tree with a root node and edge nodes and many nodes in between. Ideally the outer nodes are clean from difficult dependencies, whereas the inner notes can depend on those dependencies but even here ideally these dependencies are extracted into another set of objects, the stores.</p>
-<p>In general we have stores, views, panels and controls. The controls form the edge nodes of our UI tree. Right above the controls are the panels. The panels care the most UI load as they use semantic free controls to introduce application semantic. On top of the panels sit the views, they bring together the UI surface with the data providers the stores. Ideally these views only depend on these store. The stores finally encapsulate the application business logic and interface the platform services. Based on this description we can start to extract some KPIs.</p>
-<p>At first we need to identify the difficult dependencies. These are dependencies which make unit testing more painful. These harmful dependencies can be a module which uses a network service or a global object introducing global state or a rendering node which introduces certain hardware dependencies. We must ensure our goal to decompose the UI and unit test each component must not be compromised.</p>
+<p>A KPI (key performance indicator) provides high level insights about the healthiness of the software architecture. To understand the KPIs presented, we need to understand that the UI is a tree with a root node and edge nodes and many nodes in between. Ideally the outer nodes are clean from difficult dependencies, whereas the inner notes can depend on those dependencies but even here ideally these dependencies are extracted into another set of objects, the stores.</p>
+<p>In general, we have stores, views, panels and controls. The controls form the edge nodes of our UI tree. Right below the controls are the panels. The panels care the most UI load as they use semantic free controls to introduce application semantic. Below the panels, sit the views which bring together the UI surface. Views are part of the UI that depend on data providers which are the stores. The stores encapsulate the application business logic and interface to the platform services. Based on this description we can start to extract some KPIs.</p>
+<p>At first, we need to identify the complex dependencies. These are dependencies which make unit testing more painful. These harmful dependencies can be a module which uses a network service or a global object introducing global state or a rendering node which introduces certain hardware dependencies to the UI. We must ensure our goal to decompose the UI and unit test of each component must not be compromised.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Ensure UI can be decomposed and run independent and the testability is guaranteed.</p>
@@ -1155,17 +1167,26 @@
 Martin Fowler (<a href="https://refactoring.com">https://refactoring.com</a>)</p>
 </blockquote>
 <h3 id="recipe-stop-leaking-object-internals-from-singletons">Recipe: Stop leaking object internals from singletons</h3>
-<p>A singleton which exposes an object opens the opportunity for everyone to navigate the object internals. By this open up all kind of cross-dependencies.</p>
-<p>So assume a singleton exposes an object</p>
-<div class="codehilite"><pre><span></span><span class="c1">// HelperSingleton.qml</span>
+<p>A singleton which exposes an object, opens the opportunity for anyone to navigate to the object internals. By this, open up the opportunities to any kind of cross-dependencies.</p>
+<p>Take a look on the example below. Assume that there is a singleton which expose an object</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// HelperSingleton.qml</span>
 <span class="nx">QtObject</span> <span class="p">{</span>
     <span class="nx">property</span> <span class="nx">Item</span> <span class="nx">appWindow</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<p>The anticipated or desired usage could be to allow others to control window visibility.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
+<p>The desired usage could be to allow others to control its window visibility.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
     <span class="nx">Button</span> <span class="p">{</span>
         <span class="k">text:</span> <span class="s2">&quot;Hide window&quot;</span>
@@ -1173,10 +1194,16 @@ Martin Fowler (<a href="https://refactoring.com">https://refactoring.com</a>)</p
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<p>But others could expose the object in an evil way like this.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// EvilPanel.qml</span>
+<p>But, it also allows others to expose the object in an evil way like an example below:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// EvilPanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
     <span class="nx">Button</span> <span class="p">{</span>
         <span class="k">text:</span> <span class="s2">&quot;Set Title of Window&quot;</span>
@@ -1184,18 +1211,30 @@ Martin Fowler (<a href="https://refactoring.com">https://refactoring.com</a>)</p
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<p>Now the EvilPanel depends on the internal structure and even existence of internal UI types. And even worse the developer of the AppWindow is not aware someone is using this API. Don't expose your object internals, and do not use other objects internals.</p>
-<p>The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.</p>
+<p>Now, the EvilPanel depends on the internal structure and even existence of internal UI types. And even worse, the developer of the AppWindow is not aware that someone is using the same API somewhere else. Hence, don't expose your object internals, and do not use other object's internals.</p>
+<p>The point is, the user of a singleton could now navigate to the parents of the window, just to fulfill a single requirement.</p>
 <blockquote>
-<p>whatever can happen will happen</p>
+<p>anything could happen, can happen</p>
 </blockquote>
-<p>To close down this leakage we need to investigate how the object is used. Often we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.</p>
-<div class="codehilite"><pre><span></span>// HelperSingleton.qml - improved
+<p>To close down this object's leakage, we need to investigate how the object is meant to be used. Often, we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// HelperSingleton.qml - improved
 QtObject {
 <span class="gd">-   property Item appWindow</span>
-<span class="gi">+   property Item __appWindow</span>
+<span class="gi">+   readonly property Item __appWindow</span>
 
 <span class="gi">+   function hideWindow() {</span>
 <span class="gi">+       __appWindow.visible = false</span>
@@ -1206,10 +1245,17 @@ QtObject {
 <span class="gi">+   }</span>
 }
 </pre></div>
+</td></tr></table>
 
-
-<p>And better panel</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml - improved
+<p>And better panels</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml - improved
 Panel {
     Button {
         text: &quot;Hide window&quot;
@@ -1218,9 +1264,16 @@ Panel {
     }
 }
 </pre></div>
+</td></tr></table>
 
-
-<div class="codehilite"><pre><span></span>// EvilPanel.qml - improved
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// EvilPanel.qml - improved
 Panel {
     Button {
         text: &quot;Set Title of Window&quot;
@@ -1229,26 +1282,37 @@ Panel {
     }
 }
 </pre></div>
+</td></tr></table>
 
-
-<p>Over time we will be able to eliminate the object from the public interface and only allow users to use these functions. From now on we can ensure no new internals of this object will be leaked. And even better we better understand how users want to use the API.</p>
+<p>Over time, we will be able to eliminate the object from the public interface and only allow users to use these functions. From now on, we can ensure there will be no new internals of this object will be leaked. And even better, we are now able to understand how users want to use the API. Additionally, by making the object's property become readonly will make sure that users will not be able to change the content of that object as well.</p>
 <blockquote>
 <p>Expose functions with meanings, not objects with internals</p>
 </blockquote>
 <h3 id="recipe-push-singletons-up">Recipe: Push singletons up</h3>
-<p>When investigating the usage of certain singletons often they are used in a related code area. It seems developers where to lazy to pass in these dependencies and rather shortcut the relations.</p>
-<p>Assume we have a panel which show a title and some content. The title shall present the current time and the content shall present the time but also be able to reset the current time.</p>
+<p>When investigating the usage of certain singletons, usually they are found in a related code area. It seems that developers are too lazy to pass in these dependencies and rather find a shortcut of the relations.</p>
+<p>Assuming that we have a panel which show a title and some content. The title shall present the current time and the content shall present the time but also be able to reset the current time.</p>
 <p>The parent application panel, which holds both children panels.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
     <span class="nx">TitlePanel</span> <span class="p">{}</span>
     <span class="nx">ContentPanel</span> <span class="p">{}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The title panel displays the current time.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// TitlePanel.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// TitlePanel.qml</span>
 <span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">time</span> <span class="mf">1.0</span>
 
 <span class="nx">Panel</span> <span class="p">{</span>
@@ -1257,10 +1321,18 @@ Panel {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<p>The content panel will display the time and allow the reset current time.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// ContentPanel.qml</span>
+<p>The content panel will display the time and is allowed to reset the current time.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// ContentPanel.qml</span>
 <span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">time</span> <span class="mf">1.0</span>
 
 <span class="nx">Panel</span> <span class="p">{</span>
@@ -1270,10 +1342,20 @@ Panel {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<p>We can revert this by looking at the singleton usage in one component and move the usage up to the root level.</p>
-<div class="codehilite"><pre><span></span>// TitlePanel.qml
+<p>We can revert this by looking at the singleton usage in a component and move the usage up to the root level.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// TitlePanel.qml
 import service.time 1.0
 
 Panel {
@@ -1285,10 +1367,25 @@ Panel {
     }
 }
 </pre></div>
+</td></tr></table>
 
-
-<p>Same can be applied to content panel</p>
-<div class="codehilite"><pre><span></span>// ContentPanel.qml
+<p>The same way can be applied to content panel</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// ContentPanel.qml
 import service.time 1.0
 
 Panel {
@@ -1305,10 +1402,21 @@ Panel {
     }
 }
 </pre></div>
+</td></tr></table>
 
-
-<p>In the next step we can then move the singleton onto the other side and pass it into the component.</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml
+<p>In the next step, we can then move the singleton onto the other side and pass it into the component.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml
 <span class="gi">+ import service.time 1.0</span>
 
 Panel {
@@ -1321,10 +1429,19 @@ Panel {
     }
 }
 </pre></div>
+</td></tr></table>
 
-
-<p>Now we can eliminate the usage of the singletons in the children.</p>
-<div class="codehilite"><pre><span></span>// TitlePanel.qml
+<p>Now, we can eliminate the usage of the singletons in the children.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// TitlePanel.qml
 <span class="gd">- import service.time 1.0</span>
 Panel {
     id: root
@@ -1335,10 +1452,23 @@ Panel {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>And similar to the content panel</p>
-<div class="codehilite"><pre><span></span>// ContentPanel.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// ContentPanel.qml
 <span class="gd">- import service.time 1.0</span>
 Panel {
     id: root
@@ -1353,14 +1483,32 @@ Panel {
     }
 }
 </pre></div>
+</td></tr></table>
 
-
-<p>Be aware we are now able to remove the dependency on the <code>service.time</code> module and by this making the <code>TitlePanel</code> and <code>ContentPanel</code> easier to test as dependencies are now injected.</p>
-<p>By this we effectively push the singleton usage on level up. Normally it is expected after several of these pushes you will reach a level where several child components suddenly depend on the same information injected from the singleton. To effectively predict how many levels you need to push up this dependency we would need to identify the node which creates the child nodes using the singleton. If we reach that point there is no need for a singleton and we can convert the singleton into an instance of even eliminate it all together.</p>
+<p>Be aware that we are now able to remove the dependency on the <code>service.time</code> module and by this making the <code>TitlePanel</code> and <code>ContentPanel</code> easier to test as dependencies are now injected instead of directly implemented inside.</p>
+<p>By doing this, we effectively push the singleton usage one level up. Normally, it is expected after several commits until we reach a level where several child components suddenly depend on the same information injected from the singleton. To effectively predict how many levels you need to push this dependency up, we would need to identify the node which creates the child nodes using the singleton. If we reach that point, there is no need for a singleton and we can convert the singleton into an instance of even eliminate it all together.</p>
 <h3 id="recipe-eliminate-singletons">Recipe: Eliminate singletons</h3>
 <p>A singleton normally shares global state, functionality and events. To eliminate this we need to find the common ancestor node from where we can inject the dependencies. For a share event, we often can just connect the signal with a state change on that level, for shared properties we could do similar. For common functionality we can connect a signal which bubbles up to a function being executed. Ideally the function is extracted into a store if its application business relevant.</p>
 <p>So after we pushed the singleton up, we could now convert it to an instance, which acts like a small store.</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml
 <span class="gi">+ import service.time 1.0</span>
 
 Panel {
@@ -1380,11 +1528,27 @@ Panel {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>Now that we have an instance, we can in our tests create and destroy this instance. Also when this UI portion is destroyed, the service instance will also be destroyed and does not use any resources.</p>
 <p>To go a step forward we can even inject the service as a dependency.</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml
 <span class="gi">+ import service.time 1.0</span>
 
 Panel {
@@ -1402,7 +1566,7 @@ Panel {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>This allows use to configure the dependency of the AppPanel and with this make it better testable.</p>
 <h3 id="recipe-extract-harmful-dependency-conditions">Recipe: Extract harmful dependency conditions</h3>
@@ -1417,7 +1581,22 @@ Panel {
 <p>After pushing conditions up to the root level of the current component sometimes it is a good practice to collect them into an object. So the object gets injected into this component. This component is the first version of a potential store.</p>
 <p>This object then collects these dependencies and will carry the harmful dependencies. The component itself will only depend on this particular object (aka store).</p>
 <p>This makes it also easier to push dependencies up the UI tree as we only have to push the object up not individual properties.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// AppPanel.qml</span>
 <span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">time</span> <span class="mf">1.0</span>
 
 <span class="nx">Panel</span> <span class="p">{</span>
@@ -1434,21 +1613,45 @@ Panel {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p><strong>Step: name space your dependency</strong></p>
 <p>We create a new object called AppStore. This object shall wrap the dependencies.</p>
-<div class="codehilite"><pre><span></span><span class="gi">+ // AppStore.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="gi">+ // AppStore.qml</span>
 <span class="gi">+ import service.time 1.0</span>
 <span class="gi">+</span>
 <span class="gi">+ Store {</span>
 <span class="gi">+     property Clock clock: Clock {}</span>
 <span class="gi">+ }</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Now we can replace the direct dependencies with indirect dependencies using the new used store object. So practically name spacing the dependencies.</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml
 <span class="gd">- import service.time 1.0</span>
 
 Panel {
@@ -1469,12 +1672,23 @@ Panel {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>In the next step this will allow us now to do the trick and remove the dependencies from our panels.</p>
 <p><strong>Step: Prevent object leaking</strong></p>
 <p>We still have a problem in the store, we leak an object and the internals of the object can be discovered. We could prevent it by hiding the object behind the store interface.</p>
-<div class="codehilite"><pre><span></span>// AppStore.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppStore.qml
 import service.time 1.0
 
 Store {
@@ -1487,10 +1701,27 @@ Store {
 <span class="gi">+   }</span>
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>This will change our panel in a way that it only depends on properties, signals or functions of the store and the store is able to conceal its internals.</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml
 
 Panel {
     id: root
@@ -1509,11 +1740,17 @@ Panel {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <p><strong>Step: extract data interface into a data object</strong></p>
 <p>Now we can also add the remaining station name, which might come from another service. The relevant part is it is not a visual property it is a data property, and as such should be contained inside the data store.</p>
-<div class="codehilite"><pre><span></span>// AppStore.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppStore.qml
 import service.time 1.0
 
 Store {
@@ -1521,10 +1758,28 @@ Store {
 <span class="gi">+   property string stationName</span>
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>Now the panel does not use the name property anymore it gets the information from the store.</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml
 
 Panel {
     id: root
@@ -1544,13 +1799,31 @@ Panel {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>On the first sight this seems to make thing more complicated. But think about, we want to inject dependency. So we want to make it the duty of the instance which instantiates us to think about where the data comes from.</p>
 <p>As the panel does now solely depend on the store for its data, testing the panel also now gets much more easier as also passing on the data between parts its now easier. To test now the business side, we can simple test the none visual store.</p>
 <p><strong>Step: inject store</strong></p>
 <p>So this allows us now to inject the store as dependency and make our dependency much more clearer.</p>
-<div class="codehilite"><pre><span></span>// AppPanel.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// AppPanel.qml
 // import service.time 1.0
 
 Panel {
@@ -1570,10 +1843,18 @@ Panel {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>We would call this component now a View (from View in <a href="https://en.wikipedia.org/wiki/Model–view–viewmodel">Model-View-ViewModel</a> pattern), as it depends on a store. A panels just depend on data properties, a view on a store.</p>
-<div class="codehilite"><pre><span></span><span class="gd">- // AppPanel.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="gd">- // AppPanel.qml</span>
 <span class="gi">+ // AppView.qml</span>
 
 <span class="gd">- Panel {</span>
@@ -1583,10 +1864,20 @@ Panel {
     ...
 }
 </pre></div>
-
+</td></tr></table>
 
 <p>Maybe our AppPanel is called by a Main item, this would be the change there.</p>
-<div class="codehilite"><pre><span></span>// Main.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// Main.qml
 Item {
     width: 800
     height: 600
@@ -1598,11 +1889,20 @@ Item {
     }
 }
 </pre></div>
-
+</td></tr></table>
 
 <h2 id="conclusion">Conclusion</h2>
 <p>Injecting dependencies, means roughly: make it the problem of the object calling you. When looking back we have now a set of nice to test components and clear idea where the data comes from.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Main.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Main.qml</span>
 <span class="nx">Item</span> <span class="p">{</span>
     <span class="k">width:</span> <span class="mi">800</span>
     <span class="k">height:</span> <span class="mi">600</span>
@@ -1613,9 +1913,19 @@ Item {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<div class="codehilite"><pre><span></span><span class="c1">// AppStore.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// AppStore.qml</span>
 <span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">time</span> <span class="mf">1.0</span>
 
 <span class="nx">Store</span> <span class="p">{</span>
@@ -1627,9 +1937,21 @@ Item {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<div class="codehilite"><pre><span></span><span class="c1">// AppView.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// AppView.qml</span>
 <span class="nx">View</span> <span class="p">{</span>
     <span class="kd">id: root</span>
     <span class="nx">property</span> <span class="nx">AppStore</span> <span class="nx">store</span>
@@ -1643,9 +1965,19 @@ Item {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<div class="codehilite"><pre><span></span><span class="c1">// ContentPanel.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// ContentPanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
     <span class="kd">id: root</span>
     <span class="nx">property</span> <span class="nx">string</span> <span class="nx">currentTime</span>
@@ -1657,9 +1989,16 @@ Item {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
 
-
-<div class="codehilite"><pre><span></span><span class="c1">// TitlePanel.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// TitlePanel.qml</span>
 <span class="nx">Panel</span> <span class="p">{</span>
     <span class="kd">id: root</span>
     <span class="nx">property</span> <span class="nx">string</span> <span class="nx">currentTime</span>
@@ -1668,6 +2007,7 @@ Item {
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table>
                 
                   
                 

@@ -666,6 +666,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1041,19 +1053,24 @@ The user interface is typically developed in QML/JavaScript and Qt/C++.</p>
 <h2 id="ui-runtime">UI Runtime</h2>
 <p>A runtime is responsible to initialize the user interface library and load a minimal set of extensions that are required to load the initial UI. From then on, the UI itself will take control of the loading of other UI parts.</p>
 <p><img alt="Runtime Model" src="../../assets/coreui-runtime.svg" /></p>
-<div class="codehilite"><pre><span></span>runtime --import imports Main.qml
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>runtime --import imports Main.qml
 </pre></div>
-
+</td></tr></table>
 
 <p>Often a runtime is made using a configuration document which can be written in JSON or a similar data-interchange format.</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;imports&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">&quot;imports&quot;</span>
   <span class="p">],</span>
   <span class="nt">&quot;document&quot;</span><span class="p">:</span> <span class="s2">&quot;Main.qml&quot;</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>In the Qt/QML case, the default runtime is the qmlscene which is great for simple prototypes but for a more complex project you want to create a custom runtime, especially for loading your custom boot extensions.</p>
 <h2 id="ui-extensions">UI Extensions</h2>
@@ -1082,7 +1099,25 @@ The visual topmost layer is the dialog layer which displays notifications. The n
 <p>Below the launcher, there could be an optional background image, e.g. the desktop background.</p>
 <p><img alt="Layers" src="../../assets/layers.svg" /></p>
 <p>In QML code this would roughly look like this.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Display.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Display.qml</span>
 <span class="nx">Item</span> <span class="p">{</span>
   <span class="kd">id: root</span>
   <span class="nx">Image</span> <span class="p">{</span>
@@ -1102,7 +1137,7 @@ The visual topmost layer is the dialog layer which displays notifications. The n
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <h1 id="stage-loading">Stage Loading</h1>
 <p>To allow the System UI to be launched in a controlled and efficient manner the typical way is to stage load the SysUI. Stage loading is a practice to dynamically load partially user interfaces using a state machine or a similar controller which is controlled by external information and/or the current state of the machine.</p>

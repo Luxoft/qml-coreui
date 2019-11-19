@@ -592,6 +592,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../topics/runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -978,10 +990,11 @@
 </ul>
 <h2 id="building-the-extension">Building the extension</h2>
 <p>The extension are Qt static libraries and plugins. The plugins are build into the $BUILD_DIR/imports folder and the static libraries into the $BUILD_DIR/libs folder.</p>
-<div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
 <span class="n">qmake</span> <span class="p">..</span><span class="o">/</span><span class="n">coreui</span><span class="o">-</span><span class="n">extensions</span><span class="p">.</span><span class="n">pro</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">install</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>After installation the plugins are installed into the $QTDIR/qml folder.</p>
 <h1 id="extensions">Extensions</h1>

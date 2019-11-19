@@ -693,6 +693,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../topics/runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1080,47 +1092,56 @@
 <h3 id="create-an-application">Create an Application</h3>
 <p>To create an application you need to define the application package as also the application name. </p>
 <p>For example to create an empty <code>About</code> application using the package <code>org.example.about</code> use the <code>app</code> command.</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">app</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">About</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">app</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">About</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The output will be</p>
-<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">info</span><span class="p">.</span><span class="n">yaml</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">AppShell</span><span class="p">.</span><span class="n">qml</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">stores</span><span class="o">/</span><span class="n">RootStore</span><span class="p">.</span><span class="n">qml</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">WelcomeView</span><span class="p">.</span><span class="n">qml</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">panels</span><span class="o">/</span><span class="n">WelcomePanel</span><span class="p">.</span><span class="n">qml</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>This will create the about app inside the <code>ui/apps/org.example.about</code> using the initial CoreUI architecture. Have a look and see the code.</p>
 <h3 id="adding-a-view">Adding a View</h3>
 <p>A view is a visual type and uses a store to access business logic. The top level store is called <code>RootStore</code>. </p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="k">view</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">About</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="k">view</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">About</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The output will be</p>
-<div class="codehilite"><pre><span></span><span class="n">generate</span> <span class="n">aspect</span> <span class="k">view</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">generate</span> <span class="n">aspect</span> <span class="k">view</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">AboutView</span><span class="p">.</span><span class="n">qml</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>This will create a view named <code>AboutView</code> inside the application views folder.</p>
 <h3 id="adding-a-store">Adding a store</h3>
 <p>To add a child store to the <code>RootStore</code> you need to provide the applicationpackage as also the store name.</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">store</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">Status</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">store</span> <span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span> <span class="n">Status</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The output should be</p>
-<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
 <span class="n">generate</span> <span class="n">aspect</span> <span class="n">store</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">stores</span><span class="o">/</span><span class="n">StatusStore</span><span class="p">.</span><span class="n">qml</span>
 <span class="n">PATCH</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">jryannel</span><span class="o">/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">/</span><span class="n">ui</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">org</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">about</span><span class="o">/</span><span class="n">stores</span><span class="o">/</span><span class="n">RootStore</span><span class="p">.</span><span class="n">qml</span> <span class="k">with</span> <span class="n">property</span> <span class="n">StatusStore</span> <span class="n">statusStore</span><span class="p">:</span> <span class="n">StatusStore</span> <span class="err">{</span> <span class="err">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The last <code>PATCH</code> line indicates the <code>RootStore</code> was patched with a reference with the newly created <code>StatusStore</code>.</p>
 <div class="admonition note">
@@ -1131,30 +1152,64 @@
 <h2 id="adding-native-components">Adding native components</h2>
 <h3 id="adding-an-plugin">Adding an plugin</h3>
 <p>To add a QtQuick plugin you need to run the <code>gen plugin</code> generator. For example to add a <code>heater</code> plugin we can just write</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">plugin</span> <span class="n">heater</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">plugin</span> <span class="n">heater</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>This will produce</p>
-<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
 <span class="n">generate</span> <span class="n">aspect</span> <span class="n">plugin</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">heater</span><span class="o">/</span><span class="n">heater</span><span class="p">.</span><span class="n">pro</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">heater</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">h</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">heater</span><span class="o">/</span><span class="n">plugin</span><span class="p">.</span><span class="n">cpp</span>
 <span class="n">PATCH</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">jryannel</span><span class="o">/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">/</span><span class="n">native</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">plugins</span><span class="p">.</span><span class="n">pro</span> <span class="k">with</span> <span class="n">SUBDIRS</span> <span class="o">+=</span> <span class="n">heater</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>This will create a scaffold plugin named heater in the <code>native/plugins</code> directory and register the project with the <code>plugins</code> project file.</p>
 <h3 id="adding-a-service">Adding a service</h3>
 <p>To add a QtIVI service to the native project use the <code>gen service</code> generator.</p>
-<div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">service</span> <span class="n">service</span><span class="p">.</span><span class="n">heater</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">gen</span> <span class="n">service</span> <span class="n">service</span><span class="p">.</span><span class="n">heater</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>This would create a heater service with the package <code>service.heater</code>. The QtIVI service will support a simulation backend, a default backend and a QtRemoteObjects backend. To suport shared business logic the logic shouldbe placed into the service plugin whch can be used by the service backends.</p>
 <p>The command above will output</p>
-<div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">myproject</span><span class="o">`</span>
 <span class="n">generate</span> <span class="n">aspect</span> <span class="n">service</span> <span class="k">in</span> <span class="n">project</span> <span class="n">apps</span>
 <span class="k">write</span> <span class="n">initial</span> <span class="n">service</span> <span class="p">..</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">interfaces</span><span class="o">/</span><span class="n">service_heater</span><span class="p">.</span><span class="n">qface</span>
@@ -1185,7 +1240,7 @@
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">server_qtro</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">cpp</span>
 <span class="k">WRITE</span><span class="p">:</span> <span class="n">native</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">service_heater</span><span class="o">/</span><span class="n">server_qtro</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">h</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Please read the <a href="https://doc.qt.io/QtIVI/">QtIVI</a> documentation to get more insights about the structure.</p>
 <h2 id="conclusion">Conclusion</h2>

@@ -603,6 +603,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -934,7 +946,15 @@ APIs in embedded devices are primary state-full</p>
 <h1 id="api-shape">API Shape</h1>
 <p>The API should be shaped after easy to understand patterns and ideally be familiar to the developer but also easy to explain to non-technical API authors. The API should define a common vocabulary and provide a way to structure larger projects.</p>
 <p>The API shall be shaped around the idea of a module. Each module is identified by a reverse URI (e.g. like a Java package convention). Each module can contain a list of interfaces. An interface is a collection of properties, operations and signals. The collection of properties define the state of the interface. The operations provide a mean to modify the state or to retrieve data. Signals allow a service to notify a client about external changes. It is assumed for pure property changes the API will auto-provide signals.</p>
-<div class="codehilite"><pre><span></span>    <span class="o">-</span> <span class="nv">module</span>                  # <span class="nv">module</span> <span class="nv">is</span> <span class="nv">a</span> <span class="nv">namespace</span> <span class="k">for</span> <span class="nv">all</span> <span class="nv">child</span> <span class="nv">symbols</span> <span class="nv">exists</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="o">-</span> <span class="nv">module</span>                  # <span class="nv">module</span> <span class="nv">is</span> <span class="nv">a</span> <span class="nv">namespace</span> <span class="k">for</span> <span class="nv">all</span> <span class="nv">child</span> <span class="nv">symbols</span> <span class="nv">exists</span>
         <span class="o">-</span> <span class="nv">Interface</span>           # <span class="nv">named</span> <span class="nv">symbol</span> <span class="nv">which</span> <span class="nv">defines</span> <span class="nv">a</span> <span class="nv">set</span> <span class="nv">of</span> <span class="nv">properties</span>, <span class="nv">operations</span>, <span class="nv">and</span> <span class="nv">signals</span>
             <span class="o">-</span> <span class="nv">Properties</span>      # <span class="nv">data</span> <span class="nv">entry</span> <span class="nv">with</span> <span class="nv">a</span> <span class="nv">name</span> <span class="nv">and</span> <span class="nv">type</span>
             <span class="o">-</span> <span class="nv">Operations</span>      # <span class="nv">operation</span> <span class="nv">with</span> <span class="nv">parameters</span> <span class="nv">and</span> <span class="k">return</span> <span class="nv">value</span>
@@ -944,11 +964,17 @@ APIs in embedded devices are primary state-full</p>
         <span class="o">-</span> <span class="nv">Enum</span><span class="o">/</span><span class="nv">Flag</span>           # <span class="nv">An</span> <span class="nv">enumeration</span> <span class="nv">which</span> <span class="nv">can</span> <span class="nv">be</span> <span class="nv">used</span> <span class="nv">e</span>.<span class="nv">g</span>. <span class="k">for</span> <span class="nv">properties</span> <span class="nv">and</span><span class="o">/</span><span class="nv">or</span> <span class="nv">operations</span>
             <span class="o">-</span> <span class="nv">Values</span>          # <span class="nv">entries</span> <span class="nv">of</span> <span class="nv">an</span> <span class="nv">enumeration</span> <span class="nv">with</span> <span class="nv">name</span> <span class="nv">and</span> <span class="nv">value</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>A module can have one or more interfaces, structs or enums/flags. As such a module is a higher level feature. To adhere to the micro-service architecture a service API should not depend directly on another service, instead, the API author should use identifiers (IDs), which are typically integers or strings to identify a resource from another module.</p>
 <p>Below is an example of a simple counter API. Please be aware this is a state-full example as the state of the interface is encoded in the count property.</p>
-<div class="codehilite"><pre><span></span>    <span class="n">module</span> <span class="n">counter</span> <span class="mf">1.0</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">module</span> <span class="n">counter</span> <span class="mf">1.0</span>
 
     <span class="kd">interface</span> <span class="nc">Counter</span> <span class="o">{</span>
       <span class="kt">int</span> <span class="n">count</span>
@@ -956,10 +982,16 @@ APIs in embedded devices are primary state-full</p>
       <span class="kt">void</span> <span class="nf">decrement</span><span class="o">()</span>
     <span class="o">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>A state-less example would look like this</p>
-<div class="codehilite"><pre><span></span>    <span class="n">module</span> <span class="n">counter</span> <span class="mf">1.0</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="n">module</span> <span class="n">counter</span> <span class="mf">1.0</span>
 
     <span class="kd">interface</span> <span class="nc">Counter</span> <span class="o">{</span>
       <span class="kt">int</span> <span class="nf">count</span><span class="o">()</span>
@@ -967,7 +999,7 @@ APIs in embedded devices are primary state-full</p>
       <span class="kt">int</span> <span class="nf">decrement</span><span class="o">()</span>
     <span class="o">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <h2 id="interface-definition">Interface Definition</h2>
 <p>The API exposed by all middle-ware services needs to be harmonized across all services. To ensure a well defined and harmonized API can be created the API shall be defined in an interface definition language (IDL) with an attached code generation.</p>
@@ -984,7 +1016,31 @@ APIs in embedded devices are primary state-full</p>
 <h2 id="client-usage">Client Usage</h2>
 <p>From the UI perspective the client should just be instantiated. The UI should be in charge to decide at which time a client is created and connected to the device. The client configuration should be read from some kind of data storage (e.g. settings file) and/or environment variable. By this configuration of the client is separated from the instantiation. The UI shall be in charge of the startup sequence. And as such must be able to delay certain clients only to be constructed on demand.</p>
 <p>A service API shall not be exposed to the UI, this is merely to allow better testing. For this a store wrappes the used service APIs in a common API for the UI. The store can be written either in QML/JS or C++.  QML/JS is great during prototyping but C++ offers more performance and better control of the API usage.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// store/RootStore.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// store/RootStore.qml</span>
 
 <span class="kr">import</span> <span class="nx">services</span><span class="p">.</span><span class="nx">phone</span> <span class="mf">1.0</span>
 
@@ -1010,7 +1066,7 @@ APIs in embedded devices are primary state-full</p>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Calling service function is often more complex than just calling the operation. Certain conditions defeind by the requirements specification and or error cases needs to be handled. To avoid this code pollutes the UI these functions are coded inside a store. Often used functions can also be encoded into helpers to even more reduce code clutter.</p>
 <h2 id="service-simulation">Service Simulation</h2>

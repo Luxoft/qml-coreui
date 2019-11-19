@@ -592,6 +592,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../topics/runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -970,25 +982,28 @@
 </div>
 <h2 id="existing-qt">Existing Qt</h2>
 <p>Please install Qt5 using the Qt online installer first. Now you should create a folder to host the QtAuto components and initialize the folder.</p>
-<div class="codehilite"><pre><span></span><span class="nb">source</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">source</span>
 mkdir qauto
 <span class="nb">cd</span> qauto
 coreui-admin init
 </pre></div>
-
+</td></tr></table>
 
 <p>The init command will create a <code>coreui.yml</code> project document. You can either edit the document yourself or add config values.</p>
 <p>To edit the configuration just type</p>
-<div class="codehilite"><pre><span></span>coreui-admin config --edit
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config --edit
 </pre></div>
-
+</td></tr></table>
 
 <p>This will start your default editor and open the coreui document.</p>
 <p>Now we will tell coreui where the existing qt installation is, by setting the path to the <code>qmake</code> executable.</p>
 <p>For example on MACOS this should look like this:</p>
-<div class="codehilite"><pre><span></span>coreui-admin config qmake ~/Qt/5.11.0/clang_64/bin/qmake
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config qmake ~/Qt/5.11.0/clang_64/bin/qmake
 </pre></div>
-
+</td></tr></table>
 
 <p>From now on coreui-admin will use the existing Qt installation as the base.</p>
 <div class="admonition note">
@@ -997,84 +1012,94 @@ coreui-admin init
 </div>
 <p>Now we clone the QtAuto modules and build them.</p>
 <p>First, we can check the <code>auto</code> target using::</p>
-<div class="codehilite"><pre><span></span>coreui-admin targets auto
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin targets auto
 </pre></div>
-
+</td></tr></table>
 
 <p>This will print the currently listed repositories available under the auto-target. A target is an ordered list or repositories. The ordering defines the build order. This information is stored in the <code>coreui.yml</code> targets section.</p>
-<div class="codehilite"><pre><span></span> ______name______|______________________repos______________________
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span> ______name______|______________________repos______________________
  auto | appman, qtivi, neptune3-ui
 </pre></div>
-
+</td></tr></table>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If no target is given target <code>all</code> is automatically invoked.</p>
 </div>
 <p>The list may vary based on your <code>coreui.yml</code> configuration. The next step would be to clone and build all auto repositories.</p>
-<div class="codehilite"><pre><span></span>coreui-admin clone auto
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin clone auto
 coreui-admin build auto
 </pre></div>
-
+</td></tr></table>
 
 <p>The clones repositories are available in the <code>source/&lt;repo-name&gt;</code> and <code>build/&lt;repo-name&gt;</code> locations. After building the repositories will be automatically installed into <code>install/&lt;repo-name&gt;</code>.</p>
 <p>!! note</p>
 <p>Be aware some repositories will automatically install as qt modules into the Qt directory and can not be found in the install location.</p>
 <p>If you later want to update your installation, you can simply run an update.</p>
-<div class="codehilite"><pre><span></span>coreui-admin update auto
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin update auto
 coreui-admin build auto
 </pre></div>
-
+</td></tr></table>
 
 <p>To clean the build you can run</p>
-<div class="codehilite"><pre><span></span>coreui-admin clean auto
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin clean auto
 </pre></div>
-
+</td></tr></table>
 
 <h2 id="custom-qt">Custom Qt</h2>
 <p>If you want to use the multi-process setup on Linux or just want to use a custom Qt the script will support you in building Qt for your platform.</p>
 <p>The first step is to check if your OS can build Qt and the QtAuto components. For this run the OS command.</p>
-<div class="codehilite"><pre><span></span>coreui-admin os --check
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin os --check
 </pre></div>
-
+</td></tr></table>
 
 <p>Note: The OS command is currently only supported on Ubuntu.</p>
 <p>The check command will either be positive or negative. In the case the result is negative please run the os init command.</p>
-<div class="codehilite"><pre><span></span>coreui-admin os --init
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin os --init
 </pre></div>
-
+</td></tr></table>
 
 <p>This command will either print the required steps to initialize your OS or ask you to install several packages onto your system. For this step administration privileges are required.</p>
 <p>After the OS configuration has been validated Qt can now be downloaded and build.</p>
-<div class="codehilite"><pre><span></span>coreui-admin qt --clone
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin qt --clone
 coreui-admin qt --config
 coreui-admin qt --build
 </pre></div>
-
+</td></tr></table>
 
 <p>The last step can take up to an hour, depending on your machine configuration.</p>
 <p>To set the number of make jobs (how many CPU cores make can use), you can edit the jobs config value. For example, for a great performance on a Core i7 Quad-Core Intel CPU, you can set the jobs to 6. You would still have two processors left to continue working.</p>
-<div class="codehilite"><pre><span></span>coreui-admin config <span class="nb">jobs</span> <span class="m">6</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config <span class="nb">jobs</span> <span class="m">6</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>To check your configuration you can list the configuration values.</p>
-<div class="codehilite"><pre><span></span>coreui-admin config
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config
 </pre></div>
-
+</td></tr></table>
 
 <p>Will output something like this</p>
-<div class="codehilite"><pre><span></span>build | build
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>build | build
 install | install
 jobs | 6
 qmake | ~/Qt/5.10.0/clang_64/bin/qmake
 source | source
 </pre></div>
-
+</td></tr></table>
 
 <p>To unset a configuration value you can use the <code>config --unset</code> option.</p>
-<div class="codehilite"><pre><span></span>coreui-admin config --unset qmake
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config --unset qmake
 </pre></div>
+</td></tr></table>
                 
                   
                 

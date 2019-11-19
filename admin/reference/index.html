@@ -592,6 +592,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../topics/runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -977,7 +989,34 @@
                 
                 <h1 id="reference">Reference</h1>
 <h2 id="command-line-usage">Command Line Usage</h2>
-<div class="codehilite"><pre><span></span>Usage: coreui-admin [OPTIONS] COMMAND [ARGS]...
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Usage: coreui-admin [OPTIONS] COMMAND [ARGS]...
 
 coreui adminstration tool
 
@@ -1006,27 +1045,37 @@ Commands:
   start     starts a project
   targets   manages the buildable targets
 </pre></div>
-
+</td></tr></table>
 
 <h2 id="initialisation">Initialisation</h2>
-<div class="codehilite"><pre><span></span>Usage: coreui-admin init [OPTIONS]
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Usage: coreui-admin init [OPTIONS]
 
   Initialized the workspace by writing the `coreui.yml` setup document
 
 Options:
   --help  Show this message and exit.
 </pre></div>
-
+</td></tr></table>
 
 <h2 id="configuration">Configuration</h2>
-<div class="codehilite"><pre><span></span>Usage: coreui-admin config [OPTIONS] [NAME] [VALUE]
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Usage: coreui-admin config [OPTIONS] [NAME] [VALUE]
 
 Options:
   --unset TEXT
   --edit / --no-edit
   --help              Show this message and exit.
 </pre></div>
-
+</td></tr></table>
 
 <p>The configuration document <code>coreui.yml</code> contains a section called <code>config</code> to configure <code>coreui-admin</code> general behavior. The supported values are currently:</p>
 <ul>
@@ -1035,29 +1084,52 @@ Options:
 <li><code>qmake</code>: qmake path (defaults to empty)</li>
 </ul>
 <p>You can set the option using the <code>config</code> command. For example to set the jobs option to 6 use</p>
-<div class="codehilite"><pre><span></span>coreui-admin config <span class="nb">jobs</span> <span class="m">6</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config <span class="nb">jobs</span> <span class="m">6</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>In case you want to edit the whole <code>coreui.yml</code> document you can just type</p>
-<div class="codehilite"><pre><span></span>coreui-admin config --edit
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config --edit
 </pre></div>
-
+</td></tr></table>
 
 <p>This will open your default editor and display the configuration document.</p>
 <h1 id="targets">Targets</h1>
 <p>The configuration document has a section of <code>targets</code>, which is a list of repositories. The repositories order is important for the order of build.</p>
-<div class="codehilite"><pre><span></span><span class="nt">targets</span><span class="p">:</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nt">targets</span><span class="p">:</span>
   <span class="nt">auto</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">appman</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dlt-daemon</span>
 </pre></div>
-
+</td></tr></table>
 
 <h1 id="repositories">Repositories</h1>
 <p>The <code>coreui.yml</code> document has an own section for repos listed. The repos are listed with a name, url, branch and the build-type. The name is the name the project will be checkout and being identified using other commands. The url should be a standard git url. The branch is the branch being checkout out. The build-type can be <code>qmake</code> or <code>cmake</code> - othe build types are currently not supported.</p>
 <p>In the <code>coreui.yml</code> document a <code>repos</code> section looks like this</p>
-<div class="codehilite"><pre><span></span><span class="nt">config</span><span class="p">:</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nt">config</span><span class="p">:</span>
   <span class="nt">jobs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
   <span class="nt">qmake</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/Users/jryannel/Qt/5.10.0/clang_64/bin/qmake</span>
 <span class="nt">env</span><span class="p">:</span>
@@ -1079,17 +1151,18 @@ Options:
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">appman</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">dlt-daemon</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>You can use the <code>coreui-admin repos</code> command to manage the repositories. See <code>coreui-admin repos --help</code> for more information.</p>
 <p>A repository can have also a <code>scripts</code> dictionary attached. This dictionary is automatically attached to the <code>scripts</code> section of the coreui-admin config document.</p>
 <h1 id="environment-variables">Environment Variables</h1>
 <p>All commands wil inherit the system environment variables. There are several ways to add additional environment variables. Either project wide enviroment variables can be set in the <code>coreui.yml</code> document in the <code>env</code> section or using a local <code>.env</code> file next to the <code>coreui.yml</code>.</p>
 <p>In the <code>coreui.yml</code> document you need to fill in the <code>env</code> section using a key value pair format.</p>
-<div class="codehilite"><pre><span></span><span class="nt">env</span><span class="p">:</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nt">env</span><span class="p">:</span>
     <span class="nt">QT_SCALE_FACTOR</span><span class="p">:</span> <span class="s">&quot;0.75&quot;</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The <code>.env</code> file is a YAML formatted document with key value pairs.</p>
 <p>The order of lookup is</p>

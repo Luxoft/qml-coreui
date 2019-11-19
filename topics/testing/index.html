@@ -700,6 +700,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1099,7 +1111,32 @@
 <p>A unit in our terms is a component. Also if this is not always exact it gives a good base to work on. To test a component you need to abstract away it dependencies.</p>
 <h3 id="control-testing">Control Testing</h3>
 <p>A control is a UI part which only depends on Qt standard data types, as such it can be easily tested as there is no need to abstract away external extra dependencies.</p>
-<div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
     <span class="kd">id: root</span>
     <span class="nx">property</span> <span class="nx">Button</span> <span class="nx">control</span>
     <span class="nx">Component</span> <span class="p">{</span>
@@ -1126,7 +1163,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <h3 id="panel-testing">Panel Testing</h3>
 <p>A panel is a UI container which similar to the control only depends on standard Qt data types. So there is also no need to extract away external dependencies.</p>
@@ -1134,7 +1171,20 @@
 <p>A view depends on the store and a store will depend on the services. So it is important to abstract away the store dependencies to allow a better testing if the views.</p>
 <p>Abstracting the store is the major issue in the testing strategy.</p>
 <p>A store abstraction is added called IRootStore which will contain the API of the root store. We need to use this IRootStore everywhere in the code to ensure we can switch it later with a root store mock. Here  is how such a IRootStore would look like.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// stores/IRootStore.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// stores/IRootStore.qml</span>
 <span class="kr">import</span> <span class="nx">CoreUI</span> <span class="mf">1.0</span>
 
 <span class="nx">Store</span> <span class="p">{</span>
@@ -1149,11 +1199,26 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The exposed API count, increment(), decrement() is implemented without a real implementation. The js functions are declared as var properties so that they can later be overwritten by an actual implementation.</p>
 <p>The actual store would have the real implementation using in this example a counter service.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// stores/RootStore.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// stores/RootStore.qml</span>
 
 <span class="nx">IRootStore</span> <span class="p">{</span>
     <span class="kd">id: root</span>
@@ -1170,11 +1235,29 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>To create a mock store we can create one directly in the tests folder, called RootStoreMock.</p>
 <p>It derives from the IRootStore and implements the API in a way which can be tested. This means the results are exposed. It is also possible to add new API to the mocked store. These properties and functions should be prefixed with an <code>_</code> to show the user this is not an official API of the root store.</p>
-<div class="codehilite"><pre><span></span>    <span class="c1">// stores/tests/RootStoreMock.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="c1">// stores/tests/RootStoreMock.qml</span>
     <span class="kr">import</span> <span class="s2">&quot;..&quot;</span>
 
     <span class="nx">IRootStore</span> <span class="p">{</span>
@@ -1194,10 +1277,51 @@
         <span class="p">}</span>
     <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>Now with the mocked root store we can run the tests.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// stores/tests/tst_welcomeview.qml</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// stores/tests/tst_welcomeview.qml</span>
 <span class="kr">import</span> <span class="nx">QtTest</span> <span class="mf">1.1</span>
 <span class="kr">import</span> <span class="s2">&quot;..&quot;</span>
 <span class="kr">import</span> <span class="s2">&quot;../mocked&quot;</span>
@@ -1240,13 +1364,50 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>This should give the reader an idea how to test an view component which depends on a store with many external dependencies.</p>
 <h3 id="store-testing">Store Testing</h3>
 <p>A store depends on the services and as such it depends on the chosen service architecture and their limitations. Ideally a store could be tested using a service simulation back-end which will run inside the test process and which is fully controllable.</p>
 <p>A normal service implementation would use some kind of IPC and requires a second process to be started. As this way of testing is error prone (start two processes, await both are established, initiate connection, wait until connection ready, ...) it would be better we could create a custom service implementation inside our test and would not have to modify the service client.</p>
-<div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
     <span class="kd">id: root</span>
     <span class="nx">CounterService</span> <span class="p">{</span>
         <span class="kd">id: service</span>
@@ -1285,14 +1446,39 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Discuss a way when the service can not be embedded into the test case, e.g. sequential testing ...</p>
 </div>
 <p>In case the service can not be integrated into the QML test case it is often desirable to let the test case start the service server and reset the particular server. Additional the test should run in sequence. For this we would need to write a small plugin which controls the server (start/stop) ans waits notifies the test case when the server is fully loaded. Also the server control should expose a reset operation to reset the data on the server. Resetting is often faster then shutdown/startup sequence. Finally the test functions should be arranged in sequence. For this we need to ensure the tests are named in a way to they are ordered by name.</p>
-<div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">TestCase</span> <span class="p">{</span>
     <span class="k">when:</span> <span class="nx">control</span><span class="p">.</span><span class="nx">ready</span>
     <span class="nx">ServerControl</span> <span class="p">{</span>
         <span class="kd">id: control</span>
@@ -1319,7 +1505,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
+</td></tr></table>
 
 <h3 id="service-testing">Service Testing</h3>
 <p>Testing a service is often divided into testing the client, the transport and the service implementation. As the service implementation is not under the control of the UI layer it is out of scope here. A client can be tested if the simulation back-end uses the same client component and the same transport. A transport should always be tested in isolation as this is often an external library.</p>

@@ -660,6 +660,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runtime/" title="Runtime & Modules" class="md-nav__link">
+      Runtime & Modules
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1036,10 +1048,11 @@
 <p><img alt="" src="../../assets/simulated_services.svg" /></p>
 <p>Ideally, to support a flexible setup, there is a central document which lists all services and allows the developer to easily switch from a simulated service to a native service. If all services are not depending on each other, then directly these switchings should happen without a considerable side-effect.</p>
 <p>In case a service is identified by an URI the listing could be something like this:</p>
-<div class="codehilite"><pre><span></span><span class="nt">org.example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tcp://localhost:8154/org.example</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nt">org.example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tcp://localhost:8154/org.example</span>
 <span class="nt">org.phone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">simu://localhost/org.example</span>
 </pre></div>
-
+</td></tr></table>
 
 <p>The first entry would use a TCP connection to connect to the service module discoverable on the port 8154. The second entry would for example use the simulation protocol to a central simulation server running on the localhost. These are just examples of a potentially deployment document and shall just display a potential way of encoding the information. The exact way depends on the used IPC technology.</p>
                 
