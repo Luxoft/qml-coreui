@@ -36,7 +36,7 @@ This measures the relation between the identified and converted kind of componen
 
 This counts the number of harmful imports per kind of component. Ideally the controls and panels will reduce the number of harmful components and most harmful imports will be isolated inside the stores.
 
-## Mico Refactoring Cookbook
+## Micro Refactoring Cookbook
 
 Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.
 
@@ -327,15 +327,114 @@ A harmful dependency is a dependency which breaks decomposition and testability 
 
 For this to be eliminated we need to push the dependency up, by first moving the dependency out of the internal of the component to the root level of the component and in a second step injecting the dependency into the component form the outside. By this practically removing the dependency from that particular component.
 
+The pattern is very similar to the removing a singleton refactoring. Assuming we have a station panel, which depends on a tuner service, to receive a list of stations and tune to the selected station.
+
+In the first instance the panel instantiates the service directly and by this introduces a dependency to the service as also makes it harder for testing.
+
+```qml
+// StationPanel.qml
+import service.radio 1.0
+Panel {
+    id: root
+    TunerService {
+        id: service
+    }
+    ListView {
+        enabled: root.visible && service.on
+        model: service.stations
+        delegate: StationItem {
+            title: model.name
+            icon: model.icon
+            onClicked: service.tune(model.stationID)
+        }
+    }
+}
+```
+
+We use the same strategy as before to move the dependency to the root level, to be able in a later step to inject it.
+
+```qml
+// StationPanel.qml
+import service.radio 1.0
+Panel {
+    id: root
+    property TunerService service
+    ListView {
+        enabled: root.visible && root.service.on
+        model: root.service.stations
+        delegate: StationItem {
+            title: model.name
+            icon: model.icon
+            onClicked: root.service.tune(model.stationID)
+        }
+    }
+}
+```
+
+This step splits the dependency to the individual parts to be able to remove the service dependency and by this make this component more testable.
+
+!!! note
+
+    We use the type `Model` which was registered as `qmlRegisterUncreatableType` to be able to define a object derived from `QAbstractItemModel` shall be used here.
+
+```qml
+// StationPanel.qml
+Panel {
+    id: root
+    property Model stations
+    property bool on
+    signal tune(string stationID)
+    ListView {
+        enabled: root.on
+        model: root.stations
+        delegate: StationItem {
+            title: model.name
+            icon: model.icon
+            onClicked: root.tune(model.stationID)
+        }
+    }
+}
+```
+
+Now we can use the panel from the outside and create the service one layer on top. As we saw in the singleton refactoring we then can introduce a store to wrap the service even further.
+
+```qml
+/// TunerView.qml
+View {
+    StationService {
+        id: service
+    }
+    StationPanel {
+        stations: service.stations
+        on: visible && service.on
+        onTune: service.tune(stationID)
+    }
+}
+```
+
 ### Recipe: Convert Component to Kinds
 
 A kind of component is a component which fits into a category. For this the component needs to be moved to a kind folder where all components of the same kind and which similar dependencies are collected. Ideally you start with the edge nodes and convert them to controls or panels.
 
-A component which uses other controls or panels is a panel. If a panel uses another panel it is better to start with the child panel.
+We define initial the following components: `Control`, `Panel`, `View`, `Store`. You might decide that other kind of components are required, than these should be documented as with the purpose as also typical external dependencies.
 
-The component is just moved into a kind folder and the dependency from the calling component is updated.
+In short, a control is a reusable visual item, which is not application specific. A panel is a container of controls or other panels. A view depends on a store and contains other panels or views. A store is a logical object, which can contain child stores.
 
-In a later step we can now start with that component. Be sure to only move components which follow the dependency guidelines, otherwise it is better to first eliminate of push up the harmful dependencies before moving the component.
+Based on this, we need to create a set of folders and start sorting these components into the kind folders.
+
+```text
+controls/
+panels/
+views/
+stores/
+Main.qml
+```
+
+It is advisable only to move a component into the kind folder after it has been cleaned up. Ideally you start with controls first and then panels, then views and stores. The strategy is to work from the UI tree from the edges towards the internal nodes.
+
+!!! note
+
+    Be sure to only move components which follow the dependency guidelines, otherwise it is better to first eliminate of push up the harmful dependencies before moving the component.
 
 ### Recipe: Extract a Store
 
