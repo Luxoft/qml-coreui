@@ -637,8 +637,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mico-refactoring-cookbook" class="md-nav__link">
-    Mico Refactoring Cookbook
+  <a href="#micro-refactoring-cookbook" class="md-nav__link">
+    Micro Refactoring Cookbook
   </a>
   
     <nav class="md-nav">
@@ -1057,8 +1057,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mico-refactoring-cookbook" class="md-nav__link">
-    Mico Refactoring Cookbook
+  <a href="#micro-refactoring-cookbook" class="md-nav__link">
+    Micro Refactoring Cookbook
   </a>
   
     <nav class="md-nav">
@@ -1160,7 +1160,7 @@
 <p>This measures the relation between the identified and converted kind of components to the uncategorized components. The goal is to ensure over time the number of components with unmanaged dependencies are reduced and the converted components can be checked for harmful imports.</p>
 <h3 id="kpi-number-of-harmful-imports-per-kind-of-component">KPI - Number of harmful imports per kind of component</h3>
 <p>This counts the number of harmful imports per kind of component. Ideally the controls and panels will reduce the number of harmful components and most harmful imports will be isolated inside the stores.</p>
-<h2 id="mico-refactoring-cookbook">Mico Refactoring Cookbook</h2>
+<h2 id="micro-refactoring-cookbook">Micro Refactoring Cookbook</h2>
 <p>Refactoring is a disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behavior.</p>
 <blockquote>
 <p>Its heart is a series of small behavior preserving transformations. Each transformation (called a "refactoring") does little, but a sequence of these transformations can produce a significant restructuring. Since each refactoring is small, it's less likely to go wrong. The system is kept fully working after each refactoring, reducing the chances that a system can get seriously broken during the restructuring.
@@ -1572,11 +1572,163 @@ Panel {
 <h3 id="recipe-extract-harmful-dependency-conditions">Recipe: Extract harmful dependency conditions</h3>
 <p>A harmful dependency is a dependency which breaks decomposition and testability by introducing (often indirect) not testable dependencies (e.g. network, hardware, global state).</p>
 <p>For this to be eliminated we need to push the dependency up, by first moving the dependency out of the internal of the component to the root level of the component and in a second step injecting the dependency into the component form the outside. By this practically removing the dependency from that particular component.</p>
+<p>The pattern is very similar to the removing a singleton refactoring. Assuming we have a station panel, which depends on a tuner service, to receive a list of stations and tune to the selected station.</p>
+<p>In the first instance the panel instantiates the service directly and by this introduces a dependency to the service as also makes it harder for testing.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// StationPanel.qml</span>
+<span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">radio</span> <span class="mf">1.0</span>
+<span class="nx">Panel</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">TunerService</span> <span class="p">{</span>
+        <span class="kd">id: service</span>
+    <span class="p">}</span>
+    <span class="nx">ListView</span> <span class="p">{</span>
+        <span class="k">enabled:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">visible</span> <span class="o">&amp;&amp;</span> <span class="nx">service</span><span class="p">.</span><span class="nx">on</span>
+        <span class="k">model:</span> <span class="nx">service</span><span class="p">.</span><span class="nx">stations</span>
+        <span class="k">delegate:</span> <span class="nx">StationItem</span> <span class="p">{</span>
+            <span class="k">title:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">name</span>
+            <span class="k">icon:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">icon</span>
+            <span class="k">onClicked:</span> <span class="nx">service</span><span class="p">.</span><span class="nx">tune</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">stationID</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>We use the same strategy as before to move the dependency to the root level, to be able in a later step to inject it.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// StationPanel.qml</span>
+<span class="kr">import</span> <span class="nx">service</span><span class="p">.</span><span class="nx">radio</span> <span class="mf">1.0</span>
+<span class="nx">Panel</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">TunerService</span> <span class="nx">service</span>
+    <span class="nx">ListView</span> <span class="p">{</span>
+        <span class="k">enabled:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">visible</span> <span class="o">&amp;&amp;</span> <span class="nx">root</span><span class="p">.</span><span class="nx">service</span><span class="p">.</span><span class="nx">on</span>
+        <span class="k">model:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">service</span><span class="p">.</span><span class="nx">stations</span>
+        <span class="k">delegate:</span> <span class="nx">StationItem</span> <span class="p">{</span>
+            <span class="k">title:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">name</span>
+            <span class="k">icon:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">icon</span>
+            <span class="k">onClicked:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">service</span><span class="p">.</span><span class="nx">tune</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">stationID</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>This step splits the dependency to the individual parts to be able to remove the service dependency and by this make this component more testable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We use the type <code>Model</code> which was registered as <code>qmlRegisterUncreatableType</code> to be able to define a object derived from <code>QAbstractItemModel</code> shall be used here.</p>
+</div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// StationPanel.qml</span>
+<span class="nx">Panel</span> <span class="p">{</span>
+    <span class="kd">id: root</span>
+    <span class="nx">property</span> <span class="nx">Model</span> <span class="nx">stations</span>
+    <span class="nx">property</span> <span class="nx">bool</span> <span class="nx">on</span>
+    <span class="nx">signal</span> <span class="nx">tune</span><span class="p">(</span><span class="nx">string</span> <span class="nx">stationID</span><span class="p">)</span>
+    <span class="nx">ListView</span> <span class="p">{</span>
+        <span class="k">enabled:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">on</span>
+        <span class="k">model:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">stations</span>
+        <span class="k">delegate:</span> <span class="nx">StationItem</span> <span class="p">{</span>
+            <span class="k">title:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">name</span>
+            <span class="k">icon:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">icon</span>
+            <span class="k">onClicked:</span> <span class="nx">root</span><span class="p">.</span><span class="nx">tune</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">stationID</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now we can use the panel from the outside and create the service one layer on top. As we saw in the singleton refactoring we then can introduce a store to wrap the service even further.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">/// TunerView.qml</span>
+<span class="nx">View</span> <span class="p">{</span>
+    <span class="nx">StationService</span> <span class="p">{</span>
+        <span class="kd">id: service</span>
+    <span class="p">}</span>
+    <span class="nx">StationPanel</span> <span class="p">{</span>
+        <span class="k">stations:</span> <span class="nx">service</span><span class="p">.</span><span class="nx">stations</span>
+        <span class="k">on:</span> <span class="nx">visible</span> <span class="o">&amp;&amp;</span> <span class="nx">service</span><span class="p">.</span><span class="nx">on</span>
+        <span class="k">onTune:</span> <span class="nx">service</span><span class="p">.</span><span class="nx">tune</span><span class="p">(</span><span class="nx">stationID</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
 <h3 id="recipe-convert-component-to-kinds">Recipe: Convert Component to Kinds</h3>
 <p>A kind of component is a component which fits into a category. For this the component needs to be moved to a kind folder where all components of the same kind and which similar dependencies are collected. Ideally you start with the edge nodes and convert them to controls or panels.</p>
-<p>A component which uses other controls or panels is a panel. If a panel uses another panel it is better to start with the child panel.</p>
-<p>The component is just moved into a kind folder and the dependency from the calling component is updated.</p>
-<p>In a later step we can now start with that component. Be sure to only move components which follow the dependency guidelines, otherwise it is better to first eliminate of push up the harmful dependencies before moving the component.</p>
+<p>We define initial the following components: <code>Control</code>, <code>Panel</code>, <code>View</code>, <code>Store</code>. You might decide that other kind of components are required, than these should be documented as with the purpose as also typical external dependencies.</p>
+<p>In short, a control is a reusable visual item, which is not application specific. A panel is a container of controls or other panels. A view depends on a store and contains other panels or views. A store is a logical object, which can contain child stores.</p>
+<p>Based on this, we need to create a set of folders and start sorting these components into the kind folders.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>controls/
+panels/
+views/
+stores/
+Main.qml
+</pre></div>
+</td></tr></table>
+
+<p>It is advisable only to move a component into the kind folder after it has been cleaned up. Ideally you start with controls first and then panels, then views and stores. The strategy is to work from the UI tree from the edges towards the internal nodes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be sure to only move components which follow the dependency guidelines, otherwise it is better to first eliminate of push up the harmful dependencies before moving the component.</p>
+</div>
 <h3 id="recipe-extract-a-store">Recipe: Extract a Store</h3>
 <p>After pushing conditions up to the root level of the current component sometimes it is a good practice to collect them into an object. So the object gets injected into this component. This component is the first version of a potential store.</p>
 <p>This object then collects these dependencies and will carry the harmful dependencies. The component itself will only depend on this particular object (aka store).</p>
