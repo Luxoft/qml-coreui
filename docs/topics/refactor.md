@@ -14,11 +14,11 @@ Refactoring must be planned and executed over time. A larger user interface proj
 
 ## Architecture KPIs
 
-A KPI (key performance indicator) provides high level insights about the healthiness of the software architecture. To understand the KPIs presented we need to understand that the UI is a tree with a root node and edge nodes and many nodes in between. Ideally the outer nodes are clean from difficult dependencies, whereas the inner notes can depend on those dependencies but even here ideally these dependencies are extracted into another set of objects, the stores.
+A KPI (key performance indicator) provides high level insights about the healthiness of the software architecture. To understand the KPIs presented, we need to understand that the UI is a tree with a root node and edge nodes and many nodes in between. Ideally the outer nodes are clean from difficult dependencies, whereas the inner notes can depend on those dependencies but even here ideally these dependencies are extracted into another set of objects, the stores.
 
-In general we have stores, views, panels and controls. The controls form the edge nodes of our UI tree. Right above the controls are the panels. The panels care the most UI load as they use semantic free controls to introduce application semantic. On top of the panels sit the views, they bring together the UI surface with the data providers the stores. Ideally these views only depend on these store. The stores finally encapsulate the application business logic and interface the platform services. Based on this description we can start to extract some KPIs.
+In general, we have stores, views, panels and controls. The controls form the edge nodes of our UI tree. Right below the controls are the panels. The panels care the most UI load as they use semantic free controls to introduce application semantic. Below the panels, sit the views which bring together the UI surface. Views are part of the UI that depend on data providers which are the stores. The stores encapsulate the application business logic and interface to the platform services. Based on this description we can start to extract some KPIs.
 
-At first we need to identify the difficult dependencies. These are dependencies which make unit testing more painful. These harmful dependencies can be a module which uses a network service or a global object introducing global state or a rendering node which introduces certain hardware dependencies. We must ensure our goal to decompose the UI and unit test each component must not be compromised.
+At first, we need to identify the complex dependencies. These are dependencies which make unit testing more painful. These harmful dependencies can be a module which uses a network service or a global object introducing global state or a rendering node which introduces certain hardware dependencies to the UI. We must ensure our goal to decompose the UI and unit test of each component must not be compromised.
 
 !!! info
 
@@ -45,9 +45,9 @@ Refactoring is a disciplined technique for restructuring an existing body of cod
 
 ### Recipe: Stop leaking object internals from singletons
 
-A singleton which exposes an object opens the opportunity for everyone to navigate the object internals. By this open up all kind of cross-dependencies.
+A singleton which exposes an object, opens the opportunity for anyone to navigate to the object internals. By this, open up the opportunities to any kind of cross-dependencies.
 
-So assume a singleton exposes an object
+Take a look on the example below. Assume that there is a singleton which expose an object
 
 ```qml
 // HelperSingleton.qml
@@ -56,7 +56,7 @@ QtObject {
 }
 ```
 
-The anticipated or desired usage could be to allow others to control window visibility.
+The desired usage could be to allow others to control its window visibility.
 
 ```qml
 // AppPanel.qml
@@ -68,7 +68,7 @@ Panel {
 }
 ```
 
-But others could expose the object in an evil way like this.
+But, it also allows others to expose the object in an evil way like an example below:
 
 ```qml
 // EvilPanel.qml
@@ -80,19 +80,19 @@ Panel {
 }
 ```
 
-Now the EvilPanel depends on the internal structure and even existence of internal UI types. And even worse the developer of the AppWindow is not aware someone is using this API. Don't expose your object internals, and do not use other objects internals.
+Now, the EvilPanel depends on the internal structure and even existence of internal UI types. And even worse, the developer of the AppWindow is not aware that someone is using the same API somewhere else. Hence, don't expose your object internals, and do not use other object's internals.
 
-The point is the user of the singleton could now navigate to the parents of the window, just to fulfill a requirement.
+The point is, the user of a singleton could now navigate to the parents of the window, just to fulfill a single requirement.
 
-> whatever can happen will happen
+> anything could happen, can happen
 
-To close down this leakage we need to investigate how the object is used. Often we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.
+To close down this object's leakage, we need to investigate how the object is meant to be used. Often, we see pattern in the usage. The patterns then need to be extracted into a function, and the function would then navigate the object.
 
 ```diff
 // HelperSingleton.qml - improved
 QtObject {
 -   property Item appWindow
-+   property Item __appWindow
++   readonly property Item __appWindow
 
 +   function hideWindow() {
 +       __appWindow.visible = false
@@ -104,7 +104,7 @@ QtObject {
 }
 ```
 
-And better panel
+And better panels
 
 ```diff
 // AppPanel.qml - improved
@@ -128,15 +128,15 @@ Panel {
 }
 ```
 
-Over time we will be able to eliminate the object from the public interface and only allow users to use these functions. From now on we can ensure no new internals of this object will be leaked. And even better we better understand how users want to use the API.
+Over time, we will be able to eliminate the object from the public interface and only allow users to use these functions. From now on, we can ensure there will be no new internals of this object will be leaked. And even better, we are now able to understand how users want to use the API. Additionally, by making the object's property become readonly will make sure that users will not be able to change the content of that object as well.
 
 > Expose functions with meanings, not objects with internals
 
 ### Recipe: Push singletons up
 
-When investigating the usage of certain singletons often they are used in a related code area. It seems developers where to lazy to pass in these dependencies and rather shortcut the relations.
+When investigating the usage of certain singletons, usually they are found in a related code area. It seems that developers are too lazy to pass in these dependencies and rather find a shortcut of the relations.
 
-Assume we have a panel which show a title and some content. The title shall present the current time and the content shall present the time but also be able to reset the current time.
+Assuming that we have a panel which show a title and some content. The title shall present the current time and the content shall present the time but also be able to reset the current time.
 
 The parent application panel, which holds both children panels.
 
@@ -161,7 +161,7 @@ Panel {
 }
 ```
 
-The content panel will display the time and allow the reset current time.
+The content panel will display the time and is allowed to reset the current time.
 
 ```qml
 // ContentPanel.qml
@@ -175,7 +175,7 @@ Panel {
 }
 ```
 
-We can revert this by looking at the singleton usage in one component and move the usage up to the root level.
+We can revert this by looking at the singleton usage in a component and move the usage up to the root level.
 
 ```diff
 // TitlePanel.qml
@@ -191,7 +191,7 @@ Panel {
 }
 ```
 
-Same can be applied to content panel
+The same way can be applied to content panel
 
 ```diff
 // ContentPanel.qml
@@ -212,7 +212,7 @@ Panel {
 }
 ```
 
-In the next step we can then move the singleton onto the other side and pass it into the component.
+In the next step, we can then move the singleton onto the other side and pass it into the component.
 
 ```diff
 // AppPanel.qml
@@ -229,7 +229,7 @@ Panel {
 }
 ```
 
-Now we can eliminate the usage of the singletons in the children.
+Now, we can eliminate the usage of the singletons in the children.
 
 ```diff
 // TitlePanel.qml
@@ -263,9 +263,9 @@ Panel {
 }
 ```
 
-Be aware we are now able to remove the dependency on the `service.time` module and by this making the `TitlePanel` and `ContentPanel` easier to test as dependencies are now injected.
+Be aware that we are now able to remove the dependency on the `service.time` module and by this making the `TitlePanel` and `ContentPanel` easier to test as dependencies are now injected instead of directly implemented inside.
 
-By this we effectively push the singleton usage on level up. Normally it is expected after several of these pushes you will reach a level where several child components suddenly depend on the same information injected from the singleton. To effectively predict how many levels you need to push up this dependency we would need to identify the node which creates the child nodes using the singleton. If we reach that point there is no need for a singleton and we can convert the singleton into an instance of even eliminate it all together.
+By doing this, we effectively push the singleton usage one level up. Normally, it is expected after several commits until we reach a level where several child components suddenly depend on the same information injected from the singleton. To effectively predict how many levels you need to push this dependency up, we would need to identify the node which creates the child nodes using the singleton. If we reach that point, there is no need for a singleton and we can convert the singleton into an instance of even eliminate it all together.
 
 ### Recipe: Eliminate singletons
 
