@@ -44,7 +44,7 @@ nav:
       - "Refactoring": "topics/refactor.md"
       - "Styles": "topics/styles.md"
       - "Runtime & Modules": "topics/runtime.md"
-      - "Exposing Data from C++": "topics/data.md"
+      - "Exposing Data to QML": "topics/data.md"
       - "Design Work Flow": "topics/workflow.md"
   - Admin:
       - "Introduction": "admin/intro.md"
