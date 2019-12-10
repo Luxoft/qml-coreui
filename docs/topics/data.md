@@ -24,11 +24,444 @@
     * https://www.vikingsoftware.com/qtquick-custom-item-performance/
     * https://github.com/QUItCoding/qnanopainter
 
-There are different categories and ways to expose C++ data to QML. 
+
+This docoument will discuss different strategies how to expose data to QML. We will shortly discuss the pros and cons of each strategy and later define a strategy which shall scale.
+
+## Exposing Data
+
+Qt offers you several ways to inject data into the user interface presented by QML. QML comes with support native support for JSON using the JS `JSON.parse` and `JSON.stringify` methods. As a transport you can use HTTP via the XMLHTTRequest for websockets using the WebSocket library. Here is a list of references:
+
+* https://doc.qt.io/qt-5/qtqml-xmlhttprequest-example.html
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
+
+The other option is to capture the data on the native C++ side expose it to QML using `qmlRegisterType` and properties, slots and signals. For this Qt C++ data types need to be transformed to QML supported data types. The process of registering C++ data types and the conversion are discussed in the Qt documentation at several places.
+
+ * [QtQml](https://doc.qt.io/qt-5/qtqml-index.html)
+     * [Overview - QML and C++ Integration](https://doc.qt.io/qt-5/qtqml-cppintegration-overview.html)
+     * [Integrating QML and C++](https://doc.qt.io/qt-5/qtqml-cppintegration-topic.html)
+         * [Exposing Attributes of C++ Types to QML](https://doc.qt.io/qt-5/qtqml-cppintegration-exposecppattributes.html)
+         * [Defining QML Types from C++](https://doc.qt.io/qt-5/qtqml-cppintegration-definetypes.html)
+         * [Embedding C++ Objects into QML with Context Properties](https://doc.qt.io/qt-5/qtqml-cppintegration-contextproperties.html)
+         * [Interacting with QML Objects from C++](https://doc.qt.io/qt-5/qtqml-cppintegration-interactqmlfromcpp.html)
+         * [Data Type Conversion Between QML and C++](https://doc.qt.io/qt-5/qtqml-cppintegration-data.html)
+     * [Writing QML Extensions with C++](https://doc.qt.io/qt-5/qtqml-tutorials-extending-qml-example.html)
+     * [Creating C++ Plugins for QML](https://doc.qt.io/qt-5/qtqml-modules-cppplugins.html)
+     * [Important C++ Classes Provided By The Qt QML Module](https://doc.qt.io/qt-5/qtqml-cppclasses-topic.html)
+ * [QtQuick](https://doc.qt.io/qt-5/qtquick-index.html)
+     * [Qt Quick C++ Classes](https://doc.qt.io/qt-5/qtquick-module.html)
+     * [C++ Extension Points Provided By Qt Quick](https://doc.qt.io/qt-5/qtquick-cppextensionpoints.html)
+ * [QtQuick.Controls 2](https://doc.qt.io/qt-5/qtquickcontrols-index.html)
+    * [Qt Quick Controls C++ Classes](https://doc.qt.io/qt-5/qtquickcontrols2-module.html)
+
+## JSON or C++
+
+JSON is a great format when you interact with HTTP REST endpoints or other cloud based services which are JSON based. Unfortunately on the Qt C++ side there is not a great support to consume such JSON based services. You would need to rely on QNetworkAccessManager and QJSonDocument to consume such kind of services. There are 3rd party libraries which makes it easier to consume a HTTP REST endpoint for example Duperagent (https://github.com/Cutehacks/duperagent).
+
+In QML you would have to use the XmlHttpRequest and convert the incoming data into JSON. This is pretty lowlevel when coming from the Webworld and are used to libraries like Axios.
+
+From the C++ side you would use the `QNetworkAccessManager` and request a HTTP endpoiunt and convert the data into JSON using `QJsonDocument`. From there you normally convert it further to a `QVariant` related type to expose it to QML or using native data types.
+
+If your data come from another native source using a binary protocol you often have to write an adapter layer to convert the data types from standard C++ to Qt C++ and then you can directly expose this data to QML using Qt offered data conversions.
+
+## Mechanics of Exposure
+
+So you have the data now either as some form of `QVariant` or as Qt C++ native types. Now you can expose the data to QML. But how to structure this?
+
+
+We can see data often as a structured tree which starts either with an object form or an array form. JSON demonstrated very nicely that all data can be reduced to simple data structures. Same applied to Qt data. But data is not everything we want to expose, we also want to expose operation on the data as also signals, so notification when something has changed. Additional Qt uses reactive programming, so a user gets notified when a property has changed and based on this we are used nowadays to bindings. It is only possible to bind to properties, not to operations or signals. On signals you can connect using a handler, which is just another form of callback. Operations might trigger property changes or setting a property will trigger property changes.
+
+Besides these structures there is also the model type in Qt. Which is a protocol to expose data arrays efficient to a view.
+
+
+## Example
+
+To demonstrate the capabilities and possible issues we will develop a small configuration loader for a tomato timer with an attached task list. The idea is you work on a task for x minutes, make a break and then continue to work on anther task. After some work unites you make a longer break.
+
+The configuration is stroed in a JSON document and looks like this:
+
+```json
+{
+    "color": "#FF0000",
+    "tasks": [
+        { "text": "task-1", "done": false },
+        { "text": "task-2", "done": false },
+        { "text": "task-3", "done": true }
+    ],
+    "timing": {
+        "work": 25,
+        "short-break": 5,
+        "long-break": 15
+    }
+}
+```
+
+In the UI we would like to display the configuration and modify it. For example we would like to:
+
+* change the color to another random color
+* add new tasks to the taks list
+* clear out all done tasks
+* mark task to be done
+* update a task text
+* change the individual timing settings
+
+As we need to use this information in different places we would like to get informed when any of these data fields change.
+
+## Use Case: Loading data from JSON
+
+The data could come from a network service using HTTP or we could read it from a NOSQL DB, or simple from a JSON file. Using a JSON file is the simplest way.
+
+We would read the text document and use QJSonDocument to convert it into a QJsonObject and form there into a QVariantMap. From there on we have two options, either expose the whole document as a great QVariantMap or expose individual properties as a QVariant related type.
+
+Exposing the whole document:
+
+```cpp
+class TodoManager : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QVariantMap document READ document WRITE setDocument NOTIFY documentChanged)
+    ...
+}
+```
+
+
+Or exposing the individual properties
+
+```cpp
+class TodoManager : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(QVariantList tasks READ tasks WRITE setTasks NOTIFY tasksChanged)
+    Q_PROPERTY(QVariantMap timing READ timing WRITE setTiming NOTIFY timingChanged)
+```
+
+Now we can get and set the data. Almost done.
+
+## C++ Data Sources
+
+If we would have C++ native data structures we would first write an adapter, before we can expose the data to Qt C++. The adapter could look like this.
+
+```cpp
+struct Task {
+    QString text
+    bool done
+}
+
+struct Timing {
+    int work;
+    int shortBreak;
+    int longBreak;
+}
+
+class TodoEngine : public QObject {
+    Q_OBJECT
+public:
+    TodoEngine(QObject *parent=nullptr);
+    QColor color();
+    void setColor(QColor color);
+    QList<Task> tasks();
+    void appendTask(Task task);
+    void clearTasks();
+    Timing timing();
+    void setTimming(Timing t);
+
+signals:
+    void dataChanged();
+private:
+};
+```
+
+This engine is using an C++ internal todo implementation which is need to be adapted to be easy consumable for Qt. This engine API is not directly exposable to QML, we need to wrap it another time to ensure we provide a great experience.
+
+```cpp
+class TimingGroupedProperty : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(int work READ work WRITE setWork NOTIFY workChanged)
+    Q_PROPERTY(int shortBreak READ shortBreak WRITE setShortBreak NOTIFY workChanged)
+    Q_PROPERTY(int longBreak READ longBreak WRITE setLongBreak NOTIFY longBreakChanged)
+    ...
+}
+class TodoManager : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QColor color READ color WRITE setColor notify colorChanged)
+    Q_PROPERTY(QVariantList task READ tasks WRITE setTasks notify tasksChanged)
+    Q_PROPERTY(TimingGroupedProperty* timing READ timing CONSTANT)
+    ...
+}
+```
+
+To make the list even better consumable we could introduce a model.
+
+```cpp
+
+class TaskModel : public QAbstractItemListModel {
+    ...
+};
+
+class TodoManager : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QColor color READ color WRITE setColor notify colorChanged)
+    Q_PROPERTY(TaskModel* tasks READ tasks CONSTANT)
+    Q_PROPERTY(TimingGroupedProperty* timing READ timing CONSTANT)
+    ...
+}
+```
+
+The model could be editable by implementing `setData` and we would be able to assign values from inside QML.
+
+Now we should assume the API is perfect and can be used by the QML frontend developers.
+
+## Using an API
+
+We should now remember aboout our use cases and see how a frontend developer would use our API.
+
+* change the color to another random color
+* add new tasks from the taks list
+* clear out all done tasks
+* mark task to be done
+* update a task text
+* change the individual timing settings
+
+
+So lets see how the fontend develper would use the API. For this we can assume a simple UI where the TodoManager is instantiated and we implement a bugtton on clicked handler.
+
+
+```qml
+
+Pane {
+    TodoManager {
+        id: manager
+    }
+    Button {
+        text: 'Action'
+        onClicked: doIt()
+    }
+
+    function doIt() {
+        // here comes our code
+    }
+}
+```
+
+> change the color to another random color
+
+```qml
+function doIt() {
+    manager.color = Qt.rgba(Math.random(), Math.random(), Math.random(), 1);
+}
+```
+
+> add new tasks to the task list
+
+This is currently not supported, we would have to extend the model for an append function. But which parameters would the append function take?
+
+If this would be a gadget, we can not create a gadget on the QML side, another option would be to pass in a `QVariantMap`.
+
+```qml
+function doIt() {
+    // using a QVariantMap
+    manager.tasks.append({text: "Another Task", done: false})
+    // individual parameters
+    manager.tasks.append("Another Task", false)
+}
+```
+
+> clear out all done tasks
+
+Also our current model does not support it yet, we have to add a clear function.
+
+```qml
+function doIt() {
+    // using a QVariantMap
+    manager.tasks.clear()
+}
+```
+
+
+> mark an individual task to be done
+
+If we would be in a ListView we would have access to an individual model entry
+
+```qml
+delegate: ItemDelegate {
+    onClicked: {
+        model.done = true;
+    }
+}
+```
+
+If not, then we would need to implement an set function, which will take a field map and an index.
+
+
+```qml
+function doIt() {
+    manager.tasks.set(index, { done: true});
+}
+```
+
+> update a task text
+
+We can again use our set method
+
+```qml
+function doIt() {
+    manager.tasks.set(index, { text: "hello" });
+}
+```
+
+
+or inside our list view the model assignment
+
+
+```qml
+delegate: Item {
+    model.text = "hello";
+}
+```
+
+> change the individual timing settings
+
+To change the data we can use the grouped properties to access them.
+
+
+```qml
+function doIt() {
+    manager.timing.work = 15; // set to 15mins
+}
+```
+
+
+## Streamling the API
+
+This API requires currently quit some thinking to ensure all data is exposed to the users in the correct way and easy accessible to the frontend.
+
+To streamline the API we could make the data read only and expose operations to support the different use case.
+
+```cpp
+class TodoManager : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QVariant color READ color notify colorChanged)
+    Q_PROPERTY(QVariantModel* tasks READ tasks CONSTANT)
+    Q_PROPERTY(QVariantMap* timing READ timing notify timingChanged)
+    ...
+public slots:
+    // set random color
+    void setRandomColor();
+    // add task to task list
+    void addTask(const QVariantMap &task);
+    // clear all done tasks
+    void clearDoneTasks();
+    // update text or done on task
+    void updateTask(int index, const QVariantMap &fields);
+    // mark task done
+    void markTaskDone(int index);
+    // update a timing value
+    void updateTiming(QVariantMap fields);
+}
+```
+
+This API now very generic. Maybe a little bit too generic.
+
+
+```cpp
+
+
+class Task {
+    Q_GADGET
+    ...
+};
+
+
+class Timing {
+    Q_GADGET
+    ...
+};
+
+class TodoManager : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QColor color READ color NOTIFY colorChanged)
+    Q_PROPERTY(TaskModel* tasks READ tasks CONSTANT)
+    Q_PROPERTY(Timing timing READ timing NOTIFY timingChanged)
+    ...
+public slots:
+    // set random color
+    void setRandomColor();
+    // add task to task list
+    void addTask(const QVariantMap &task);
+    // clear all done tasks
+    void clearDoneTasks();
+    // update text or done on task
+    void updateTask(int index, const QVariantMap &fields);
+    // mark task done
+    void markTaskDone(int index);
+    // update a timing value
+    void updateTiming(QVariantMap fields);
+}
+```
+
+The difference now is that the structures are concrete types, same as primitive types. When mmutating the value, we can not use concrete types as there is no real way to create them from QML side. You coudl create a factory but the approach is much more complicated.
+
+
+```qml
+function doIt() {
+    var task = manager.createTask()
+    task.done = true;
+    manager.updateTask(1, task);
+}
+```
+
+versus the JS way
+
+```qml
+function doIt() {
+    manager.updateTask(1, { done: true});
+}
+```
+
+The second one is much more accessible for a JavaScript developer. Also if this means a JS developer could add fields, which do not exist in the structure.
+
+## Defining Structure
+
+We define structure be defining rules for APIs.
+
+Separate state from actions from queries.
+The state is formed by all properties of an API. Actions are the methods which mutate the state, either directly or indirectly through a remote effect. And a query is a method which returns data.
+
+
+API State
+
+* Expose primitive types using read only properties
+* Expose uncountable lists using read only models of either primitive types or structures presented by gadgets
+* Expose countable lists using a QVector or QVariant
+
+API Mutations or Queries
+
+* Expose mutations using invokable methods
+* Pass in structured data through QVariantMap
+* Pass in primitives using QML base types
+
+
+# Attic
+
+
+
+* JSON or QtTypes?
+* global types, types in main.cpp, type in plugins,
+* types a properties, objects, QVariant, Model
+
+What is wrong?
+
+Using FLux Approach: Data travels up, operations travel down.
+
+Strategy which scale!
+
+Separation of rendering items and data items
+
+There are different categories and ways to expose C++ data to QML.
 
 Here is a list of data aspects we need to consider
 
-* data type - is concerned if the data is one of 
+* data type - is concerned if the data is one of
 * data dynamics
 * data structure
 * data ownership
@@ -38,7 +471,7 @@ Here is a list of data aspects we need to consider
 
 ## Data Exposure
 
-There are different ways to inject data into the QML scope. 
+There are different ways to inject data into the QML scope.
 
 * JSON over HTTP/WebSocket
 * C++ Types/Objects/Models
@@ -54,13 +487,13 @@ While JSON sources are a natural way inside QML as QML supports JS natively, the
 
 ## C++ Data Sources
 
-C++ sources are the default supported data sources in Qt/QML. They come in from various places and types. 
+C++ sources are the default supported data sources in Qt/QML. They come in from various places and types.
 
 ## C++ Type Provisioning
 
 A C++ type can be provisioned as part of the runtime, e.g. inside the `main.cpp` using one of the `qmlRegisterType` formats or it can come in on demand using a QtQuick plugin using a dynamic loaded library which includes a type registry.
 
-You can register either data types, which provide pure data or objects which provide data and operations. Data types are mostly value types and copied over to QML from C++. Objects are reference types and the ownership needs to be clear. 
+You can register either data types, which provide pure data or objects which provide data and operations. Data types are mostly value types and copied over to QML from C++. Objects are reference types and the ownership needs to be clear.
 
 !!! note
 
@@ -100,7 +533,7 @@ If the data source comes from a weakly typed source for example a REST API or a 
 
 
 
-Qt5 offers several ways to expose C++ data types to QML. It is possible to epose a basic type, a complex value type or a complex object type. A basic type in general are integers, boolean or strings, see (basic types for an overview). Complex value types are typical structs or classes where the content is copied into the QML space. Changing these types will not be reflected back to the C++ space. The complex object types are passed by reference, these are typical QObject derived types and passed as pointers. 
+Qt5 offers several ways to expose C++ data types to QML. It is possible to epose a basic type, a complex value type or a complex object type. A basic type in general are integers, boolean or strings, see (basic types for an overview). Complex value types are typical structs or classes where the content is copied into the QML space. Changing these types will not be reflected back to the C++ space. The complex object types are passed by reference, these are typical QObject derived types and passed as pointers.
 
 
 Typical types:
