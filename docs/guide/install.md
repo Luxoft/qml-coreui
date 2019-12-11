@@ -17,19 +17,10 @@ The script requires a Python (3.5> ) installation with the PIP package manager i
 
 ## Installation
 
-Normally you would install the `coreui-admin` using the pip package manager.
-
-
-    pip install coreui-admin
-
-This will install an executable `coreui-admin` into your path.
-
-## Install from git
-
 You can also directly install from git using the python package manager
 
     git clone https://github.com/Luxoft/qml-coreui.git
-    cd qml-coreui    
+    cd qml-coreui
     pip install .
 
 !!!note

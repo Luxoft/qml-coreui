@@ -55,14 +55,10 @@ nav:
       - "Developing": "admin/dev.md"
       - "Project Creation": "admin/projects.md"
       - "Reference": "admin/reference.md"
-  - "Download":
-      - "Getting Started": "download/index.md"
   - "Extensions":
       - "Overview": "extensions/overview.md"
   - "Resources":
       - "Getting Started": "resources/index.md"
-  - "Support This":
-      - "Getting Started": "support/index.md"
 
 markdown_extensions:
   - admonition
