@@ -670,18 +670,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/" title="Installation" class="md-nav__link">
-      Installation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../build/" title="Building" class="md-nav__link">
       Building
     </a>
@@ -733,8 +721,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#single-process-ui" class="md-nav__link">
-    Single Process UI
+  <a href="#qtauto-process-ui" class="md-nav__link">
+    QtAuto Process UI
   </a>
   
     <nav class="md-nav">
@@ -756,13 +744,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#multi-process-ui" class="md-nav__link">
-    Multi Process UI
-  </a>
   
 </li>
       
@@ -887,8 +868,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#single-process-ui" class="md-nav__link">
-    Single Process UI
+  <a href="#qtauto-process-ui" class="md-nav__link">
+    QtAuto Process UI
   </a>
   
     <nav class="md-nav">
@@ -910,13 +891,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#multi-process-ui" class="md-nav__link">
-    Multi Process UI
-  </a>
   
 </li>
       
@@ -949,25 +923,24 @@
 </pre></div>
 </td></tr></table>
 
-<p>This will by default create a new project in the <code>myproject</code> folder using the <code>single-process</code> template. To change the template you can provide a <code>--template</code> option.</p>
+<p>This will by default create a new project in the <code>myproject</code> folder using the <code>qtauto-process</code> template using Qt application manager. To change the template you can provide a <code>--template</code> option, but currently only the <code>appman</code> template is supported.</p>
 <p>To launch your newly created project you can use</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin start
 </pre></div>
 </td></tr></table>
 
-<p>It will launch the <code>qmlscene</code> from your given Qt SDK with the correct setup.</p>
+<p>It will launch the <code>appman</code> from your given Qt SDK with the correct setup.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To see all options please use <code>coreui-admin new --help</code></p>
 </div>
-<h2 id="single-process-ui">Single Process UI</h2>
-<p>The single process user interface is created using</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin new single-ui --template single
+<h2 id="qtauto-process-ui">QtAuto Process UI</h2>
+<p>To create a new multi-process project you can use the <code>new</code> command with the <code>--template appman</code> option.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin new multi-ui --template appman
 </pre></div>
 </td></tr></table>
 
-<p>It will create a UI project which can be launched from a QtCreator <code>.qmlproject</code> file. External native dependencies are served using QML Plugins.</p>
-<p>The project is built around the idea that there is a system UI that displays the system-wide user interface portion and applications which display the feature-specific information.</p>
+<p>This will create a new user interface project which has support for the Qt ApplicationManager built-in.</p>
 <h3 id="system-ui">System UI</h3>
 <p>The System UI which acts as the desktop-like user interface in which other applications can be shown and contains a status bar to present system-wide information, it also manages any other overlays which do not directly belong to the applications. All other information is part of the individual applications. The SystemUI is started by launching the "SystemUI.qml" document in the <code>sui</code> folder or the <code>Main.qml</code> document in the root folder of your project.</p>
 <div class="admonition note">
@@ -975,15 +948,7 @@
 <p>The SystemUI is launched by default when working with the QtCreator project. The SystemUI was also registered as the <code>start</code> script by the new project generator and can be launched using the <code>start</code> option of <code>coreui-admin</code>: <code>coreui-admin start</code>.</p>
 </div>
 <h3 id="application-ui">Application UI</h3>
-<p>An application is contained inside a apps folder and has its own <code>Application.qml</code> document. It is registered with the SystemUI and added to the launcher menu of the SystemUI.</p>
-<h2 id="multi-process-ui">Multi Process UI</h2>
-<p>To create a new multi-process project you can use the <code>new</code> command with the <code>--template multi</code> option.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin new multi-ui --template multi
-</pre></div>
-</td></tr></table>
-
-<p>This will create a new user interface project which has support for the Qt ApplicationManager built-in.</p>
-<p>It follows very similar concepts than the single-process UI but the applications are now designed to be run as separate processed and provide a higher level of flexibility and security.</p>
+<p>An application is contained inside a <code>apps</code> folder and has its own <code>Application.qml</code> document. It is registered with the SystemUI and added to the launcher menu of the SystemUI.</p>
 <p>The newly created project can be launched using</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin start
 </pre></div>
@@ -993,7 +958,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The Qt Application manager requires a Wayland window manager to run in multi-process mode, which is often only available on Linux and the target HW.</p>
-<p>To allow the development of other hosts (e.g. Mac/Windows) the application manager has a single-process model that is automatically invoked on these environments. Please consult the QtApplication Manager documented for more information.</p>
+<p>To allow the development of other hosts (e.g. Mac/Windows) the application manager has a single-process model that is automatically invoked on these environments. Please consult the <a href="https://doc.qt.io/QtApplicationManager/qtapplicationmanager-index.html">Qt Application Manager</a> documented for more information.</p>
 </div>
                 
                   

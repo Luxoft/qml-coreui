@@ -756,18 +756,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../admin/install/" title="Installation" class="md-nav__link">
-      Installation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../admin/build/" title="Building" class="md-nav__link">
       Building
     </a>
@@ -1085,19 +1073,19 @@
 </td></tr></table>
 
 <p>You should see something like this:</p>
-<p><img alt="" src="assets/controls-default.png" /></p>
+<p><img alt="" src="../../assets/controls-default.png" /></p>
 <p>Then try it with one of the styles shipped with Qt Quick Controls 2, such as "material"</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>$ qml controls.qml -style material
 </pre></div>
 </td></tr></table>
 
-<p><img alt="" src="assets/controls-material.png" /></p>
+<p><img alt="" src="../../assets/controls-material.png" /></p>
 <p>Or "fusion" (in a desktop environment that's using a dark theme)</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>$ qml controls.qml -style fusion
 </pre></div>
 </td></tr></table>
 
-<p><img alt="" src="assets/controls-fusion.png" /></p>
+<p><img alt="" src="../../assets/controls-fusion.png" /></p>
 <p>You can see that by using Qt Quick Controls 2 styles you can have the application code independent of the look and feel of its components. So no changes are needed in the components' API exposed to application code.</p>
 <p>Now we are going to create a new style that implements a different look and feel, which we will call "foobar". The first component we will customize in the foobar style is going to be the Pane, as it's the simplest. Create a subdirectory called "foobar". Then copy the file <code>QT_INSTALL_DIR/qml/QtQuick/Controls.2/Pane.qml</code> to it, where <code>QT_INSTALL_DIR</code> is the path where your Qt is installed. It should look like the following:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1164,7 +1152,7 @@
 </pre></div>
 </td></tr></table>
 
-<p><img alt="" src="assets/controls-foobar-pane.png" /></p>
+<p><img alt="" src="../../assets/controls-foobar-pane.png" /></p>
 <p>Next we want to style the Button component. As with did with Pane, just copy Button.qml over from <code>QT_INSTALL_DIR/qml/QtQuick/Controls.2</code> into our foobar style directory. If you open that file now you will see that it's quite more involded than the Pane:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1368,7 +1356,7 @@
 </td></tr></table>
 
 <p>If you run that application again you should see that the buttons are animated and look wildly different from the other styles. This is just to give an idea of how flexible and powerful the Qt Quick Controls 2 styling is.</p>
-<p><img alt="" src="assets/controls-foobar-button.png" /></p>
+<p><img alt="" src="../../assets/controls-foobar-button.png" /></p>
 <h3 id="collecting-values-in-a-style-object">Collecting values in a Style object</h3>
 <p>So far we have been hardcoding color values directly in the component's style implementation. But for better reusability it's prefferable to give them names and collect them all into a single entity. There are a couple of ways of doing it but, again, we will start with the simplest: creating a new qml module containing a singleton QtObject which will hold all the color and other values used throughout the style implementation. In this example we will name that singleton <code>FoobarStyle</code>. Create a subdirectory called <code>imports</code> and inside it yet another subdirectory called <code>FoobarStyle</code>, which will be the name of our qml module.</p>
 <p>Inside <code>imports/FoobarStyle</code> create a file named <code>qmldir</code> with the following content::</p>
@@ -1594,7 +1582,7 @@
 </td></tr></table>
 
 <p>This is how our <code>controls.qml</code> application should look like after having the theme support added to it:</p>
-<p><img alt="" src="assets/controls-foobar-themes.png" /></p>
+<p><img alt="" src="../../assets/controls-foobar-themes.png" /></p>
 <h2 id="naming-conventions">Naming conventions</h2>
 <p>One common mistake when naming colors in particular is naming them after what they look like instead of their function or where they are used. So avoid names such as "orangeBackgroundColor" or "lightTextColor" and prefer usage, such as "buttonBackgroundColor" or a category such as "primaryColor" or "accentColor". After all, as soon as you have a day/light and a night/dark theme, a color property that used to have a "yellow" or "light" value will switch to have the opposite, having a "dark" or "brown" one instead. Naming a color property after the visual caracteristics of its value will void the abstraction level (and hence flexibility) it provides when compared to using hardcoded values directly.</p>
 <p>Having that said, there might still be value in naming a color in a explicit way in your style object, such as FoobarStyle.red, meaning that whenever your UI uses red, it's not just any red, or the standard 0xFF0000, but a very particular hue of red, which is specified in your style. And that only if the usage of this named red throught the UI is always the same, regardless of the theme. Such as the red that makes up the visual identity of your company or the red that signifies alert or the interruption of a call.</p>

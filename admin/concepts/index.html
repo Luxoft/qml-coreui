@@ -750,18 +750,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/" title="Installation" class="md-nav__link">
-      Installation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../build/" title="Building" class="md-nav__link">
       Building
     </a>
@@ -970,21 +958,28 @@
                 
                 
                 <h1 id="concepts">Concepts</h1>
-<p>As a project solution, the coreui-admin guides you through the initial setup of QtAuto and the creation of an initial user interface based on QtAuto. For this, it tries to be flexible and uses several generic concepts.</p>
+<p>As a project solution, the <code>coreui-admin</code> guides you through the initial setup of QtAuto and the creation of an initial user interface based on QtAuto project. The script tries to be flexible and uses several generic concepts, which are described below.</p>
 <h2 id="configuration-file">Configuration File</h2>
-<p>The admin relies on a per-project configuration file. It stores information about the build process and involved repositories. Additional you can place environment variables and small scripts into the configuration document.</p>
+<p>The admin relies on a per-project configuration file (<code>coreui.yml</code>). It stores information about the build process and involved repositories. Additional you can place environment variables and small named scripts into the configuration document.</p>
 <h2 id="environment-variables">Environment Variables</h2>
-<p>Environment variables passed on to the build or run commands will be read from the shell environment but also can be placed into the coreui config file in the env section. For user-contributed env variables it is also possible to add environment variables into a  <code>.env</code> file.</p>
+<p>Environment variables are passed on to the build or run commands and will be read from the shell environment but also can be placed into the <code>coreui.yml</code> config file in the <code>env</code> section. For user-contributed environment variables it is also possible to add environment variables into a  <code>.env</code> file.</p>
+<p>Here the order a environment file will be read:</p>
+<ul>
+<li><code>coreui.yml</code> in the <code>env</code> section</li>
+<li><code>.env</code> file</li>
+<li>shell environment variable</li>
+</ul>
+<p>later entries will overwrite earlier entries.</p>
 <h2 id="repositories-and-targets">Repositories and Targets</h2>
-<p>QtAuto supports the registration of repositories by name with the git URL, branch, build-system information. A repository listed can be made available in the target section. A target allows the bundling of one or more repositories as a build unit.</p>
+<p>QtAuto supports the registration of repositories by name with the git URL, branch and used build-system. A repository listed can be made available in the target section. A target allows the bundling of one or more repositories as a sequence of build unit. The order repositories are build is the order they are defined in the target.</p>
 <h2 id="standardized-builds">Standardized Builds</h2>
-<p>Registered repositories can have different build systems named when registered with coreui. For this, it knows currently three build systems (configure, qmake, CMake). Configure is used for the building of Qt itself and other projects may use qmake or CMake based projects.</p>
+<p>Registered repositories can have different build systems when registered with coreui. For this, <code>coreui-admin</code> supports currently three build systems (<code>configure</code>, <code>qmake</code>, <code>CMake</code>). Configure is used for the building of Qt itself and other projects may use <code>qmake</code> or <code>CMake</code> based projects.</p>
 <h2 id="scripts">Scripts</h2>
-<p>A script is a command-line registered with the coreui configuration file. The environment variables are passed on to the scripts.</p>
+<p>A script is a shell command line registered with the coreui configuration file. The environment variables are passed on to the script.</p>
 <h2 id="project-generators">Project Generators</h2>
 <p>QtAuto allows you to generate a full project scaffold. The scaffolds are based on smart templates and follow a defined architecture.</p>
 <h2 id="aspect-generators">Aspect Generators</h2>
-<p>Besides generating full project the coreui script allows also to extend the generated project using distinct components. This allows the extension of the generated project.</p>
+<p>Besides generating full project the coreui script allows also to extend the generated project using distinct components. This allows the extension of the generated project. The generator is also able to patch existing files in certain limits.</p>
                 
                   
                 
@@ -1020,13 +1015,13 @@
           </a>
         
         
-          <a href="../install/" title="Installation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../build/" title="Building" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Installation
+                Building
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

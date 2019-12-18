@@ -722,18 +722,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../install/" title="Installation" class="md-nav__link">
-      Installation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../build/" title="Building" class="md-nav__link">
       Building
     </a>
@@ -918,14 +906,14 @@
 <p>To use the admin we first need to install it as part of our environment.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>git clone git@http://github.com/Luxoft/coreui-admin.git
-<span class="nb">cd</span> coreui-admin
-pip install -e .
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>git clone https://github.com/Luxoft/qml-coreui.git
+<span class="nb">cd</span> qml-coreui
+pip install .
 </pre></div>
 </td></tr></table>
 
-<p>The simplest start is to use an existing Qt SDK (e.g. 5.11 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start to the creation of a new user interface for systems.</p>
 <h2 id="setting-up-qtauto-stack">Setting up QtAuto Stack</h2>
+<p>The simplest start is to use an existing Qt SDK (e.g. 5.13 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start to the creation of a new user interface for systems.</p>
 <p>Create a project directory</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>mkdir coreui <span class="o">&amp;&amp;</span> <span class="nb">cd</span> coreui
 </pre></div>

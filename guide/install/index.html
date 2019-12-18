@@ -407,14 +407,14 @@
       
         <li class="md-nav__item">
   <a href="#using-virtualenv" class="md-nav__link">
-    Using Virtualenv
+    Using virtualenv
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#first-usage" class="md-nav__link">
-    First Usage
+  <a href="#first-use" class="md-nav__link">
+    First use
   </a>
   
 </li>
@@ -736,18 +736,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../admin/install/" title="Installation" class="md-nav__link">
-      Installation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../admin/build/" title="Building" class="md-nav__link">
       Building
     </a>
@@ -910,14 +898,14 @@
       
         <li class="md-nav__item">
   <a href="#using-virtualenv" class="md-nav__link">
-    Using Virtualenv
+    Using virtualenv
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#first-usage" class="md-nav__link">
-    First Usage
+  <a href="#first-use" class="md-nav__link">
+    First use
   </a>
   
 </li>
@@ -947,12 +935,12 @@
 <p>This material is work in progress and will change!</p>
 </div>
 <p>CoreUI is not really something to be installed. It is more an approach to write large scaled user interfaces using Qt and Qt Auto. Still there is a helper library and tools to help you getting started and which is used throughout the guide.</p>
-<p>The tool is called <code>coreui-admin</code> which can be used to create new sample projects or add aspects to these projects. This shall make the guide more compact. Instead of describing in detail how to setup a project, we can now just tell <code>coreui-admin new myproject</code>.</p>
+<p>The tool is called <code>coreui-admin</code> which can be used to create new sample projects or add aspects to these projects. This tool purpose is to make the guide more compact. Instead of describing in detail how to setup a project, it is possible now just to create a project using <code>coreui-admin new myproject</code>.</p>
 <p>The <code>coreui-admin</code> tool is a Python 3 script which can be easily installed using the standard python tooling.</p>
 <h2 id="requirements">Requirements</h2>
 <p>The script requires a Python (3.5&gt; ) installation with the PIP package manager installed.</p>
 <h2 id="installation">Installation</h2>
-<p>You can also directly install from git using the python package manager</p>
+<p>You install the tool directly from this repository using the python package manager</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">Luxoft</span><span class="o">/</span><span class="n">qml</span><span class="o">-</span><span class="n">coreui</span><span class="p">.</span><span class="n">git</span>
@@ -965,7 +953,9 @@
 <p class="admonition-title">Note</p>
 <p>On Ubuntu you might need to add <code>$HOME/.local/bin</code> to you <code>$PATH</code></p>
 </div>
-<p>An editable installation only installs links to the original source. In effect updating the git checkout also installs the script.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you intent to work om the script you can install an editable installation which only installs links to the original source.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="p">.</span> <span class="c1">--upgrade</span>
 </pre></div>
 </td></tr></table>
@@ -978,13 +968,14 @@
 </td></tr></table>
 
 <p>Now the <code>coreui-admin</code> is updated to the latest from the remote repository.</p>
+</div>
 <h2 id="uninstall">Uninstall</h2>
 <p>To de install the script you can to use the pip tool</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">coreui</span><span class="o">-</span><span class="k">admin</span>
 </pre></div>
 </td></tr></table>
 
-<h2 id="using-virtualenv">Using Virtualenv</h2>
+<h2 id="using-virtualenv">Using virtualenv</h2>
 <p>In case you do not want to pollute your local python installation you can use python virtualenv</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -994,8 +985,8 @@
 </pre></div>
 </td></tr></table>
 
-<p>Now install coreui-admin and to exit this python virtual environment call <code>deactivate</code>.</p>
-<h2 id="first-usage">First Usage</h2>
+<p>Now install <code>coreui-admin</code> and to exit this python virtual environment call <code>deactivate</code>.</p>
+<h2 id="first-use">First use</h2>
 <p>After the installation the <code>coreui-admin</code> command is at your disposal.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="c1">--help</span>
 </pre></div>

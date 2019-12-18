@@ -397,8 +397,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#building-qtauto-with-coreui-admin" class="md-nav__link">
-    Building QtAuto with coreui-admin
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-coreui-project" class="md-nav__link">
+    Create a CoreUI Project
   </a>
   
 </li>
@@ -722,18 +729,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../admin/install/" title="Installation" class="md-nav__link">
-      Installation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../admin/build/" title="Building" class="md-nav__link">
       Building
     </a>
@@ -874,8 +869,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#building-qtauto-with-coreui-admin" class="md-nav__link">
-    Building QtAuto with coreui-admin
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-coreui-project" class="md-nav__link">
+    Create a CoreUI Project
   </a>
   
 </li>
@@ -914,21 +916,74 @@
                 
                 
                 <h1 id="getting-started">Getting Started</h1>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>This material is work in progress and will change!</p>
-</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The project and the architecture created by <code>coreui-admin</code> is only meant to be used for educational purpose.
 The <code>coreui-admin</code> tool, neither the code created by the tool is production ready.
 Still it is believed the code is a good starting point for creating your own production project.</p>
 </div>
-<p>To get started with the CoreUI Architecture we will create a new project and look at the source code.</p>
+<h2 id="prerequisite">Prerequisite</h2>
+<p>Before you can use the CoreUI architecture we need to build the QtAuto components which are not part of standard Qt5. If you have already installed a version of Qt5 and QtAuto you can skip this step.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Be aware the QtAuto and Qt SDK have their own license restrictions. So please make sure you inform yourself before using them.</p>
+</div>
+<p>We create a <code>qtauto</code> folder to download and build the QtAuto components. Todo this we mark the folder as a coreui folder using init.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">tryout</span><span class="o">/</span><span class="n">qtauto</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">tryout</span><span class="o">/</span><span class="n">qtauto</span>
+<span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">init</span>
+</pre></div>
+</td></tr></table>
+
+<p>This create a <code>coreui.yml</code> configuration document into this folder. To be able to build using Qt5 qmake we need to configure coreui to tell the location of the qmake binary</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="n">qmake</span> <span class="o">~/</span><span class="n">Qt</span><span class="o">/</span><span class="mi">5</span><span class="p">.</span><span class="mi">13</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="n">clang_64</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">qmake</span>
+</pre></div>
+</td></tr></table>
+
+<p>We can look which componens will be cloned based on which targets.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">targets</span>
+</pre></div>
+</td></tr></table>
+
+<p>Will produce the following table</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="n">tryout</span>
-<span class="n">cd</span> <span class="n">tryout</span>
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">qtauto</span><span class="o">`</span>
+<span class="n">______name______</span><span class="o">|</span><span class="n">______________________repos______________________</span>
+<span class="n">auto</span>            <span class="o">|</span> <span class="n">ivi</span><span class="p">,</span> <span class="n">appman</span><span class="p">,</span> <span class="n">neptune3</span><span class="o">-</span><span class="n">ui</span>
+<span class="n">tools</span>           <span class="o">|</span> <span class="n">qmllive</span><span class="p">,</span> <span class="n">gammaray</span>
+</pre></div>
+</td></tr></table>
+
+<p>To know more about a repo just type <code>coreui-admin repos</code>. The targets and repos are listed in the <code>coreui.yml</code> document. Feel free to edit them if required.</p>
+<p>Now we will clone the target repos using</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">clone</span> <span class="n">auto</span>
+</pre></div>
+</td></tr></table>
+
+<p>This will clone all repos listed under the target <code>auto</code> into the <code>repos/source</code> folder. It is also possible to just clone a repo by providing the repo name.</p>
+<p>To build the source components enter the build command</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">build</span> <span class="n">auto</span>
+</pre></div>
+</td></tr></table>
+
+<p>The build command also installs the components automatically into your provided Qt directory.</p>
+<p>If you want to first see the commands issued you can use the <code>--dry-run</code> option <code>coreui-admin --dry-run build auto</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To increse the number of CPUs used you can re-configure the jobs variable</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="n">jobs</span> <span class="mi">6</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now the build will use 6 cores.</p>
+</div>
+<p>If you later would like to rebuild the components but want to skip the configure parts you can append <code>--no-config --no-pause</code> to the build command. See <code>--help</code> for all the options.</p>
+<h2 id="create-a-coreui-project">Create a CoreUI Project</h2>
+<p>To get started with the CoreUI Architecture we will create a new project and look at the source code.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="n">tryout</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">tryout</span>
 <span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="k">new</span> <span class="n">myproject</span>
 </pre></div>
 </td></tr></table>
@@ -950,65 +1005,7 @@ Still it is believed the code is a good starting point for creating your own pro
 </pre></div>
 </td></tr></table>
 
-<p>The instructions are two fold. The first part for using the coreui-admin to build yiur project and the second part for using Qt Creator.</p>
-<h2 id="building-qtauto-with-coreui-admin">Building QtAuto with <code>coreui-admin</code></h2>
-<p>Before you can use the CoreUI architecture we need to build the QtAuto components which are not part of standard Qt5.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Be aware the QtAuto and Qt SDK have their own license restrictions. So please make sure you inform yourself before using them.</p>
-</div>
-<p>We create a <code>qtauto</code> folder to download and build the QtAuto components. Before this we need to mark this folder as a coreui folder using init.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="n">qtauto</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">qtauto</span>
-<span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">init</span>
-</pre></div>
-</td></tr></table>
-
-<p>Now we need to configure coreui to tell the location of the qmake binary</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="n">qmake</span> <span class="o">~/</span><span class="n">Qt</span><span class="o">/</span><span class="mi">5</span><span class="p">.</span><span class="mi">13</span><span class="p">.</span><span class="mi">0</span><span class="o">/</span><span class="n">clang_64</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">qmake</span>
-</pre></div>
-</td></tr></table>
-
-<p>Before we clone the repositories we can look which componens will be cloned.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">targets</span>
-</pre></div>
-</td></tr></table>
-
-<p>Will produce the following table</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="n">workspace</span> <span class="o">`~/</span><span class="k">work</span><span class="o">/</span><span class="n">luxoft</span><span class="o">/</span><span class="n">tryout</span><span class="o">/</span><span class="n">qtauto</span><span class="o">`</span>
-<span class="n">______name______</span><span class="o">|</span><span class="n">______________________repos______________________</span>
-<span class="n">auto</span>            <span class="o">|</span> <span class="n">ivi</span><span class="p">,</span> <span class="n">appman</span><span class="p">,</span> <span class="n">neptune3</span><span class="o">-</span><span class="n">ui</span>
-<span class="n">tools</span>           <span class="o">|</span> <span class="n">qmllive</span><span class="p">,</span> <span class="n">gammaray</span>
-</pre></div>
-</td></tr></table>
-
-<p>To know more about a repo just type <code>coreui-admin repos</code>. The targets and repos are listed in the <code>coreui.yml</code> document. Feel free to edit them if required.</p>
-<p>Now we will clone the repos using</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">clone</span> <span class="n">auto</span>
-</pre></div>
-</td></tr></table>
-
-<p>This will clone all repos listed under the target <code>auto</code> into the <code>repos/source</code> folder.</p>
-<p>To build the source components enter the build command</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">build</span> <span class="n">auto</span>
-</pre></div>
-</td></tr></table>
-
-<p>The build command also installs the components automatically into your provided Qt directory.</p>
-<p>If you want to first see the commands issued you can use the <code>--dry-run</code> option <code>coreui-admin --dry-run build auto</code></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To increse the number of CPUs used you can re-configure the jobs variable</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="n">config</span> <span class="n">jobs</span> <span class="mi">6</span>
-</pre></div>
-</td></tr></table>
-
-<p>Now the build will use 6 cores.</p>
-</div>
-<p>If you later would like to rebuild the components but want to skip the configure parts you can append <code>--no-config --no-pause</code> to the build command. See <code>--help</code> for all the options.</p>
+<p>The instructions are two fold. The first part for using the <code>coreui-admin</code> to run your project and the second part for using Qt Creator to run your project.</p>
 <h2 id="using-coreui-admin-to-run-your-ui-project">Using <code>coreui-admin</code> to run your ui project</h2>
 <p>The instruction tells us to change the directory, make some remaining configuration and run the project</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1028,14 +1025,14 @@ Still it is believed the code is a good starting point for creating your own pro
 </pre></div>
 </td></tr></table>
 
-<p>Now you can start the new project using</p>
+<p>Please change this, if they are wrong. Now you can start the new project using</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="k">start</span>
 </pre></div>
 </td></tr></table>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you want to print the commands issued and not run the commands themself you can use the dry-run option</p>
+<p>If you want to print the commands issued and not run the commands themself you can use the dry-run option at any time.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">coreui</span><span class="o">-</span><span class="k">admin</span> <span class="c1">--dry-run start</span>
 </pre></div>
 </td></tr></table>
@@ -1053,7 +1050,7 @@ Still it is believed the code is a good starting point for creating your own pro
 </pre></div>
 </td></tr></table>
 
-<p>Change directory to <code>./ui</code> and open the <code>myproject-ui.qmlproject</code> with Qt Creator and in the run mode change the executable to <code>%{Qt:QT_INSTALL_BINS}/appman</code> 
+<p>Change directory to <code>./ui</code> and open the <code>myproject-ui.qmlproject</code> with Qt Creator and in the run mode change the executable to <code>%{Qt:QT_INSTALL_BINS}/appman</code>
 with the arguments <code>-r -c am-config.yaml</code>. This will use <code>appman</code> as runtime and re-creted the app database on each start as also read the configuration from the <code>am-config.yaml</code>.</p>
 <p>To ensure the QtQuick Controls 2 style is loaded correctly register <code>QT_QUICK_CONTROLS_CONF</code> environment variable with Qt Creator in the run environment to <code>QT_QUICK_CONTROLS_CONF=./qtquickcontrols2.conf</code>. This will lookup the configuration document from the local directory.</p>
 <div class="admonition info">

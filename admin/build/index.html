@@ -668,18 +668,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../install/" title="Installation" class="md-nav__link">
-      Installation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -927,14 +915,14 @@ coreui-admin init
 <p>This will start your default editor and open the coreui document.</p>
 <p>Now we will tell coreui where the existing qt installation is, by setting the path to the <code>qmake</code> executable.</p>
 <p>For example on MACOS this should look like this:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config qmake ~/Qt/5.11.0/clang_64/bin/qmake
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config qmake ~/Qt/&lt;version&gt;/clang_64/bin/qmake
 </pre></div>
 </td></tr></table>
 
-<p>From now on coreui-admin will use the existing Qt installation as the base.</p>
+<p>From now on <code>coreui-admin</code> will use the existing Qt installation as the base.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In case you need to build your own Qt leave the qmake configuration empty and use the <code>coreui-admin qt</code> command to build your custom Qt5 from the source. See the section <em>Setup using custom Qt</em>.</p>
+<p>In case you need to build your own Qt leave the <code>qmake</code> configuration empty and use the <code>coreui-admin qt</code> command to build your custom Qt5 from the source. See the section <em>Setup using custom Qt</em>.</p>
 </div>
 <p>Now we clone the QtAuto modules and build them.</p>
 <p>First, we can check the <code>auto</code> target using::</p>
@@ -961,8 +949,10 @@ coreui-admin build auto
 </td></tr></table>
 
 <p>The clones repositories are available in the <code>source/&lt;repo-name&gt;</code> and <code>build/&lt;repo-name&gt;</code> locations. After building the repositories will be automatically installed into <code>install/&lt;repo-name&gt;</code>.</p>
-<p>!! note</p>
-<p>Be aware some repositories will automatically install as qt modules into the Qt directory and can not be found in the install location.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be aware some repositories will automatically installed as Qt modules into the Qt directory and can not be found in the install location.</p>
+</div>
 <p>If you later want to update your installation, you can simply run an update.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin update auto
@@ -982,7 +972,10 @@ coreui-admin build auto
 </pre></div>
 </td></tr></table>
 
-<p>Note: The OS command is currently only supported on Ubuntu.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The OS command is currently only supported on Ubuntu.</p>
+</div>
 <p>The check command will either be positive or negative. In the case the result is negative please run the os init command.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin os --init
 </pre></div>
@@ -1014,11 +1007,11 @@ coreui-admin qt --build
 2
 3
 4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>build | build
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>build   | build
 install | install
-jobs | 6
-qmake | ~/Qt/5.10.0/clang_64/bin/qmake
-source | source
+jobs    | 6
+qmake   | ~/Qt/5.10.0/clang_64/bin/qmake
+source  | source
 </pre></div>
 </td></tr></table>
 
@@ -1026,6 +1019,8 @@ source | source
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>coreui-admin config --unset qmake
 </pre></div>
 </td></tr></table>
+
+<p>For more information on the <code>coreui-admin</code> script use the <code>--help</code> flag. Also each command has an own <code>--help</code> section.</p>
                 
                   
                 
@@ -1046,7 +1041,7 @@ source | source
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../install/" title="Installation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../concepts/" title="Concepts" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1055,7 +1050,7 @@ source | source
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Installation
+                Concepts
               </span>
             </div>
           </a>
