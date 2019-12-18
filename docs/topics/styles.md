@@ -83,19 +83,19 @@ Save it as, say, controls.qml. Now run it with the qml tool
 
 You should see something like this:
 
-![](assets/controls-default.png)
+![](../assets/controls-default.png)
 
 Then try it with one of the styles shipped with Qt Quick Controls 2, such as "material"
 
     $ qml controls.qml -style material
 
-![](assets/controls-material.png)
+![](../assets/controls-material.png)
 
 Or "fusion" (in a desktop environment that's using a dark theme)
 
     $ qml controls.qml -style fusion
 
-![](assets/controls-fusion.png)
+![](../assets/controls-fusion.png)
 
 You can see that by using Qt Quick Controls 2 styles you can have the application code independent of the look and feel of its components. So no changes are needed in the components' API exposed to application code.
 
@@ -142,7 +142,7 @@ Now let's run our controls.qml app with our brand new style. For that we will ha
 
     $ QT_QUICK_CONTROLS_STYLE_PATH=. QT_QUICK_CONTROLS_FALLBACK_STYLE=Material qml controls.qml -style foobar
 
-![](assets/controls-foobar-pane.png)
+![](../assets/controls-foobar-pane.png)
 
 
 Next we want to style the Button component. As with did with Pane, just copy Button.qml over from `QT_INSTALL_DIR/qml/QtQuick/Controls.2` into our foobar style directory. If you open that file now you will see that it's quite more involded than the Pane:
@@ -260,7 +260,7 @@ For now let's just set a hardcoded background color, make the background rounded
 
 If you run that application again you should see that the buttons are animated and look wildly different from the other styles. This is just to give an idea of how flexible and powerful the Qt Quick Controls 2 styling is.
 
-![](assets/controls-foobar-button.png)
+![](../assets/controls-foobar-button.png)
 
 ### Collecting values in a Style object
 
@@ -399,7 +399,7 @@ And modifying the application code, `controls.qml`, so that clicking on the firs
 
 This is how our `controls.qml` application should look like after having the theme support added to it:
 
-![](assets/controls-foobar-themes.png)
+![](../assets/controls-foobar-themes.png)
 
 
 Naming conventions

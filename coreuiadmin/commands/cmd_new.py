@@ -82,9 +82,9 @@ def generate_appman_process(path, force):
 @click.command('new', short_help='creates a new coreui project')
 @click.option(
     '--template',
-    type=click.Choice(['simple', 'appman']),
+    type=click.Choice(['appman']),
     default='appman',
-    help='Project template. Default is "single" a single-process UI'
+    help='Project template. Default is "appmen", a QtAuto process. There are no other templates currently available.'
 )
 @click.option('--force/--no-force', help="forces writing of files also when file exists already")
 @click.argument('path', required=True, type=click.Path(resolve_path=True))

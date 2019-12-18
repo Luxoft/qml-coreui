@@ -33,14 +33,14 @@ Now we will tell coreui where the existing qt installation is, by setting the pa
 For example on MACOS this should look like this:
 
 ```sh
-coreui-admin config qmake ~/Qt/5.11.0/clang_64/bin/qmake
+coreui-admin config qmake ~/Qt/<version>/clang_64/bin/qmake
 ```
 
-From now on coreui-admin will use the existing Qt installation as the base.
+From now on `coreui-admin` will use the existing Qt installation as the base.
 
 !!! note
 
-    In case you need to build your own Qt leave the qmake configuration empty and use the `coreui-admin qt` command to build your custom Qt5 from the source. See the section *Setup using custom Qt*.
+    In case you need to build your own Qt leave the `qmake` configuration empty and use the `coreui-admin qt` command to build your custom Qt5 from the source. See the section *Setup using custom Qt*.
 
 Now we clone the QtAuto modules and build them.
 
@@ -70,9 +70,9 @@ coreui-admin build auto
 
 The clones repositories are available in the `source/<repo-name>` and `build/<repo-name>` locations. After building the repositories will be automatically installed into `install/<repo-name>`.
 
-!! note
+!!! note
 
-  Be aware some repositories will automatically install as qt modules into the Qt directory and can not be found in the install location.
+    Be aware some repositories will automatically installed as Qt modules into the Qt directory and can not be found in the install location.
 
 If you later want to update your installation, you can simply run an update.
 
@@ -97,7 +97,9 @@ The first step is to check if your OS can build Qt and the QtAuto components. Fo
 coreui-admin os --check
 ```
 
-Note: The OS command is currently only supported on Ubuntu.
+!!! info
+
+    The OS command is currently only supported on Ubuntu.
 
 The check command will either be positive or negative. In the case the result is negative please run the os init command.
 
@@ -132,11 +134,11 @@ coreui-admin config
 Will output something like this
 
 ```text
-build | build
+build   | build
 install | install
-jobs | 6
-qmake | ~/Qt/5.10.0/clang_64/bin/qmake
-source | source
+jobs    | 6
+qmake   | ~/Qt/5.10.0/clang_64/bin/qmake
+source  | source
 ```
 
 To unset a configuration value you can use the `config --unset` option.
@@ -144,3 +146,7 @@ To unset a configuration value you can use the `config --unset` option.
 ```sh
 coreui-admin config --unset qmake
 ```
+
+
+For more information on the `coreui-admin` script use the `--help` flag. Also each command has an own `--help` section.
+

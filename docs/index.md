@@ -9,7 +9,7 @@
 
 When you are part of a team that works on Qt Automotive Suite (short - Qt Auto), as Qt's vertical extension into the automotive market, you always wonder how new customers will approach Qt Auto, and how they will adapt it to their needs to create a truly stunning user experience for their automotive customers.
 
-From our research projects and production projects with various customers, we have gained valuable insights into this interesting market. Each project has its own unique constellation of management, design, development, and partnerships. This guide attempts to lay out the ground for a discussion about creating user interfaces wich scale using technologies including in Qt Auto, using an architecture we named the Core UI architecture.
+From our research projects and production projects with various customers, we have gained valuable insights into this interesting market. Each project has its own unique constellation of management, design, development, and partnerships. This guide attempts to lay out the ground for a discussion about creating user interfaces which scale using technologies included in [Qt](https://www.qt.io) and the [Qt Automotive Suite developed by Luxoft with Partners](https://www.qt.io/qt-automotive-suite/), using an architecture we named the QML Core UI architecture.
 
 Naturally, customers shall be motivated to deviate from this Core UI Guide where necessary. This guide helps customers to get a base for fundamental discussions, internally and externally and hopefully the support required to come to a conclusion that helps them to achieve their own goals.
 

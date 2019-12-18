@@ -5,14 +5,15 @@
 To use the admin we first need to install it as part of our environment.
 
 ```sh
-git clone git@http://github.com/Luxoft/coreui-admin.git
-cd coreui-admin
-pip install -e .
+git clone https://github.com/Luxoft/qml-coreui.git
+cd qml-coreui
+pip install .
 ```
 
-The simplest start is to use an existing Qt SDK (e.g. 5.11 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start to the creation of a new user interface for systems.
 
 ## Setting up QtAuto Stack
+
+The simplest start is to use an existing Qt SDK (e.g. 5.13 incl. Qt Remote Objects TP) and build of QtAuto components. This is a great start to the creation of a new user interface for systems.
 
 Create a project directory
 

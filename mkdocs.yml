@@ -50,7 +50,6 @@ nav:
       - "Introduction": "admin/intro.md"
       - "Quick Start": "admin/start.md"
       - "Concepts": "admin/concepts.md"
-      - "Installation": "admin/install.md"
       - "Building": "admin/build.md"
       - "Developing": "admin/dev.md"
       - "Project Creation": "admin/projects.md"

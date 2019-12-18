@@ -10,7 +10,7 @@ You can create a new project using the `new` command.
 coreui-admin new myproject
 ```
 
-This will by default create a new project in the `myproject` folder using the `single-process` template. To change the template you can provide a `--template` option.
+This will by default create a new project in the `myproject` folder using the `qtauto-process` template using Qt application manager. To change the template you can provide a `--template` option, but currently only the `appman` template is supported.
 
 To launch your newly created project you can use
 
@@ -18,23 +18,22 @@ To launch your newly created project you can use
 coreui-admin start
 ```
 
-It will launch the `qmlscene` from your given Qt SDK with the correct setup.
+It will launch the `appman` from your given Qt SDK with the correct setup.
 
 !!! note
 
     To see all options please use `coreui-admin new --help`
 
-## Single Process UI
 
-The single process user interface is created using
+## QtAuto Process UI
+
+To create a new multi-process project you can use the `new` command with the `--template appman` option.
 
 ```sh
-coreui-admin new single-ui --template single
+coreui-admin new multi-ui --template appman
 ```
 
-It will create a UI project which can be launched from a QtCreator `.qmlproject` file. External native dependencies are served using QML Plugins.
-
-The project is built around the idea that there is a system UI that displays the system-wide user interface portion and applications which display the feature-specific information.
+This will create a new user interface project which has support for the Qt ApplicationManager built-in.
 
 ### System UI
 
@@ -46,19 +45,8 @@ The System UI which acts as the desktop-like user interface in which other appli
 
 ### Application UI
 
-An application is contained inside a apps folder and has its own `Application.qml` document. It is registered with the SystemUI and added to the launcher menu of the SystemUI.
+An application is contained inside a `apps` folder and has its own `Application.qml` document. It is registered with the SystemUI and added to the launcher menu of the SystemUI.
 
-## Multi Process UI
-
-To create a new multi-process project you can use the `new` command with the `--template multi` option.
-
-```sh
-coreui-admin new multi-ui --template multi
-```
-
-This will create a new user interface project which has support for the Qt ApplicationManager built-in.
-
-It follows very similar concepts than the single-process UI but the applications are now designed to be run as separate processed and provide a higher level of flexibility and security.
 
 The newly created project can be launched using
 
@@ -72,4 +60,4 @@ The start script invokes the `appman` executable form your QAuto installation an
 
     The Qt Application manager requires a Wayland window manager to run in multi-process mode, which is often only available on Linux and the target HW.
 
-    To allow the development of other hosts (e.g. Mac/Windows) the application manager has a single-process model that is automatically invoked on these environments. Please consult the QtApplication Manager documented for more information.
+    To allow the development of other hosts (e.g. Mac/Windows) the application manager has a single-process model that is automatically invoked on these environments. Please consult the [Qt Application Manager](https://doc.qt.io/QtApplicationManager/qtapplicationmanager-index.html) documented for more information.
