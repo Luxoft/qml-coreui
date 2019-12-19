@@ -36,6 +36,7 @@ nav:
       - "Controls": "topics/controls.md"
       - "Filesystem layout": "topics/fslayout.md"
       - "Extensions": "topics/extensions.md"
+      - "Kind of Components": "topics/kind.md"
       - "Layouts": "topics/layouts.md"
       - "Protoyping": "topics/prototyping.md"
       - "Services": "topics/services.md"
