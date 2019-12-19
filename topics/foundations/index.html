@@ -584,6 +584,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../kind/" title="Kind of Components" class="md-nav__link">
+      Kind of Components
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../layouts/" title="Layouts" class="md-nav__link">
       Layouts
     </a>
@@ -986,56 +998,114 @@
                 
                 
                 <h1 id="foundations">Foundations</h1>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>This material is work in progress and will change!</p>
-</div>
 <div class="admonition abstract">
 <p class="admonition-title">Abstract</p>
 <p>CoreUI is founded on some core-principles collected over the years, which all contribute to the overall design decisions. These principles are based on the opinions of many but may not be applicable to everyone.</p>
 </div>
 <p>Here are some key principles:</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
 <ul>
-<li><strong>Follow the Agile Principles</strong> - UX depends on flexibility and agility. Keep it that way.</li>
-<li><strong>Enable Hot-Reloading everywhere</strong> - Allow changes to be visible in a fraction of a second.</li>
-<li><strong>Testability and dependency management is paramount</strong> - You can't trust code you cannot test. And trust is the foundation of large systems.</li>
-<li><strong>Separation of Hardware and Software</strong> - As a UI developer you don't want to depend on something you cannot control or isn't even available at an early stage.</li>
-<li><strong>UX Design is a bi-directional conversation</strong> - Design has a great impact on the UX, but also the chosen technology. Finding the balance and pushing forward together makes heroes.</li>
-<li><strong>Thinking in Components and Building Blocks</strong> - Component-based programming leads to a better structure and allows for building larger user interfaces.</li>
-<li><strong>Component separation is good, process separation is better</strong> - Trust is good, having control is better. A process gives you more control.</li>
-<li><strong>Aspect driven components</strong> - Design your component layers around different aspects of your software. Each aspect provides another piece to the puzzle.</li>
+<li>
+<p><strong>Follow the Agile Principles</strong> - UX depends on flexibility and agility. Keep it that way.</p>
+</li>
+<li>
+<p><strong>Enable Hot-Reloading everywhere</strong> - Allow changes to be visible in a fraction of a second.</p>
+</li>
+<li>
+<p><strong>Testability and dependency management is paramount</strong> - You can't trust code you cannot test. And trust is the foundation of large systems.</p>
+</li>
+<li>
+<p><strong>Separation of Hardware and Software</strong> - As a UI developer you don't want to depend on something you cannot control or isn't even available at an early stage.</p>
+</li>
+<li>
+<p><strong>UX Design is a bi-directional conversation</strong> - Design has a great impact on the UX, but also the chosen technology. Finding the balance and pushing forward together makes heroes.</p>
+</li>
+<li>
+<p><strong>Thinking in Components and Building Blocks</strong> - Component-based programming leads to a better structure and allows for building larger user interfaces.</p>
+</li>
+<li>
+<p><strong>Component separation is good, process separation is better</strong> - Trust is good, having control is better. A process gives you more control.</p>
+</li>
+<li>
+<p><strong>Aspect driven components</strong> - Design your component layers around different aspects of your software. Each aspect provides another piece to the puzzle.</p>
+</li>
 </ul>
 <p>A detailed description for each principle can be found below.</p>
+<hr />
 <h2 id="agile-principles">Agile Principles</h2>
-<p>CoreUI embodies the core values of the Manifesto for Agile Software development. Agility means in its core to "walk the path even if you don't know the whole path yet". It is about taking the opportunity and relying on motivated teams.</p>
+<p>QML Core UI embodies the core values of the Agile Manifesto for software development.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
+<p>Agility means in its core to <code>"walk the path even if you don't know the whole path yet"</code>. It is about taking the opportunity and relying on motivated teams.</p>
 <ul>
-<li><strong>Individuals and Interactions</strong> over processes and tools: Tools and processes are important, but it's more important to have competent people working together effectively.</li>
-<li><strong>Working Software over comprehensive documentation</strong>: Good documentation is useful in helping people to understand how the software is built and how to use it, but the main point of development is to create software, not documentation.</li>
-<li><strong>Customer Collaboration over contract negotiation</strong>: A contract is important but is no substitute for working closely with customers to discover what they need.</li>
-<li><strong>Responding to Change over following a plan</strong>: A project plan is important, but it mustn't be too rigid to accommodate changes in technology or the environment, stakeholders' priorities, and people's understanding of the problem and its solution.</li>
+<li>
+<p><strong>Individuals and Interactions</strong> over processes and tools: Tools and processes are important, but it's more important to have competent people working together effectively.</p>
+</li>
+<li>
+<p><strong>Working Software over comprehensive documentation</strong>: Good documentation is useful in helping people to understand how the software is built and how to use it, but the main point of development is to create software, not documentation.</p>
+</li>
+<li>
+<p><strong>Customer Collaboration over contract negotiation</strong>: A contract is important but is no substitute for working closely with customers to discover what they need.</p>
+</li>
+<li>
+<p><strong>Responding to Change over following a plan</strong>: A project plan is important, but it mustn't be too rigid to accommodate changes in technology or the environment, stakeholders' priorities, and people's understanding of the problem and its solution.</p>
+</li>
 </ul>
-<p>In short, while there is value in the items on the right, they value the items on the left more. [^AgilePrinciples]
-Sources: Wikipedia, Agile Manifesto</p>
+<p>In short, while there is value in the items on the right, they value the items on the left more. [AgilePrinciples]</p>
+<p>Sources: Wikipedia, Agile Manifesto</p>
+<hr />
 <h2 id="live-reloading">Live-reloading</h2>
-<p>Live-reloading is the practice of reloading the program as a whole or as part of a particular change in the underlying source code. That change can be triggered by a keystroke, a timer, or based on document persistence. The reloading can be either state preserving or state resetting.</p>
+<p>Live-reloading is the practice of reloading the program as a whole or as part triggered by a change in the underlying source code.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
+<p>That change can be triggered by a keystroke, a timer, or based on document persistence. The reloading can be either based on a preserved state or a clean state. A clean state approach is deservable, as it provides always a predictable start point.</p>
 <p>Enabling live-reloading throughout the CoreUI architecture serves several goals:</p>
 <ul>
-<li>Productivity: CoreUI enforces a clean abstraction of business-logic and visual-logic, thus making the reloading of business tests part of the daily work-flow.</li>
-<li>Testability: CoreUI not only supports live-reloading of the whole program but also encourages Developers to live-reload individual pieces of the user interface. As such it encourages the developer to think about components and their dependencies, thus resulting in better testability.</li>
-<li>UX Creation: Reloading also plays a crucial role in enabling great UX by making the conversation that the developer has with the UI teams more fluent.</li>
+<li>
+<p><strong>Productivity</strong>: CoreUI enforces a clean abstraction of business-logic and visual-logic, thus making the reloading of business tests part of the daily work-flow.</p>
+</li>
+<li>
+<p><strong>Testability</strong>: CoreUI not only supports live-reloading of the whole program but also encourages Developers to live-reload individual pieces of the user interface. As such it encourages the developer to think about components and their dependencies, thus resulting in better testability.</p>
+</li>
+<li>
+<p><strong>UX Creation</strong>: Reloading also plays a crucial role in enabling great UX by making the conversation that the developer has with the UI teams more fluent.</p>
+</li>
 </ul>
+<hr />
 <h2 id="testability-and-controlled-dependency">Testability and Controlled Dependency</h2>
-<p>CoreUI separates user interface pieces into different components with clearly-defined dependencies and interfaces. CoreUI encourages the developer to create smaller, well-defined, components. The idea is less about re-use but more about splitting the UI into small, manageable, pieces which can be implemented independently. This principle manages dependencies and smaller components, enabling testability with fewer headaches or overhead.</p>
+<p>QML CoreUI separates user interface pieces into different kind of components with clearly-defined dependencies and interfaces.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
+<p>CoreUI encourages the developer to create smaller, well-defined, components. The idea is less about re-use but more about splitting the UI into small, manageable, pieces which can be implemented independently. This principle manages dependencies and smaller components, enabling testability with fewer headaches or overhead. Reuse is a result of separation, not the goal.</p>
 <p>CoreUI comes with a test harness which enables both manual component testing and automated component testing. Manual component testing is especially useful during development, when you want to try out a specific component. All of this can be paired with live-reloading of such tests: either when the test code itself or the underlying component changes.</p>
+<hr />
 <h2 id="separation-of-hardware-from-software">Separation of Hardware from Software</h2>
-<p>Developing embedded software means always working with the target hardware. However, often the target hardware is not available in the early stages of development or even at later stages. Additionally, there may also be a shortage of devices and each developer can't have his or her own device to work with. These hardware can be big and difficult to place in an office. Consequently, the ability to develop as much software as possible without depending on the target hardware is highly desirable. Nevertheless, it is still required to go on the hardware as early as possible. This brings up the requirement of being flexible enough to support compatibility between different back-ends using the same front-end software.</p>
-<p>Ideally, you are able to run the front-end with either a simulation backend or with the real, production, one. Ideally, the simulation back-end can also run on the target HW. To foster easier front-end development it should also be possible to run the front-end on a desktop and have it using a back-end running on the target HW. To achieve this, the interface between front-end and back-end must be done via a cross-device communication protocol (typically TCP/IP based).</p>
+<p>Developing embedded software means always working with the target hardware. However, often the target hardware is not available in the early stages of development or even at later stages.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
+<p>Additionally, there may also be a shortage of devices and each developer can't have his or her own device to work with. These hardware can be big and difficult to place in an office. Consequently, the ability to develop as much software as possible without depending on the target hardware is highly desirable. Nevertheless, it is still required to go on the hardware as early as possible. This brings up the requirement of being flexible enough to support compatibility between different back-ends using the same front-end software.</p>
+<p>Ideally, you are able to run the front-end with either a simulation backend or with the real, production backend. Ideally, the simulation of the back-end can also run on the target HW. To foster easier front-end development it should also be possible to run the front-end on a desktop and have it using a back-end running on the target HW. To achieve this, the interface between front-end and back-end must be done via a cross-device communication protocol (typically TCP/IP based).</p>
+<hr />
 <h2 id="ux-design-conversations">UX Design Conversations</h2>
-<p>Creating a stunning UX is a team effort involving UI designers, UI developers, and other stakeholders. The System needs to be able to deliver the processing power and graphics capabilities allowing a stunning user experience at first place, but even if this is given, still there is not a guarantee that a great UX will be created. To achieve a truly beautiful UX it is required that the visionary people who design the product and deliver the information architecture and UI appearance, work closely together with the people programming the UI. Only then a great UX can be achieved.</p>
+<p>Creating a stunning UX is a team effort involving UI designers, UI developers, and other stakeholders.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
+<p>The System needs to be able to deliver the processing power and graphics capabilities allowing a stunning user experience at first place, but even if this is given, still there is not a guarantee that a great UX will be created. To achieve a truly beautiful UX it is required that the visionary people who design the product and deliver the information architecture and UI appearance, work closely together with the people programming the UI. Only then a great UX can be achieved.</p>
 <p>The UI developers know what the system can deliver and which special effects and/or animations will take down the system and will start introducing an unsatisfying user experience to the user. The UI designers have their own vision into their head but often the documentation is lacking behind and also does not tell the whole story. These internal concepts not documented but expressed in design are important for the UI developers as they also need to base their detailed UI appearance on fundamental concepts. If these fundamental concepts diverge because of not being aware of each other, the UI code will always look like someone has patched it to make it work.</p>
 <p>A true harmony and understanding of UI design of the UI developer can be seen in the UI code produced by the developers.</p>
+<hr />
 <h2 id="thinking-in-components">Thinking in Components</h2>
 <p>While the UI developer using QML is forced to think in components as its basic building block, designers often don't think in terms of components. This is probably related to the pixels on a display and the tooling used that is based on pixel manipulation, less vector art, and objects.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
 <p>A component is a piece of a reusable user interface from which the information architecture receives a clear set of data and provides a clearly defined interaction to the user. This component can then be re-used in other parts of the user interface by manipulating the incoming properties.</p>
 <p>For example, a Button receives a text property which can be set when created, and allows the user to click on it as its interaction. This component can be used anywhere a button is used by assigning a different text property and reacting differently to the click interaction.</p>
 <p>Designing a square rectangle of pixels with a nice gradient, without thinking about how this rectangle eventually becomes a component with appearance, incoming data, and interaction - will result in the designer not being able to use the button everywhere coherently. Consequently, the developer will have to implement each of these buttons, providing the different flavors of buttons by adding more complex code to the initial component.</p>
@@ -1043,14 +1113,28 @@ Sources: Wikipedia, Agile Manifesto</p>
 <p>There is a common set of components that users are used to, which are often provided as standard components by the UI toolkits. Qt, for example, provides the QtQuick Controls 2 library.</p>
 <p>On a higher level, it is also worth thinking about larger components, such as components that act as a container for other components. In CoreUI, they are called panels. Panels provide a defined layout and interaction possibility for a set of components laid out together, for either a specific or a more general purpose.</p>
 <p>If a component can be re-used in different contexts it can also be re-used in a test setup. That said, it's important to display a component independently from its UI context to validate its appearance and behavior.</p>
+<hr />
 <h2 id="components-vs-processes">Components vs. Processes</h2>
-<p>A component is a reusable piece of user interface, with a known exported programming interface. A process is an execution unit, which allows the CPU to schedule it independently from other processes and manage the memory independently from other processes. A process provides security and separation of interfaces. Inside a process, you cannot easily call an API which is available inside another process. You always need to export this API and then make use of that from within the other process via some form of IPC. But processes can be re-used the same as components, but on a different level and with a much stricter control.</p>
+<p>A component is a reusable piece of user interface, with a known exported programming interface. A process is an execution unit, which allows the CPU to schedule it independently from other processes and manage the memory independently from other processes.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
+<p>A process provides security and separation of interfaces. Inside a process, you cannot easily call an API which is available inside another process. You always need to export this API and then make use of that from within the other process via some form of IPC. But processes can be re-used the same as components, but on a different level and with a much stricter control.</p>
 <p>Typically an application is a deciding factor to create a new process. An application can stem from a 3rd party and might introduce a security risk, so it is better to control its access to the system. In a single process UI where an application is merely a component, these security mechanisms do not exist, so any application can in general access every API.</p>
+<hr />
 <h2 id="aspect-driven-components">Aspect-driven Components</h2>
-<p>Traditional UI development follows the user interface specifications and starts with the main document and then the folder structure mirrors the feature set of the UI specification. Applying this on larger user interfaces provides several drawbacks. The code gets more complex as deeper the folder structure goes. There is no guideline about dependency, which leads to the fact that even components on the edge of the UI tree might have dependencies to central components or worse other edges of the tree. Not controlling dependency is the main factor that the development speed slows down when the UI gets more complex.</p>
+<p>Traditional UI development follows the user interface specifications and starts with the main document and then the folder structure mirrors the feature set of the UI specification.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
+<p>Applying this on larger user interfaces provides several drawbacks. The code gets more complex as deeper the folder structure goes. There is no guideline about dependency, which leads to the fact that even components on the edge of the UI tree might have dependencies to central components or worse other edges of the tree. Not controlling dependency is the main factor that the development speed slows down when the UI gets more complex.</p>
 <p>Aspect driven development tries to focus on the different aspects of a user interface (e.g. views, panels, controls, animations, helpers) and tries to provide clear guidance how such a component shall be constructed and which dependencies it might create.</p>
+<hr />
 <h2 id="release-early-release-often">Release Early, Release Often</h2>
 <p>Celebrate releasing your software. Releasing software is a practice which needs to be repeated and automated as much as possible. Always keep your software in a releasable state.</p>
+<blockquote>
+<p>TODO: Add Image</p>
+</blockquote>
 <p>Releasing usually means you have to interrupt your software development to make a release. By repeating this process over and over and perfecting the workflow, you can minimize the disruption a release creates and ensure your code stays in good health.</p>
 <p>You want to run a Continuous Integration (CI) workflow with a maximum number of automated tests, which ideally proves the test coverage. Try to release software that acts as feedback to your developers so that they experience releasing as a natural step forward. in the software development process. For example, if you work on the UI, you can release the platform that the UI is based on and ensure all developers use the same platform.</p>
 <p>See: <a href="https://en.wikipedia.org/wiki/Release_early,_release_often">https://en.wikipedia.org/wiki/Release_early,_release_often</a></p>
