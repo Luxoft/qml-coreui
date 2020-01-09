@@ -1,5 +1,10 @@
 # Services
 
+>   "The code is the truth,
+>   but not the whole truth"
+>
+> -- Grady Booch
+
 !!!info
 
     This material is work in progress and will change!

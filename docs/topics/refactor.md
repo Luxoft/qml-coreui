@@ -1,8 +1,10 @@
 # Micro - Refactorings
 
-!!!info
 
-    This material is work in progress and will change!
+> Wexelblat's Scheduling Algorithm:
+>
+> Choose two: Good, Fast, Cheap
+
 
 Refactoring shall provide the reader with insights how to re-factor slowly an existing user interface architecture toward the CoreUI architecture by applying a series of micro-re-factorings.
 

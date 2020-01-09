@@ -1,5 +1,11 @@
 # What is QML Core UI
 
+> No matter what the problem is,
+> it's always a people problem.
+>
+> - Jerry Weinberg
+
+
 !!! abstract
 
     CoreUI was created out of the need for a more structured way of creating User Interfaces (UIs) not only for applications but also for large systems. Our current process worked fine if only a few people work on a user interface. But, as the user interface starts to get bigger and the number of people working on the UI layer increases, then the existing process was no longer well defined. It just doesn't scale. Ideally, CoreUI provides a pattern to scale UI development linearly without scrutinizing the implementation of UI features.

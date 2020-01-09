@@ -1,8 +1,9 @@
 # Physical Layout
 
-!!!info
-
-    This material is work in progress and will change!
+> Most architectures are accidential,
+> not intensional
+>
+> -- Grady Booch
 
 
 !!! abstract

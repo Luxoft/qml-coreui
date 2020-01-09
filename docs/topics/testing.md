@@ -1,9 +1,8 @@
 # Testing
 
-!!!info
-
-    This material is work in progress and will change!
-
+> Q: How many QA testers does it take to change a lightbulb?
+>
+> A: QA testers don't change anything. They just report that it's dark.
 
 
 There are different test strategies from white-box over black-box testing and system, integration and unit testing.

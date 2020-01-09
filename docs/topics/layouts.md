@@ -1,8 +1,9 @@
 # Layout
 
-!!!info
+> André Bensoussan once explained to me the difference between a programmer and a designer:
+>
+> If you make a general statement, a programmer says, '**Yes, but...**', while a designer says, '**Yes, and...**'
 
-    This material is work in progress and will change!
 
 
 In the past the UI was a static view on the information to be presented. Today this view is very dynamic and the user expects the view to change its appearance based on the context the display is in. Another aspect of layout is the support for different screen sizes out of one code base. This aspect is important to support for example a low-end device and a mid and high-end device from only one code-base without re-writing the whole UI layer.

@@ -1,5 +1,9 @@
 # Foundations
 
+> Abraham Lincoln reportedly said that, given eight hours to chop down a tree, he'd spend six sharpening his axe.
+>
+> -- TidBITS 654, quoted by Derek K. Miller, via Art Evans
+
 !!! abstract
 
     CoreUI is founded on some core-principles collected over the years, which all contribute to the overall design decisions. These principles are based on the opinions of many but may not be applicable to everyone.

@@ -1,5 +1,9 @@
 # Getting Started
 
+> All models are wrong,
+> some of them are useful
+> - George Box
+
 !!! warning
 
     The project and the architecture created by `coreui-admin` is only meant to be used for educational purpose.

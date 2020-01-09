@@ -1,5 +1,9 @@
 # Runtime & Modules
 
+> Craziness is doing the same thing and expecting a different result.
+>
+> -- Einstein
+
 The QML runtime used in the CoreUI architecture is Qt Application Manager. Which is designed to provide a multi-process architecture, where each application runs in an own process, started by its own runtime.
 
 ## Engine

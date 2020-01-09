@@ -1,8 +1,10 @@
 # Welcome to QML Core UI Guide
 
-!!!info
+> You must be the change
+> You wish to see in the world
+>
+> -- Gandhi (now a bumper sticker)
 
-    This material is work in progress and will change!
 
 
 # Preface

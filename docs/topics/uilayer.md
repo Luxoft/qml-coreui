@@ -1,5 +1,9 @@
 # User Interface Layer
 
+> “Have no fear of perfection—you’ll never reach it.”
+>
+> –- Salvador Dali
+
 !!!info
 
     This material is work in progress and will change!

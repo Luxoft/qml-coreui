@@ -1,5 +1,10 @@
 # Exposing Data to QML
 
+> A clever person solves a problem.
+> A wise person avoids it.
+>
+> -- Einstein
+
 !!! info
 
     This chapter will show you how to expose the different ways of exposing data to the user interface layer and tries to develop

@@ -1,5 +1,8 @@
 # Design Work Flow
 
+> “Digital design is like painting, except the paint never dries.”
+> - Neville Brody
+
 * Agile
 * Scaled Agile
 * Split Teams
@@ -45,7 +48,7 @@ A production designer takes over the role to convert the visual designs into a f
 
 A production designer understand the design workflow from his colleagues. He is embedded in to the design team. As an additional feature the designer also understands the software solution and the component model.
 
-It is important that the production designer understands both worlds to adapt the design. 
+It is important that the production designer understands both worlds to adapt the design.
 
 !!! note
 
@@ -61,7 +64,7 @@ A designer which likes to code in QML/JS to create user interface concepts backe
 
 We have great experience with Sketch as a design tool. It is ideally suited for the work. But I would expect also Figma would be a good tool. Sketch as a tool understand the concept of a component and allows effortless to export PNG images in different sizes. These exports have a clear size, meaning with and height which is required for the integration. Doing the same export twice should alway lead to the same asset exports having the same characteristics. Exporting assets by hand is very error prone and very unproductive for the developer later.
 
-There is currently no good tooling to validate an asset delivery. Just think about for a moment. Let us assume we get every week a new delivery from the design department. How do we ensure that 
+There is currently no good tooling to validate an asset delivery. Just think about for a moment. Let us assume we get every week a new delivery from the design department. How do we ensure that
 
 - all assets which where present last week, are also present this week
 - how can we track when an asset was renamed or relocated

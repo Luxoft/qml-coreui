@@ -1,5 +1,13 @@
 # Design Principles
 
+
+
+> The First Rule of Program Optimization: Don't do it.
+>
+> The Second Rule of Program Optimization (for experts only!): Don't do it yet.
+>
+> --   Michael A. Jackson
+
 Software design is an important part of the software development cycle. Thinking about how to create structure before start writing code is critical. Good software design comes from capturing the requirements and playing with the question "What happens when ...?"
 
 "What happens when ...?" captures the moving parts. And parts with move together should stay together and the joints should be protected by interfaces. These principles are expressed in bad and good principles. Please bear in mind principles are not laws. But consider them as good practices and improve on them by discussion.

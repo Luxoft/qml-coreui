@@ -1,8 +1,8 @@
 # Building Blocks
 
-!!!info
-
-    This material is work in progress and will change!
+> "If you think good architecture is expensive, try bad architecture."
+>
+> -- Brian Foote and Joseph Yoder
 
 
 !!! abstract
