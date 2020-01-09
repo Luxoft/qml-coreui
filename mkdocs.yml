@@ -47,6 +47,7 @@ nav:
       - "Design Work Flow": "topics/workflow.md"
       - "(Live) Reloading": "topics/reload.md"
       - "Refactoring": "topics/refactor.md"
+      - "Design Principles": "topics/principles.md"
   - Admin CLI:
       - "Introduction": "admin/intro.md"
       - "Quick Start": "admin/start.md"
