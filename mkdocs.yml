@@ -23,9 +23,9 @@ theme:
     tabs: true
 
 nav:
-  - "Overview": index.md
-  - "Guide":
-      - "What is Core UI": "guide/whatis.md"
+  - "Home": index.md
+  - "Tutorial":
+      - "Overview": "guide/overview.md"
       - "Install": "guide/install.md"
       - "Getting Started": "guide/start.md"
       - "CookBook": "guide/cookbook.md"
@@ -33,21 +33,21 @@ nav:
   - Topics:
       - "Foundations": "topics/foundations.md"
       - "Building Blocks": "topics/blocks.md"
-      - "Controls": "topics/controls.md"
+      - "UI Layer": "topics/uilayer.md"
       - "Filesystem layout": "topics/fslayout.md"
-      - "Extensions": "topics/extensions.md"
+      - "Runtime & Modules": "topics/runtime.md"
       - "Kind of Components": "topics/kind.md"
-      - "Layouts": "topics/layouts.md"
-      - "Protoyping": "topics/prototyping.md"
+      - "Controls": "topics/controls.md"
       - "Services": "topics/services.md"
       - "Testing": "topics/testing.md"
-      - "UI Layer": "topics/uilayer.md"
-      - "Refactoring": "topics/refactor.md"
       - "Styles": "topics/styles.md"
-      - "Runtime & Modules": "topics/runtime.md"
+      - "Layouts": "topics/layouts.md"
+      - "Protoyping": "topics/prototyping.md"
       - "Exposing Data to QML": "topics/data.md"
       - "Design Work Flow": "topics/workflow.md"
-  - Admin:
+      - "(Live) Reloading": "topics/reload.md"
+      - "Refactoring": "topics/refactor.md"
+  - Admin CLI:
       - "Introduction": "admin/intro.md"
       - "Quick Start": "admin/start.md"
       - "Concepts": "admin/concepts.md"
@@ -55,10 +55,6 @@ nav:
       - "Developing": "admin/dev.md"
       - "Project Creation": "admin/projects.md"
       - "Reference": "admin/reference.md"
-  - "Extensions":
-      - "Overview": "extensions/overview.md"
-  - "Resources":
-      - "Getting Started": "resources/index.md"
 
 markdown_extensions:
   - admonition

@@ -1,6 +1,6 @@
-# Core UI Admin
+# Core UI Admin CLI
 
-The `coreui-admin` script allows you to control your QtAuto installation. QtAuto is a set of components on top of Qt5 which allows you to create a typical user interface for the automotive market.
+The `coreui-admin` command line script allows you to control your QtAuto installation or to crearte a new CoreUI project. QtAuto is a set of components on top of Qt5 which allows you to create a typical user interface for the automotive market.
 
 To better support the market needs the script propagates an opinionated architecture called the CoreUI Architecture. The script is capable of building the underlying platform as also to generate CoreUI projects and core components of these projects.
 
