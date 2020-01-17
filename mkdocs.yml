@@ -48,6 +48,7 @@ nav:
       - "(Live) Reloading": "topics/reload.md"
       - "Refactoring": "topics/refactor.md"
       - "Design Principles": "topics/principles.md"
+      - "UI Process Modes": "topics/process.md"
   - Admin CLI:
       - "Introduction": "admin/intro.md"
       - "Quick Start": "admin/start.md"
