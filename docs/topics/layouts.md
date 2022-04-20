@@ -10,7 +10,7 @@ In the past the UI was a static view on the information to be presented. Today t
 
 The dynamic aspect of the layout of the visual elements always requires some fundamental rules defined by the design team the UI shall follow, the so called design language. Often these rules are based on a grid system or on other geometrical constraints. If such a fundamental layout system does not exist it will be impossible for a UI developer to code a UI that follows the UI specification in all different scenarios.
 
-The complexity of testing increases when a new device configuration is added to the supported list of devices. The testing requires to test all device configurations with all market variations. There needs to be though a test strategy planned for the UI testing.
+The complexity of testing increases when a new device configuration is added to the supported list of devices. The testing requires to test all device configurations with all market variations. There needs to be a thorough test strategy planned for the UI testing.
 
 Resources
 
